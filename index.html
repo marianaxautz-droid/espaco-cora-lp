@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espaço Cora — Clínica Odontológica</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:        hsl(32, 39%, 22%);
+      --background:     hsl(45, 28%, 88%);
+      --accent:         hsl(84, 18%, 61%);
+      --neutral:        hsl(87, 17%, 51%);
+      --btn:            hsl(32, 39%, 22%);
+      --btn-hover:      hsl(32, 39%, 17%);
+      --foreground:     hsl(32, 39%, 22%);
+      --muted:          hsl(32, 39%, 45%);
+      --border:         hsl(45, 28%, 78%);
+      --transition:     all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+       NAVBAR
+    ───────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 3rem);
+      max-width: 1200px;
+      z-index: 200;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(223, 217, 203, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 32px rgba(92, 51, 23, 0.12);
+    }
+
+    /* Logo */
+    .navbar-logo img {
+      height: 44px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s ease;
+    }
+    .navbar.scrolled .navbar-logo img {
+      filter: none;
+    }
+
+    /* Nav links */
+    .navbar-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .navbar-nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .navbar.scrolled .navbar-nav a {
+      color: var(--foreground);
+    }
+
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--btn);
+      transition: width 0.3s ease;
+    }
+    .navbar-nav a:hover::after { width: 100%; }
+
+    /* CTA */
+    .navbar-cta {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-nav {
+      background: var(--btn);
+      color: white;
+      border: none;
+      padding: 0.55rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .btn-nav:hover {
+      background: var(--btn-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(92, 51, 23, 0.3);
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 220vh;
+    }
+
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Dark background behind everything */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 55% 40%, hsl(32, 30%, 18%), hsl(32, 45%, 10%));
+      transform-origin: center center;
+      will-change: transform;
+    }
+
+    /* ─── Door Scene ─── */
+    .door-scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1400px;
+      perspective-origin: 50% 45%;
+    }
+
+    .door-wrapper {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    /* Side walls flanking the door */
+    .wall-left,
+    .wall-right {
+      width: 160px;
+      height: 560px;
+      background: linear-gradient(to bottom, hsl(32, 25%, 16%), hsl(32, 25%, 12%));
+    }
+    .wall-left { border-right: 3px solid hsl(32, 30%, 28%); }
+    .wall-right { border-left: 3px solid hsl(32, 30%, 28%); }
+
+    /* Door frame */
+    .door-frame {
+      position: relative;
+      width: 260px;
+      height: 520px;
+      border-top: 8px solid hsl(32, 35%, 32%);
+      border-left: 8px solid hsl(32, 35%, 32%);
+      border-right: 8px solid hsl(32, 35%, 28%);
+      background: transparent;
+      overflow: visible;
+    }
+
+    /* Interior visible through the open gap */
+    .door-interior {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, hsl(45, 35%, 82%), hsl(45, 25%, 65%) 60%, hsl(32, 20%, 45%));
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    /* The door panel itself */
+    .door-panel {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        165deg,
+        hsl(32, 32%, 26%) 0%,
+        hsl(32, 38%, 20%) 40%,
+        hsl(32, 45%, 16%) 100%
+      );
+      transform-origin: left center;
+      transform: rotateY(-12deg);
+      will-change: transform;
+      border-radius: 1px;
+      box-shadow:
+        inset -10px 0 28px rgba(0,0,0,0.35),
+        6px 0 24px rgba(0,0,0,0.5);
+    }
+
+    /* Top panel inset */
+    .door-panel::before {
+      content: '';
+      position: absolute;
+      top: 12%;
+      left: 10%;
+      right: 10%;
+      height: 28%;
+      border: 1.5px solid hsl(32, 35%, 38%);
+      border-radius: 2px;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    /* Bottom panel inset */
+    .door-panel::after {
+      content: '';
+      position: absolute;
+      top: 47%;
+      left: 10%;
+      right: 10%;
+      height: 36%;
+      border: 1.5px solid hsl(32, 35%, 38%);
+      border-radius: 2px;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    /* Door handle */
+    .door-handle {
+      position: absolute;
+      right: 13%;
+      top: 48%;
+      transform: translateY(-50%);
+      width: 9px;
+      height: 48px;
+      background: linear-gradient(to bottom, hsl(42, 55%, 70%), hsl(38, 45%, 55%));
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.2);
+    }
+
+    /* Light leaking through left edge of door */
+    .door-light {
+      position: absolute;
+      left: -2px;
+      top: 5%;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(to bottom,
+        transparent,
+        rgba(255, 248, 220, 0.7) 20%,
+        rgba(255, 248, 220, 0.5) 80%,
+        transparent
+      );
+      filter: blur(4px);
+      opacity: 0;
+      will-change: opacity;
+    }
+
+    /* Floor line under door */
+    .door-floor {
+      position: absolute;
+      bottom: -3px;
+      left: -8px;
+      right: -8px;
+      height: 3px;
+      background: hsl(32, 35%, 25%);
+    }
+
+    /* ─── Hero Content ─── */
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      padding: 2rem;
+      will-change: opacity;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6.5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: hsl(45, 40%, 85%);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-hero-primary {
+      background: var(--btn);
+      color: white;
+      border: none;
+      padding: 0.8rem 2.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+    }
+    .btn-hero-primary:hover {
+      background: var(--btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(92, 51, 23, 0.3);
+    }
+
+    .btn-hero-ghost {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.8rem 2.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-hero-ghost:hover {
+      border-color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4));
+      animation: lineDown 2s ease-in-out infinite;
+    }
+
+    @keyframes lineDown {
+      0%, 100% { opacity: 0.2; transform: scaleY(0.7) translateY(-4px); }
+      50%       { opacity: 0.8; transform: scaleY(1) translateY(0); }
+    }
+
+    /* Bottom fade to next section */
+    .hero-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 240px;
+      background: linear-gradient(to bottom, transparent, var(--background));
+      z-index: 15;
+      opacity: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    /* ─────────────────────────────────────────
+       SECTION 2 — Placeholder
+    ───────────────────────────────────────── */
+    .section-placeholder {
+      background: var(--background);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .section-placeholder h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--foreground);
+    }
+
+    .section-placeholder p {
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────
+       SERVIÇOS
+    ───────────────────────────────────────── */
+    .services {
+      background: var(--background);
+      padding: 7rem 2rem;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 300;
+      color: var(--foreground);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .section-rule {
+      width: 36px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto;
+    }
+
+    /* Grid de cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Card */
+    .service-card {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease, border-color 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: hsl(45, 20%, 68%);
+    }
+
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card:nth-child(2) { transition-delay: 0.14s; }
+    .service-card:nth-child(3) { transition-delay: 0.28s; }
+
+    .service-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--foreground);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .service-card-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 1rem;
+      transition: width 0.4s ease;
+    }
+
+    .service-card:hover .service-card-rule {
+      width: 40px;
+    }
+
+    .service-card-text {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ─────────────────────────────────────────
+       COMO FUNCIONA
+    ───────────────────────────────────────── */
+    .how-it-works {
+      background: var(--background);
+      padding: 7rem 2rem;
+    }
+
+    .how-it-works-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .how-it-works-header {
+      position: sticky;
+      top: 8rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .how-it-works-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .how-it-works-header .section-eyebrow { text-align: left; }
+    .how-it-works-header .section-title   { text-align: left; }
+    .how-it-works-header .section-rule    { margin: 0; }
+
+    .steps-wrap {
+      position: relative;
+    }
+
+    /* Linha vertical contínua */
+    .steps-wrap::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .step {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      padding-bottom: 4.5rem;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Círculo numerado */
+    .step-number {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--foreground);
+      position: relative;
+      z-index: 1;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+
+    .step.visible .step-number {
+      background: var(--foreground);
+      color: var(--background);
+      border-color: var(--foreground);
+    }
+
+    .step-body {
+      padding-top: 0.9rem;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--foreground);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .step-text {
+      font-size: 0.925rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ─────────────────────────────────────────
+       ESTRUTURA & LOCALIZAÇÃO
+    ───────────────────────────────────────── */
+    .structure {
+      background: var(--background);
+      padding: 7rem 2rem;
+    }
+
+    .structure-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .structure-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .structure-text .section-eyebrow { text-align: left; }
+    .structure-text .section-title   { text-align: left; }
+    .structure-text .section-rule    { margin: 0; margin-bottom: 2rem; }
+
+    .structure-desc {
+      margin-top: 2rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .structure-location {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .structure-location-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .structure-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .structure-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--foreground);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .structure-item-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .structure-item-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .structure-item-value {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--foreground);
+      line-height: 1.6;
+    }
+
+    /* Galeria de fotos */
+    .structure-gallery {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      background: hsl(45, 18%, 80%);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .gallery-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item:nth-child(1) { grid-row: 1 / 3; transition-delay: 0s; }
+    .gallery-item:nth-child(2) { transition-delay: 0.1s; }
+    .gallery-item:nth-child(3) { transition-delay: 0.2s; }
+    .gallery-item:nth-child(4) { transition-delay: 0.15s; }
+    .gallery-item:nth-child(5) { transition-delay: 0.25s; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Placeholder para foto ainda sem imagem */
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      color: var(--muted);
+    }
+
+    .gallery-placeholder svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--border);
+      fill: none;
+      stroke-width: 1.2;
+    }
+
+    .gallery-placeholder span {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--border);
+    }
+
+    /* Animação entrada do bloco de texto */
+    .structure-text {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .structure-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .structure-location {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    }
+
+    .structure-location.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─────────────────────────────────────────
+       CORPO CLÍNICO
+    ───────────────────────────────────────── */
+    .team {
+      background: var(--background);
+      padding: 7rem 2rem;
+      overflow: hidden;
+    }
+
+    /* Card principal — Dra. Laise */
+    .team-featured {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .team-featured.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-featured-img {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+
+    .team-featured:hover .team-featured-img img {
+      transform: scale(1.03);
+    }
+
+    .team-featured-body {
+      background: hsl(45, 22%, 84%);
+      border: 1px solid var(--border);
+      border-left: none;
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .team-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      width: fit-content;
+    }
+
+    .team-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: hsl(84, 35%, 58%);
+    }
+
+    .team-badge span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .team-featured-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--foreground);
+      line-height: 1.1;
+    }
+
+    .team-featured-name em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--primary);
+    }
+
+    .team-featured-role {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .team-featured-rule {
+      width: 32px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .team-featured-bio {
+      font-size: 0.975rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 480px;
+    }
+
+    /* Tags de especialidades */
+    .team-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .team-tag {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem 0.85rem;
+    }
+
+    /* Credenciais */
+    .team-credentials {
+      display: flex;
+      gap: 2rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .team-credential {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .team-credential strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--foreground);
+    }
+
+    .team-credential span {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* Grid de outros membros */
+    .team-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .team-card {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+    }
+
+    .team-card:hover {
+      border-color: hsl(45, 20%, 68%);
+    }
+
+    .team-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-card:nth-child(2) { transition-delay: 0.1s; }
+    .team-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .team-card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: hsl(45, 18%, 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .team-card:hover .team-card-img img {
+      transform: scale(1.04);
+    }
+
+    .team-card-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--border);
+    }
+
+    .team-card-placeholder svg {
+      width: 32px;
+      height: 32px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1;
+    }
+
+    .team-card-placeholder span {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .team-card-body {
+      padding: 1.5rem;
+    }
+
+    .team-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--foreground);
+      margin-bottom: 0.3rem;
+    }
+
+    .team-card-role {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────
+       DEPOIMENTOS
+    ───────────────────────────────────────── */
+    .testimonials {
+      background: hsl(32, 30%, 20%);
+      padding: 7rem 2rem;
+      overflow: hidden;
+    }
+
+    .testimonials .section-eyebrow { color: rgba(255,255,255,0.45); }
+    .testimonials .section-title   { color: rgba(255,255,255,0.92); }
+    .testimonials .section-rule    { background: rgba(255,255,255,0.2); }
+
+    .testimonials .services-header {
+      margin-bottom: 4rem;
+    }
+
+    .testimonials-track-wrap {
+      overflow: hidden;
+      position: relative;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .testimonials-track-wrap:active { cursor: grabbing; }
+
+    .testimonials-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
+    }
+
+    .testi-card {
+      flex: 0 0 360px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .testi-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 3px;
+    }
+
+    .testi-star {
+      width: 13px;
+      height: 13px;
+      background: hsl(45, 60%, 68%);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+    }
+
+    .testi-author {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.2rem;
+    }
+
+    .testi-author strong {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.02em;
+    }
+
+    .testi-author span {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+    }
+
+    .testi-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 2.5rem;
+    }
+
+    .testi-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .testi-dot.active {
+      background: rgba(255,255,255,0.7);
+      transform: scale(1.3);
+    }
+
+    /* ─────────────────────────────────────────
+       ANTES & DEPOIS
+    ───────────────────────────────────────── */
+    .before-after {
+      background: var(--background);
+      padding: 7rem 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .before-after .services-header {
+      margin-bottom: 5rem;
+    }
+
+    /* Área do baralho */
+    .ba-stack-wrap {
+      position: relative;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    /* Cada card */
+    .ba-card {
+      position: absolute;
+      width: 280px;
+      height: 210px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(80, 55, 30, 0.2);
+      transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.85s ease;
+    }
+
+    .ba-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* ── Empilhado: leve offset mostrando borda inferior de cada carta ── */
+    .ba-card:nth-child(1) { z-index: 7; transform: translateY(0px); }
+    .ba-card:nth-child(2) { z-index: 6; transform: translateY(6px); }
+    .ba-card:nth-child(3) { z-index: 5; transform: translateY(12px); }
+    .ba-card:nth-child(4) { z-index: 4; transform: translateY(18px); }
+    .ba-card:nth-child(5) { z-index: 3; transform: translateY(24px); }
+    .ba-card:nth-child(6) { z-index: 2; transform: translateY(30px); }
+    .ba-card:nth-child(7) { z-index: 1; transform: translateY(36px); }
+
+    /* ── Abertura lateral: deslizam para os lados ── */
+    .ba-stack-wrap.fanned .ba-card:nth-child(1) { transform: translateX(-540px) translateY(-8px);  }
+    .ba-stack-wrap.fanned .ba-card:nth-child(2) { transform: translateX(-360px) translateY(-4px);  }
+    .ba-stack-wrap.fanned .ba-card:nth-child(3) { transform: translateX(-180px) translateY(0px);   }
+    .ba-stack-wrap.fanned .ba-card:nth-child(4) { transform: translateX(0px)    translateY(0px);   }
+    .ba-stack-wrap.fanned .ba-card:nth-child(5) { transform: translateX(180px)  translateY(0px);   }
+    .ba-stack-wrap.fanned .ba-card:nth-child(6) { transform: translateX(360px)  translateY(-4px);  }
+    .ba-stack-wrap.fanned .ba-card:nth-child(7) { transform: translateX(540px)  translateY(-8px);  }
+
+    /* ─────────────────────────────────────────
+       FAQ
+    ───────────────────────────────────────── */
+    .faq {
+      background: var(--background);
+      padding: 7rem 2rem;
+    }
+
+    .faq-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .faq-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.6rem 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--foreground);
+      transition: color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--muted);
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .faq-icon span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: var(--foreground);
+      border-radius: 2px;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .faq-icon span:nth-child(1) {
+      width: 10px;
+      height: 1px;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-icon span:nth-child(2) {
+      width: 1px;
+      height: 10px;
+      transform: translate(-50%, -50%);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon {
+      background: var(--foreground);
+      border-color: var(--foreground);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon span {
+      background: var(--background);
+    }
+
+    .faq-question[aria-expanded="true"] .faq-icon span:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-answer > p {
+      overflow: hidden;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      padding-bottom: 0;
+      transition: padding-bottom 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-item.open .faq-answer > p {
+      padding-bottom: 1.6rem;
+    }
+
+    /* ─────────────────────────────────────────
+       CTA FINAL
+    ───────────────────────────────────────── */
+    .cta-final {
+      background: hsl(32, 30%, 20%);
+      padding: 7rem 2rem;
+    }
+
+    .cta-final-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .cta-final-text {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .cta-final-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .cta-final-text .section-eyebrow { color: rgba(255,255,255,0.4); text-align: left; }
+
+    .cta-final-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-final-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: hsl(45, 45%, 80%);
+    }
+
+    .cta-final-sub {
+      font-size: 0.975rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.85;
+      max-width: 380px;
+    }
+
+    /* Formulário */
+    .cta-form-wrap {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    }
+
+    .cta-form-wrap.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .form-field label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .form-field input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.93rem;
+      font-weight: 300;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255,255,255,0.85);
+      outline: none;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      width: 100%;
+    }
+
+    .form-field input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .form-field input:focus {
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .form-submit {
+      margin-top: 0.5rem;
+      background: hsl(45, 45%, 72%);
+      color: hsl(32, 39%, 16%);
+      border: none;
+      border-radius: 999px;
+      padding: 0.9rem 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .form-submit:hover {
+      background: hsl(45, 50%, 78%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    }
+
+    .form-note {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    .footer {
+      background: hsl(32, 28%, 10%);
+      padding: 4rem 2rem 2.5rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-brand img {
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      filter: brightness(0) invert(1);
+      opacity: 0.75;
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 280px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ NAVBAR ═══════════ -->
+  <nav class="navbar" id="navbar">
+
+    <div class="navbar-logo">
+      <img
+        src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-scrolled-BhTATvRn.png"
+        alt="Espaço Cora"
+      />
+    </div>
+
+    <ul class="navbar-nav">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#localizacao">Localização</a></li>
+    </ul>
+
+    <div class="navbar-cta">
+      <button class="btn-nav">Realizar agendamento</button>
+    </div>
+
+  </nav>
+
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-sticky">
+
+      <!-- Background escuro -->
+      <div class="hero-bg" id="heroBg"></div>
+
+      <!-- Cena da porta -->
+      <div class="door-scene">
+        <div class="door-wrapper">
+
+          <div class="wall-left"></div>
+
+          <div class="door-frame">
+            <div class="door-interior" id="doorInterior"></div>
+            <div class="door-panel" id="doorPanel">
+              <div class="door-handle"></div>
+            </div>
+            <div class="door-light" id="doorLight"></div>
+            <div class="door-floor"></div>
+          </div>
+
+          <div class="wall-right"></div>
+
+        </div>
+      </div>
+
+      <!-- Conteúdo centralizado -->
+      <div class="hero-content" id="heroContent">
+        <p class="hero-eyebrow">Clínica Odontológica · Florianópolis, SC</p>
+        <h1 class="hero-headline">
+          Onde o cuidado<br><em>encontra o afeto</em>
+        </h1>
+        <p class="hero-sub">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-hero-primary">Realizar agendamento</button>
+          <button class="btn-hero-ghost">Conhecer serviços</button>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="scroll-cue">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+
+      <!-- Fade para próxima seção -->
+      <div class="hero-fade" id="heroFade"></div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ SERVIÇOS ═══════════ -->
+  <section class="services" id="servicos">
+
+    <div class="services-header">
+      <span class="section-eyebrow">Tratamentos</span>
+      <h2 class="section-title">O que fazemos pelo<br><em>seu sorriso</em></h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Card 1 — Facetas -->
+      <div class="service-card">
+        <h3 class="service-card-title">Facetas em porcelana ou resina</h3>
+        <div class="service-card-rule"></div>
+        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      </div>
+
+      <!-- Card 2 — Implantes -->
+      <div class="service-card">
+        <h3 class="service-card-title">Implantes dentários</h3>
+        <div class="service-card-rule"></div>
+        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      </div>
+
+      <!-- Card 3 — Invisalign -->
+      <div class="service-card">
+        <h3 class="service-card-title">Ortodontia com Invisalign</h3>
+        <div class="service-card-rule"></div>
+        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ COMO FUNCIONA ═══════════ -->
+  <section class="how-it-works" id="consulta">
+    <div class="how-it-works-inner">
+
+        <div class="how-it-works-header" id="howHeader">
+          <span class="section-eyebrow">O processo</span>
+          <h2 class="section-title">Como funciona<br><em>a sua consulta</em></h2>
+          <div class="section-rule"></div>
+        </div>
+
+        <div class="steps-wrap">
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-body">
+          <h3 class="step-title">Agendamento</h3>
+          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-body">
+          <h3 class="step-title">Avaliação detalhada</h3>
+          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-body">
+          <h3 class="step-title">Planejamento</h3>
+          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-body">
+          <h3 class="step-title">Tratamento</h3>
+          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+        </div>
+      </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CORPO CLÍNICO ═══════════ -->
+  <section class="team" id="equipe">
+
+    <div class="services-header">
+      <span class="section-eyebrow">Corpo clínico</span>
+      <h2 class="section-title">Quem cuida<br><em>de você</em></h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <!-- Dra. Laise — destaque -->
+    <div class="team-featured" id="teamFeatured">
+
+      <div class="team-featured-img">
+        <img
+          src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg"
+          alt="Dra. Laise Gonçalves"
+        />
+      </div>
+
+      <div class="team-featured-body">
+
+        <div class="team-badge">
+          <div class="team-badge-dot"></div>
+          <span>Fundadora & Diretora Clínica</span>
+        </div>
+
+        <div>
+          <h3 class="team-featured-name">Dra. Laise<br><em>Gonçalves</em></h3>
+          <p class="team-featured-role">Cirurgiã-Dentista · CRO-SC 12345</p>
+        </div>
+
+        <div class="team-featured-rule"></div>
+
+        <p class="team-featured-bio">
+          Especialista em Odontologia Estética e Reabilitação Oral, a Dra. Laise fundou o Espaço Cora com a missão de unir técnica de alto nível com um atendimento verdadeiramente humano. Com formação no Brasil e exterior, atua com protocolos personalizados que respeitam a individualidade de cada paciente.
+        </p>
+
+        <div class="team-tags">
+          <span class="team-tag">Odontologia Estética</span>
+          <span class="team-tag">Facetas & Lentes</span>
+          <span class="team-tag">Reabilitação Oral</span>
+          <span class="team-tag">Invisalign</span>
+          <span class="team-tag">Harmonização</span>
+        </div>
+
+        <div class="team-credentials">
+          <div class="team-credential">
+            <strong>8+</strong>
+            <span>Anos de experiência</span>
+          </div>
+          <div class="team-credential">
+            <strong>1.200+</strong>
+            <span>Pacientes atendidos</span>
+          </div>
+          <div class="team-credential">
+            <strong>3</strong>
+            <span>Especializações</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Demais membros -->
+    <div class="team-grid" id="teamGrid">
+
+      <div class="team-card">
+        <div class="team-card-img">
+          <div class="team-card-placeholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Foto</span>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-name">Dr. Nome Sobrenome</p>
+          <p class="team-card-role">Implantodontia · CRO-SC 00000</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-img">
+          <div class="team-card-placeholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Foto</span>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-name">Dra. Nome Sobrenome</p>
+          <p class="team-card-role">Ortodontia · CRO-SC 00000</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-card-img">
+          <div class="team-card-placeholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span>Foto</span>
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-name">Dra. Nome Sobrenome</p>
+          <p class="team-card-role">Periodontia · CRO-SC 00000</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════ DEPOIMENTOS ═══════════ -->
+  <section class="testimonials" id="depoimentos">
+
+    <div class="services-header">
+      <span class="section-eyebrow">Depoimentos</span>
+      <h2 class="section-title">O que dizem<br><em>nossos pacientes</em></h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="testimonials-track-wrap" id="testiWrap">
+      <div class="testimonials-track" id="testiTrack">
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+          </div>
+          <p class="testi-text">"Fiz minhas facetas no Espaço Cora e o resultado superou todas as minhas expectativas. A Dra. Laise tem um olhar único para estética — cada detalhe foi pensado para parecer o mais natural possível."</p>
+          <div class="testi-author">
+            <strong>Fernanda Alves</strong>
+            <span>Facetas em porcelana</span>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+          </div>
+          <p class="testi-text">"O ambiente já te coloca num estado de calma logo na entrada. Passei anos com medo de dentista e ali me senti completamente à vontade. O implante ficou perfeito e sem nenhuma dor no pós."</p>
+          <div class="testi-author">
+            <strong>Ricardo Mendes</strong>
+            <span>Implante dentário</span>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+          </div>
+          <p class="testi-text">"Uso Invisalign há 8 meses e já vejo uma transformação enorme. A consulta de avaliação foi super detalhada, com simulação do resultado final. Isso deu muita segurança para começar o tratamento."</p>
+          <div class="testi-author">
+            <strong>Camila Nunes</strong>
+            <span>Ortodontia com Invisalign</span>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+          </div>
+          <p class="testi-text">"Clínica diferenciada em todos os sentidos. Atendimento pontual, equipe gentil e a Dra. Laise explica cada etapa com muita clareza. Me senti parte do processo do início ao fim."</p>
+          <div class="testi-author">
+            <strong>Marcos Souza</strong>
+            <span>Tratamento completo</span>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">
+            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+          </div>
+          <p class="testi-text">"Meu sorriso mudou completamente — e com ele, minha autoestima. O cuidado começa antes de sentar na cadeira: desde o agendamento até o acompanhamento pós-tratamento, tudo é impecável."</p>
+          <div class="testi-author">
+            <strong>Juliana Costa</strong>
+            <span>Facetas em resina</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="testi-dots" id="testiDots"></div>
+
+  </section>
+
+
+  <!-- ═══════════ ANTES & DEPOIS ═══════════ -->
+  <section class="before-after" id="resultados">
+
+    <div class="services-header">
+      <span class="section-eyebrow">Resultados</span>
+      <h2 class="section-title">Antes <em>& depois</em></h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="ba-stack-wrap" id="baStack">
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_01-C0qopQn_.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_02-D5Po86rJ.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_03-11UIgwiN.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_04-fMGzKvGK.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_05-2CPuQjt_.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_06-D3f-PmyU.jpg" alt="" /></div>
+      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_07-MsQdWF0P.jpg" alt="" /></div>
+    </div>
+
+  </section>
+
+
+  <!-- ═══════════ ESTRUTURA & LOCALIZAÇÃO ═══════════ -->
+  <section class="structure" id="estrutura">
+    <div class="structure-inner">
+
+      <!-- Texto + info de localização -->
+      <div class="structure-top">
+
+        <div class="structure-text" id="structureText">
+          <span class="section-eyebrow">Espaço & localização</span>
+          <h2 class="section-title">Um ambiente feito<br><em>para acolher</em></h2>
+          <div class="section-rule"></div>
+          <p class="structure-desc">
+            Cada detalhe do Espaço Cora foi pensado para que você se sinta confortável desde o momento em que entra. Iluminação suave, materiais nobres e uma equipe que prioriza a sua experiência.
+          </p>
+        </div>
+
+        <div class="structure-location" id="structureLocation">
+
+          <div class="structure-location-item">
+            <div class="structure-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="structure-item-body">
+              <span class="structure-item-label">Endereço</span>
+              <span class="structure-item-value">Rua Lauro Linhares, 2055 — sala 706<br>Trindade, Florianópolis — SC</span>
+            </div>
+          </div>
+
+          <div class="structure-location-item">
+            <div class="structure-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="structure-item-body">
+              <span class="structure-item-label">Horário de atendimento</span>
+              <span class="structure-item-value">Segunda a sexta: 8h às 18h<br>Sábados: 8h às 13h</span>
+            </div>
+          </div>
+
+          <div class="structure-location-item">
+            <div class="structure-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l1.27-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="structure-item-body">
+              <span class="structure-item-label">Agendamento</span>
+              <span class="structure-item-value">(48) 99999-0000 · @espacocora</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Galeria do consultório -->
+      <div class="structure-gallery" id="structureGallery">
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Foto do consultório</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Foto do consultório</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Foto do consultório</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Foto do consultório</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Foto do consultório</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FAQ ═══════════ -->
+  <section class="faq" id="faq">
+
+    <div class="faq-inner">
+
+      <div class="faq-header">
+        <span class="section-eyebrow">Dúvidas frequentes</span>
+        <h2 class="section-title">Perguntas<br><em>& respostas</em></h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="faq-list" id="faqList">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Como funciona o agendamento da primeira consulta?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>O agendamento pode ser feito pelo WhatsApp, telefone ou diretamente pelo nosso Instagram. Na primeira consulta fazemos uma avaliação completa, escutamos seus objetivos e apresentamos as opções de tratamento mais indicadas para o seu caso — sem compromisso.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Quais formas de pagamento são aceitas?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>Aceitamos cartões de crédito e débito, PIX e parcelamento sem juros em até 12x no cartão. Para tratamentos de maior extensão, oferecemos condições especiais de parcelamento — consulte nossa equipe.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>A clínica atende convênio odontológico?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>O Espaço Cora é uma clínica particular e não opera com convênios odontológicos. Isso nos permite oferecer um atendimento mais personalizado, com tempo dedicado exclusivamente a cada paciente e uso dos melhores materiais disponíveis no mercado.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Quanto tempo dura um tratamento com facetas?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>Em média, o tratamento com facetas de porcelana é concluído em 3 a 4 consultas ao longo de duas a três semanas. Já as facetas de resina podem ser realizadas em uma única sessão. O prazo exato depende do número de dentes e do planejamento do caso.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>O Invisalign funciona para todos os casos?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>O Invisalign é indicado para a maioria dos casos de má oclusão, desde apinhamentos leves até correções mais complexas. Na consulta de avaliação, realizamos um escaneamento digital para simular o resultado final e confirmar se o tratamento é adequado para você.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Há garantia nos tratamentos realizados?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. Todos os tratamentos realizados no Espaço Cora têm acompanhamento pós-procedimento e garantia conforme o protocolo de cada especialidade. Nosso compromisso vai além da cadeira — estamos disponíveis para qualquer dúvida ou necessidade após a conclusão do tratamento.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CTA FINAL ═══════════ -->
+  <section class="cta-final" id="agendamento">
+    <div class="cta-final-inner">
+
+      <div class="cta-final-text" id="ctaText">
+        <span class="section-eyebrow">Agende sua consulta</span>
+        <h2 class="cta-final-headline">O seu sorriso<br>começa com<br><em>uma conversa</em></h2>
+        <p class="cta-final-sub">
+          Preencha o formulário e entraremos em contato para agendar sua avaliação. Sem compromisso — só cuidado.
+        </p>
+      </div>
+
+      <div class="cta-form-wrap" id="ctaForm">
+        <form class="cta-form" onsubmit="handleFormSubmit(event)">
+
+          <div class="form-field">
+            <label for="form-name">Nome completo</label>
+            <input type="text" id="form-name" name="name" placeholder="Seu nome" autocomplete="name" required />
+          </div>
+
+          <div class="form-field">
+            <label for="form-whatsapp">WhatsApp</label>
+            <input type="tel" id="form-whatsapp" name="whatsapp" placeholder="(48) 99999-0000" autocomplete="tel" required />
+          </div>
+
+          <div class="form-field">
+            <label for="form-email">E-mail</label>
+            <input type="email" id="form-email" name="email" placeholder="seu@email.com" autocomplete="email" required />
+          </div>
+
+          <button type="submit" class="form-submit">Solicitar agendamento</button>
+
+          <p class="form-note">Suas informações são confidenciais e não serão compartilhadas.</p>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img
+            src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-transparent-qK_-2zKC.png"
+            alt="Espaço Cora"
+          />
+          <p>Clínica odontológica especializada em estética e saúde bucal, localizada em Florianópolis, SC. Cuidado que transforma.</p>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Navegação</p>
+          <ul class="footer-links">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#resultados">Resultados</a></li>
+            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#localizacao">Localização</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Contato</p>
+          <ul class="footer-links">
+            <li><a href="tel:+5548999990000">(48) 99999-0000</a></li>
+            <li><a href="https://wa.me/5548999990000" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="https://instagram.com/espacocora" target="_blank" rel="noopener">@espacocora</a></li>
+            <li><a href="mailto:contato@espacocora.com.br">contato@espacocora.com.br</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2025 Espaço Cora. Todos os direitos reservados.</span>
+        <span>Florianópolis, SC · CRO-SC 12345</span>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════ JS ═══════════ -->
+  <script>
+    const navbar      = document.getElementById('navbar');
+    const heroBg      = document.getElementById('heroBg');
+    const doorPanel   = document.getElementById('doorPanel');
+    const doorLight   = document.getElementById('doorLight');
+    const doorInterior= document.getElementById('doorInterior');
+    const heroContent = document.getElementById('heroContent');
+    const heroFade    = document.getElementById('heroFade');
+
+    function clamp(val, min, max) {
+      return Math.min(Math.max(val, min), max);
+    }
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function easeOut(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollY   = window.scrollY;
+      const vh        = window.innerHeight;
+
+      // — Navbar —
+      navbar.classList.toggle('scrolled', scrollY > 40);
+
+      // — Door progress (0 → 1 over first 75% of hero scroll zone) —
+      const doorRaw  = scrollY / (vh * 0.75);
+      const doorT    = easeOut(clamp(doorRaw, 0, 1));
+
+      // Door rotates from -12deg (slightly open) to -86deg (fully open)
+      const angle = lerp(-12, -86, doorT);
+      doorPanel.style.transform = `rotateY(${angle}deg)`;
+
+      // Light leaks in as door opens
+      doorLight.style.opacity = lerp(0, 1, doorT);
+
+      // Interior brightens as door opens
+      doorInterior.style.opacity = clamp(doorT * 1.4, 0, 1);
+
+      // Background subtle zoom
+      const scale = lerp(1, 1.07, doorT);
+      heroBg.style.transform = `scale(${scale})`;
+
+      // Hero content fades as door is nearly open
+      const contentT = clamp((doorRaw - 0.6) / 0.4, 0, 1);
+      heroContent.style.opacity = 1 - contentT;
+
+      // Fade out to next section
+      const fadeT = clamp((scrollY - vh * 0.78) / (vh * 0.22), 0, 1);
+      heroFade.style.opacity = fadeT;
+    });
+  </script>
+
+  <script>
+    // Animação de entrada dos cards de serviço
+    const cards = document.querySelectorAll('.service-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => observer.observe(card));
+
+    // Título da seção "Como funciona"
+    const howHeader = document.getElementById('howHeader');
+    const howHeaderObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { howHeader.classList.add('visible'); howHeaderObs.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    howHeaderObs.observe(howHeader);
+
+    // Etapas — cada uma dispara individualmente ao chegar na tela
+    const steps = document.querySelectorAll('.step');
+    const stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          stepObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0,
+      rootMargin: '0px 0px -45% 0px' // só dispara quando o step subiu além dos 45% inferiores
+    });
+    steps.forEach(step => stepObserver.observe(step));
+
+    // Leque de antes & depois — dispara quando o stack chega ao centro da tela
+    const baStack = document.getElementById('baStack');
+    const fanObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          baStack.classList.add('fanned');
+        } else {
+          baStack.classList.remove('fanned');
+        }
+      });
+    }, {
+      threshold: 0,
+      rootMargin: '-38% 0px -38% 0px'  // dispara só quando está no centro do viewport
+    });
+
+    fanObserver.observe(baStack);
+  </script>
+
+  <script>
+    // ─── Depoimentos — carrossel drag + dots ──────
+    const track      = document.getElementById('testiTrack');
+    const dotsWrap   = document.getElementById('testiDots');
+    const testiWrap  = document.getElementById('testiWrap');
+    const testiCards = track.querySelectorAll('.testi-card');
+    let currentSlide = 0;
+
+    testiCards.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Depoimento ${i + 1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(idx) {
+      const cardW = testiCards[0].offsetWidth + 24;
+      currentSlide = Math.max(0, Math.min(idx, testiCards.length - 1));
+      track.style.transform = `translateX(-${currentSlide * cardW}px)`;
+      dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+    }
+
+    let startX = 0, isDragging = false;
+    testiWrap.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
+    testiWrap.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
+    testiWrap.addEventListener('mousemove',  e => { if (isDragging) e.preventDefault(); }, { passive: false });
+    testiWrap.addEventListener('mouseup',    e => { if (!isDragging) return; isDragging = false; const dx = e.clientX - startX; if (dx < -50) goTo(currentSlide + 1); else if (dx > 50) goTo(currentSlide - 1); });
+    testiWrap.addEventListener('touchend',   e => { if (!isDragging) return; isDragging = false; const dx = e.changedTouches[0].clientX - startX; if (dx < -50) goTo(currentSlide + 1); else if (dx > 50) goTo(currentSlide - 1); });
+
+    const testiObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); testiObs.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    testiCards.forEach(c => testiObs.observe(c));
+
+    setInterval(() => goTo(currentSlide + 1 < testiCards.length ? currentSlide + 1 : 0), 5000);
+
+    // ─── Corpo Clínico ────────────────────────────
+    const teamFeatured = document.getElementById('teamFeatured');
+    const teamCards    = document.querySelectorAll('.team-card');
+
+    const teamFeaturedObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); teamFeaturedObs.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    teamFeaturedObs.observe(teamFeatured);
+
+    const teamCardObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); teamCardObs.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    teamCards.forEach(c => teamCardObs.observe(c));
+
+    // ─── FAQ — accordion + entrada ────────────────
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        faqItems.forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded', 'false'); });
+        if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+
+    const faqObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); faqObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    faqItems.forEach((item, i) => { item.style.transitionDelay = `${i * 0.07}s`; faqObs.observe(item); });
+
+    // ─── CTA Final — entrada ──────────────────────
+    const ctaEls = [document.getElementById('ctaText'), document.getElementById('ctaForm')];
+    const ctaObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ctaObs.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    ctaEls.forEach(el => ctaObs.observe(el));
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Enviado! Entraremos em contato.';
+      btn.style.background = 'hsl(84, 35%, 58%)';
+      btn.disabled = true;
+    }
+
+    // ─── Estrutura — entrada do texto e galeria ───
+    const structureEls = [
+      document.getElementById('structureText'),
+      document.getElementById('structureLocation'),
+    ];
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    const structureObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); structureObs.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+
+    structureEls.forEach(el => structureObs.observe(el));
+
+    const galleryObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); galleryObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+
+    galleryItems.forEach(el => galleryObs.observe(el));
+  </script>
+
+
+</body>
+</html>
