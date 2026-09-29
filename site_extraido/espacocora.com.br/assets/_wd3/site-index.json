@@ -1,0 +1,411 @@
+{
+ "version": 1,
+ "tool": "wd3 0.1.0",
+ "captureId": "espacocora.com.br-0c038542",
+ "capturedAt": "2026-09-28T19:33:18+00:00",
+ "entry": {
+  "url": "https://espacocora.com.br/",
+  "path": "/",
+  "search": "",
+  "file": "assets/espacocora.com.br/index.html",
+  "contentType": "text/html"
+ },
+ "blocked": [
+  "^https?://([^/?#]+\\.)?(google\\-analytics\\.com|analytics\\.google\\.com|googletagmanager\\.com|googleadservices\\.com|doubleclick\\.net|googlesyndication\\.com|googleoptimize\\.com|connect\\.facebook\\.net|bat\\.bing\\.com|snap\\.licdn\\.com|px\\.ads\\.linkedin\\.com|analytics\\.tiktok\\.com|ct\\.pinterest\\.com|static\\.ads\\-twitter\\.com|analytics\\.twitter\\.com|tr\\.snapchat\\.com|sc\\-static\\.net|mc\\.yandex\\.ru|hotjar\\.com|hotjar\\.io|clarity\\.ms|cdn\\.segment\\.com|api\\.segment\\.io|cdn\\.mxpnl\\.com|api\\-js\\.mixpanel\\.com|api\\.mixpanel\\.com|api\\.amplitude\\.com|api2\\.amplitude\\.com|api\\-secure\\.amplitude\\.com|api\\-sr\\.amplitude\\.com|sr\\-client\\-cfg\\.amplitude\\.com|plausible\\.io|cloud\\.umami\\.is|analytics\\.umami\\.is|static\\.cloudflareinsights\\.com|cloudflareinsights\\.com|vitals\\.vercel\\-insights\\.com|browser\\-intake\\-datadoghq\\.com|browser\\-intake\\-datadoghq\\.eu|js\\-agent\\.newrelic\\.com|bam\\.nr\\-data\\.net|bam\\-cell\\.nr\\-data\\.net|fullstory\\.com|script\\.crazyegg\\.com|mouseflow\\.com|smartlook\\.com|heapanalytics\\.com|i\\.posthog\\.com|stats\\.wp\\.com|pixel\\.wp\\.com|promotekit\\.com|ingest\\.sentry\\.io|ingest\\.us\\.sentry\\.io|ingest\\.de\\.sentry\\.io|widget\\.intercom\\.io|js\\.intercomcdn\\.com|api\\-iam\\.intercom\\.io|js\\.hs\\-scripts\\.com|js\\.hs\\-analytics\\.net|js\\.hs\\-banner\\.com|js\\.hscollectedforms\\.net|js\\.usemessages\\.com|track\\.hubspot\\.com|client\\.crisp\\.chat|embed\\.tawk\\.to|js\\.driftt\\.com|static\\.zdassets\\.com|ekr\\.zdassets\\.com|cdn\\.cookielaw\\.org|geolocation\\.onetrust\\.com|consent\\.cookiebot\\.com|consentcdn\\.cookiebot\\.com|app\\.usercentrics\\.eu|api\\.usercentrics\\.eu|cdn\\.iubenda\\.com|cmp\\.osano\\.com|cdn\\.termly\\.io)(:\\d+)?([/?#]|$)",
+  "/rpc/increment_shared_code_views",
+  "^https?://(umami|analytics|stats|plausible)\\.[^/]+/(api/send|api/collect|api/event|script\\.js)",
+  "/g/c(ollect)?\\?v=2&",
+  "sentry\\.io/api/\\d+/(envelope|store)",
+  "/api/meta-capi",
+  "^https?://(leadtracker|tracking|track|events?|collect)\\.[^/]+/",
+  "^https?://a\\.vturb\\.com/",
+  "facebook\\.com/tr[/?]",
+  "/_vercel/(speed-)?insights/",
+  "/cdn-cgi/rum",
+  "/cdn-cgi/challenge-platform/",
+  "google\\.com/(pagead|ads)/"
+ ],
+ "volatileParams": [
+  "v",
+  "_rsc",
+  "dpl",
+  "_",
+  "t",
+  "ts",
+  "timestamp",
+  "cb",
+  "cachebust",
+  "cacheBust",
+  "nocache",
+  "rnd",
+  "rand",
+  "random",
+  "_t"
+ ],
+ "entries": [
+  {
+   "url": "https://espacocora.com.br/",
+   "method": "GET",
+   "status": 200,
+   "contentType": "text/html",
+   "headers": {
+    "content-type": "text/html"
+   },
+   "resourceType": "document",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/index.html",
+   "size": 5766,
+   "modes": [
+    "navigate"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/index-CB2-0wcv.css",
+   "method": "GET",
+   "status": 200,
+   "contentType": "text/css",
+   "headers": {
+    "content-type": "text/css"
+   },
+   "resourceType": "stylesheet",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/index-CB2-0wcv.css",
+   "size": 96094,
+   "modes": [
+    "cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/index-BOhGW-Jd.js",
+   "method": "GET",
+   "status": 200,
+   "contentType": "application/javascript",
+   "headers": {
+    "content-type": "application/javascript"
+   },
+   "resourceType": "script",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/index-BOhGW-Jd.js",
+   "size": 453873,
+   "modes": [
+    "cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/logo-scrolled-BhTATvRn.png",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/png",
+   "headers": {
+    "content-type": "image/png"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/logo-scrolled-BhTATvRn.png",
+   "size": 17999,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/logo-transparent-qK_-2zKC.png",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/png",
+   "headers": {
+    "content-type": "image/png"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/logo-transparent-qK_-2zKC.png",
+   "size": 32037,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/google-proxy.php?place_id=ChIJJURV1jA5J5URqiDIQ3ouXKI&key=AIzaSyAqKnz1ApdEyx9AgO9qYjVBJ0smSJjDM1Y&fields=reviews,rating,user_ratings_total",
+   "method": "GET",
+   "status": 200,
+   "contentType": "text/html",
+   "headers": {
+    "content-type": "text/html"
+   },
+   "resourceType": "fetch",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/google-proxy.php__q63b63705.html",
+   "size": 5766,
+   "modes": [
+    "cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/favicon.png",
+   "method": "GET",
+   "status": 404,
+   "contentType": "text/html",
+   "headers": {
+    "content-type": "text/html"
+   },
+   "resourceType": "other",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/favicon.png",
+   "size": 555,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/hero-dentist-Dh50MT6M.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/hero-dentist-Dh50MT6M.jpg",
+   "size": 350307,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg",
+   "size": 143336,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/dentarios-invisiveis-B3wP1oSY.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/dentarios-invisiveis-B3wP1oSY.jpg",
+   "size": 275452,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/facetas-service-JOeOt8Fq.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/facetas-service-JOeOt8Fq.jpg",
+   "size": 370796,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/sorridente-ChoNfeqG.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/sorridente-ChoNfeqG.jpg",
+   "size": 589018,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/favicon.svg",
+   "method": "GET",
+   "status": 404,
+   "contentType": "text/html",
+   "headers": {
+    "content-type": "text/html"
+   },
+   "resourceType": "other",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/favicon.svg",
+   "size": 555,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_03-11UIgwiN.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_03-11UIgwiN.jpg",
+   "size": 170302,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_07-MsQdWF0P.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_07-MsQdWF0P.jpg",
+   "size": 148771,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_01-C0qopQn_.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_01-C0qopQn_.jpg",
+   "size": 151604,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_02-D5Po86rJ.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_02-D5Po86rJ.jpg",
+   "size": 160778,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_05-2CPuQjt_.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_05-2CPuQjt_.jpg",
+   "size": 135488,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_04-fMGzKvGK.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_04-fMGzKvGK.jpg",
+   "size": 143085,
+   "modes": [
+    "no-cors"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_06-D3f-PmyU.jpg",
+   "method": "GET",
+   "status": 200,
+   "contentType": "image/jpeg",
+   "headers": {
+    "content-type": "image/jpeg"
+   },
+   "resourceType": "image",
+   "passes": [
+    "desktop"
+   ],
+   "file": "assets/espacocora.com.br/assets/ba_06-D3f-PmyU.jpg",
+   "size": 164951,
+   "modes": [
+    "no-cors"
+   ]
+  }
+ ],
+ "videos": {
+  "posters": {},
+  "onlineHosts": []
+ }
+}

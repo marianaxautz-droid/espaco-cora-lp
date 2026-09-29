@@ -1,0 +1,252 @@
+{
+ "entryUrl": "https://espacocora.com.br/",
+ "capturedAt": "2026-09-28T19:33:18+00:00",
+ "indexHtml": {
+  "kind": "arquivo",
+  "description": "site vivo aberto com duplo clique (file://): um runtime faz o papel do Service Worker; imagens e vídeos que a página só exibe são lidos de assets/, o resto (CSS, JS, fontes, dados, imagens de WebGL) vai embutido no index.html"
+ },
+ "files": [
+  {
+   "url": "https://espacocora.com.br/assets/ba_01-C0qopQn_.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_01-C0qopQn_.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 151604,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_02-D5Po86rJ.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_02-D5Po86rJ.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 160778,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_03-11UIgwiN.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_03-11UIgwiN.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 170302,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_04-fMGzKvGK.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_04-fMGzKvGK.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 143085,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_05-2CPuQjt_.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_05-2CPuQjt_.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 135488,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_06-D3f-PmyU.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_06-D3f-PmyU.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 164951,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/ba_07-MsQdWF0P.jpg",
+   "file": "assets/espacocora.com.br/assets/ba_07-MsQdWF0P.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 148771,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/dentarios-invisiveis-B3wP1oSY.jpg",
+   "file": "assets/espacocora.com.br/assets/dentarios-invisiveis-B3wP1oSY.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 275452,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg",
+   "file": "assets/espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 143336,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/facetas-service-JOeOt8Fq.jpg",
+   "file": "assets/espacocora.com.br/assets/facetas-service-JOeOt8Fq.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 370796,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/hero-dentist-Dh50MT6M.jpg",
+   "file": "assets/espacocora.com.br/assets/hero-dentist-Dh50MT6M.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 350307,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/index-BOhGW-Jd.js",
+   "file": "assets/espacocora.com.br/assets/index-BOhGW-Jd.js",
+   "type": "application/javascript",
+   "resourceType": "script",
+   "size": 453873,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ],
+   "role": "site"
+  },
+  {
+   "url": "https://espacocora.com.br/assets/index-CB2-0wcv.css",
+   "file": "assets/espacocora.com.br/assets/index-CB2-0wcv.css",
+   "type": "text/css",
+   "resourceType": "stylesheet",
+   "size": 96094,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ],
+   "role": "site"
+  },
+  {
+   "url": "https://espacocora.com.br/assets/logo-scrolled-BhTATvRn.png",
+   "file": "assets/espacocora.com.br/assets/logo-scrolled-BhTATvRn.png",
+   "type": "image/png",
+   "resourceType": "image",
+   "size": 17999,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/logo-transparent-qK_-2zKC.png",
+   "file": "assets/espacocora.com.br/assets/logo-transparent-qK_-2zKC.png",
+   "type": "image/png",
+   "resourceType": "image",
+   "size": 32037,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/assets/sorridente-ChoNfeqG.jpg",
+   "file": "assets/espacocora.com.br/assets/sorridente-ChoNfeqG.jpg",
+   "type": "image/jpeg",
+   "resourceType": "image",
+   "size": 589018,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/favicon.png",
+   "file": "assets/espacocora.com.br/favicon.png",
+   "type": "text/html",
+   "resourceType": "other",
+   "size": 555,
+   "status": 404,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/favicon.svg",
+   "file": "assets/espacocora.com.br/favicon.svg",
+   "type": "text/html",
+   "resourceType": "other",
+   "size": 555,
+   "status": 404,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/google-proxy.php?place_id=ChIJJURV1jA5J5URqiDIQ3ouXKI&key=AIzaSyAqKnz1ApdEyx9AgO9qYjVBJ0smSJjDM1Y&fields=reviews,rating,user_ratings_total",
+   "file": "assets/espacocora.com.br/google-proxy.php__q63b63705.html",
+   "type": "text/html",
+   "resourceType": "fetch",
+   "size": 5766,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  },
+  {
+   "url": "https://espacocora.com.br/",
+   "file": "assets/espacocora.com.br/index.html",
+   "type": "text/html",
+   "resourceType": "document",
+   "size": 5766,
+   "status": 200,
+   "party": "first",
+   "passes": [
+    "desktop"
+   ]
+  }
+ ]
+}
