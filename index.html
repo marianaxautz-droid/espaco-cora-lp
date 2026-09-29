@@ -137,7 +137,7 @@
     ───────────────────────────────────────── */
     .hero {
       position: relative;
-      height: 220vh;
+      height: 100vh;
     }
 
     .hero-sticky {
@@ -157,141 +157,6 @@
       will-change: transform;
     }
 
-    /* ─── Door Scene ─── */
-    .door-scene {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      perspective: 1800px;
-      perspective-origin: 50% 72%;
-      z-index: 4;
-      padding-bottom: 14%;
-    }
-
-    .door-wrapper {
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-    }
-
-    /* Paredes invisíveis — só para manter o layout */
-    .wall-left, .wall-right { display: none; }
-
-    /* Frame da porta — combina com o caixilho branco da foto */
-    .door-frame {
-      position: relative;
-      flex-shrink: 0;
-      width: 20vw;
-      max-width: 290px;
-      min-width: 160px;
-      height: 67vh;
-      border-top:   12px solid hsl(30, 20%, 91%);
-      border-left:  12px solid hsl(30, 20%, 91%);
-      border-right: 12px solid hsl(30, 16%, 86%);
-      background: transparent;
-      overflow: visible;
-    }
-
-    /* Interior luminoso quando a porta abre */
-    .door-interior {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 40% 35%,
-        hsl(45, 70%, 97%) 0%,
-        hsl(42, 50%, 90%) 40%,
-        hsl(36, 30%, 78%) 100%
-      );
-      opacity: 0;
-      will-change: opacity;
-    }
-
-    /* Painel da porta — combina com a porta branca da foto */
-    .door-panel {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom,
-          transparent 26.5%, hsl(30, 12%, 82%) 26.5%, hsl(30, 12%, 82%) 27.2%, transparent 27.2%,
-          transparent 66.5%, hsl(30, 12%, 82%) 66.5%, hsl(30, 12%, 82%) 67.2%, transparent 67.2%
-        ),
-        linear-gradient(160deg, hsl(0, 0%, 97%) 0%, hsl(30, 10%, 92%) 100%);
-      transform-origin: left center;
-      transform: rotateY(-4deg);
-      will-change: transform;
-      box-shadow:
-        inset -6px 0 18px rgba(0,0,0,0.03),
-        3px 0 12px rgba(0,0,0,0.15);
-    }
-
-    /* Logo na porta */
-    .door-logo {
-      position: absolute;
-      top: 42%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 45%;
-      text-align: center;
-      color: hsl(30, 14%, 28%);
-      pointer-events: none;
-    }
-
-    .door-logo svg { width: 100%; height: auto; }
-
-    /* Maçaneta — lado esquerdo como na foto */
-    .door-handle {
-      position: absolute;
-      left: 14%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .door-handle::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 24px; height: 6px;
-      background: linear-gradient(to bottom, hsl(0,0%,75%), hsl(0,0%,58%));
-      border-radius: 0 3px 3px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.18);
-    }
-
-    .door-handle::after {
-      content: '';
-      position: absolute;
-      left: -2px; top: 50%;
-      transform: translateY(-50%);
-      width: 7px; height: 22px;
-      background: linear-gradient(to right, hsl(0,0%,70%), hsl(0,0%,80%));
-      border-radius: 3px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.18);
-    }
-
-    /* Luz vazando pela fresta */
-    .door-light {
-      position: absolute;
-      left: -3px; top: 2%; bottom: 0;
-      width: 10px;
-      background: linear-gradient(to bottom,
-        transparent,
-        rgba(255, 248, 225, 0.95) 15%,
-        rgba(255, 248, 225, 0.8) 85%,
-        transparent
-      );
-      filter: blur(6px);
-      opacity: 0;
-      will-change: opacity;
-    }
-
-    /* Soleira */
-    .door-floor {
-      position: absolute;
-      bottom: -12px; left: -12px; right: -12px;
-      height: 12px;
-      background: hsl(30, 18%, 88%);
-    }
 
     /* ─── Hero Content ─── */
     .hero-content {
@@ -1667,37 +1532,8 @@
 
       <div class="hero-bg" id="heroBg"></div>
 
-      <!-- Cena da porta -->
-      <div class="door-scene">
-        <div class="door-wrapper">
 
-          <div class="wall-left"></div>
-
-          <div class="door-frame">
-            <div class="door-interior" id="doorInterior"></div>
-            <div class="door-panel" id="doorPanel">
-
-              <!-- Logo na porta -->
-              <div class="door-logo">
-                <svg viewBox="0 0 130 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M25 68 A40 40 0 0 1 105 68" stroke="currentColor" stroke-width="1.8" fill="none"/>
-                  <text x="65" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" letter-spacing="3" fill="currentColor">ESPAÇO</text>
-                  <text x="65" y="82" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="30" font-weight="300" letter-spacing="2" fill="currentColor">CORA</text>
-                </svg>
-              </div>
-
-              <div class="door-handle"></div>
-            </div>
-            <div class="door-light" id="doorLight"></div>
-            <div class="door-floor"></div>
-          </div>
-
-          <div class="wall-right"></div>
-
-        </div>
-      </div>
-
-      <!-- Conteúdo centralizado -->
+<!-- Conteúdo centralizado -->
       <div class="hero-content" id="heroContent">
         <p class="hero-eyebrow">Clínica Odontológica · Florianópolis, SC</p>
         <h1 class="hero-headline">
@@ -2281,56 +2117,23 @@
   <!-- ═══════════ JS ═══════════ -->
   <script>
     const navbar      = document.getElementById('navbar');
-    const heroBg      = document.getElementById('heroBg');
-    const doorPanel   = document.getElementById('doorPanel');
-    const doorLight   = document.getElementById('doorLight');
-    const doorInterior= document.getElementById('doorInterior');
     const heroContent = document.getElementById('heroContent');
     const heroFade    = document.getElementById('heroFade');
 
-    function clamp(val, min, max) {
-      return Math.min(Math.max(val, min), max);
-    }
-
-    function lerp(a, b, t) {
-      return a + (b - a) * t;
-    }
-
-    function easeOut(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
+    function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
 
     window.addEventListener('scroll', () => {
-      const scrollY   = window.scrollY;
-      const vh        = window.innerHeight;
+      const scrollY = window.scrollY;
+      const vh      = window.innerHeight;
 
-      // — Navbar —
       navbar.classList.toggle('scrolled', scrollY > 40);
 
-      // — Door progress (0 → 1 over first 75% of hero scroll zone) —
-      const doorRaw  = scrollY / (vh * 0.75);
-      const doorT    = easeOut(clamp(doorRaw, 0, 1));
-
-      // Door rotates from -12deg (slightly open) to -86deg (fully open)
-      const angle = lerp(-12, -86, doorT);
-      doorPanel.style.transform = `rotateY(${angle}deg)`;
-
-      // Light leaks in as door opens
-      doorLight.style.opacity = lerp(0, 1, doorT);
-
-      // Interior brightens as door opens
-      doorInterior.style.opacity = clamp(doorT * 1.4, 0, 1);
-
-      // Background subtle zoom
-      const scale = lerp(1, 1.07, doorT);
-      heroBg.style.transform = `scale(${scale})`;
-
-      // Hero content fades as door is nearly open
-      const contentT = clamp((doorRaw - 0.6) / 0.4, 0, 1);
+      // Hero content fades on scroll
+      const contentT = clamp(scrollY / (vh * 0.5), 0, 1);
       heroContent.style.opacity = 1 - contentT;
 
       // Fade out to next section
-      const fadeT = clamp((scrollY - vh * 0.78) / (vh * 0.22), 0, 1);
+      const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
       heroFade.style.opacity = fadeT;
     });
   </script>
