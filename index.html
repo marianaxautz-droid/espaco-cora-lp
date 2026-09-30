@@ -61,9 +61,15 @@
     }
 
     /* Logo */
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+    }
+
     .navbar-logo img {
       height: 44px;
       object-fit: contain;
+      display: block;
       filter: brightness(0) invert(1);
       transition: filter 0.4s ease;
     }
@@ -110,13 +116,14 @@
     .navbar-cta {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
     }
 
     .btn-nav {
       background: var(--btn);
       color: white;
       border: none;
-      padding: 0.55rem 1.4rem;
+      padding: 0.75rem 1.4rem;
       border-radius: 999px;
       font-size: 0.82rem;
       font-weight: 500;
@@ -137,7 +144,7 @@
     ───────────────────────────────────────── */
     .hero {
       position: relative;
-      height: 100vh;
+      height: 220vh;
     }
 
     .hero-sticky {
@@ -147,14 +154,41 @@
       overflow: hidden;
     }
 
-    /* Dark background behind everything */
-    /* Imagem de fundo — cobre 100% */
+    /* Vídeo de fundo — cobre 100% */
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('hero-bg.png') center center / cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
       transform-origin: center center;
+      transform: scale(1);
       will-change: transform;
+      animation: heroZoom linear forwards;
+      animation-play-state: paused;
+    }
+
+    .hero-bg video.playing {
+      animation-play-state: running;
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.35); }
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: hsla(32, 39%, 22%, 0.8);
+      pointer-events: none;
     }
 
 
@@ -170,6 +204,7 @@
       z-index: 10;
       padding: 2rem;
       will-change: opacity;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .hero-eyebrow {
@@ -177,7 +212,7 @@
       font-weight: 500;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: hsl(18, 10%, 38%);
+      color: hsla(45, 28%, 92%, 0.75);
       margin-bottom: 1.5rem;
     }
 
@@ -186,20 +221,20 @@
       font-size: clamp(3.2rem, 6.5vw, 5.5rem);
       font-weight: 300;
       line-height: 1.08;
-      color: hsl(18, 12%, 22%);
+      color: hsl(45, 28%, 96%);
       margin-bottom: 1.5rem;
     }
 
     .hero-headline em {
       font-style: italic;
       font-weight: 400;
-      color: hsl(18, 20%, 38%);
+      color: hsl(84, 22%, 78%);
     }
 
     .hero-sub {
       font-size: 1rem;
       font-weight: 300;
-      color: hsl(18, 10%, 42%);
+      color: hsla(45, 20%, 90%, 0.8);
       max-width: 440px;
       line-height: 1.75;
       margin-bottom: 2.5rem;
@@ -233,8 +268,8 @@
 
     .btn-hero-ghost {
       background: transparent;
-      color: hsl(18, 12%, 28%);
-      border: 1px solid hsl(18, 14%, 58%);
+      color: hsl(45, 28%, 92%);
+      border: 1px solid hsla(45, 28%, 92%, 0.5);
       padding: 0.8rem 2.2rem;
       border-radius: 999px;
       font-size: 0.9rem;
@@ -244,8 +279,8 @@
       transition: var(--transition);
     }
     .btn-hero-ghost:hover {
-      border-color: hsl(18, 14%, 38%);
-      background: rgba(0, 0, 0, 0.04);
+      border-color: hsl(45, 28%, 92%);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     /* Scroll indicator */
@@ -259,7 +294,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      color: hsl(18, 10%, 44%);
+      color: hsla(45, 28%, 90%, 0.6);
       font-size: 0.65rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -268,7 +303,7 @@
     .scroll-line {
       width: 1px;
       height: 36px;
-      background: linear-gradient(to bottom, transparent, hsl(18, 12%, 48%));
+      background: linear-gradient(to bottom, transparent, hsla(45, 28%, 90%, 0.6));
       animation: lineDown 2s ease-in-out infinite;
     }
 
@@ -284,11 +319,12 @@
       left: 0;
       right: 0;
       height: 240px;
-      background: linear-gradient(to bottom, transparent, var(--background));
+      background: linear-gradient(to bottom, transparent, hsl(32, 39%, 22%));
       z-index: 15;
       opacity: 0;
       pointer-events: none;
       will-change: opacity;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* ─────────────────────────────────────────
@@ -330,7 +366,7 @@
        SERVIÇOS
     ───────────────────────────────────────── */
     .services {
-      background: var(--background);
+      background: hsl(32, 39%, 22%);
       padding: 7rem 2rem;
     }
 
@@ -368,6 +404,41 @@
       height: 1px;
       background: var(--border);
       margin: 0 auto;
+    }
+
+    /* Overrides de cor para fundo escuro */
+    .services .section-eyebrow {
+      color: hsla(45, 28%, 88%, 0.6);
+    }
+
+    .services .section-title {
+      color: hsl(45, 28%, 94%);
+    }
+
+    .services .section-rule {
+      background: hsla(45, 28%, 88%, 0.3);
+    }
+
+    .services .service-card {
+      border-color: hsla(45, 28%, 88%, 0.15);
+      background: hsla(45, 28%, 88%, 0.05);
+    }
+
+    .services .service-card:hover {
+      border-color: hsla(45, 28%, 88%, 0.35);
+      background: hsla(45, 28%, 88%, 0.09);
+    }
+
+    .services .service-card-title {
+      color: hsl(45, 28%, 92%);
+    }
+
+    .services .service-card-rule {
+      background: hsla(45, 28%, 88%, 0.3);
+    }
+
+    .services .service-card-text {
+      color: hsla(45, 28%, 88%, 0.65);
     }
 
     /* Grid de cards */
@@ -887,40 +958,44 @@
       text-transform: uppercase;
     }
 
-    /* Grid de outros membros */
-    .team-grid {
+    /* Carrossel de membros */
+    .team-carousel-wrap {
       max-width: 1100px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      position: relative;
+    }
+
+    .team-track-outer {
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .team-track-outer:active { cursor: grabbing; }
+
+    .team-track {
+      display: flex;
+      gap: 1.25rem;
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+      will-change: transform;
     }
 
     .team-card {
+      flex: 0 0 calc((100% - 2.5rem) / 3);
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+      transition: border-color 0.3s ease;
     }
 
     .team-card:hover {
       border-color: hsl(45, 20%, 68%);
     }
 
-    .team-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .team-card:nth-child(2) { transition-delay: 0.1s; }
-    .team-card:nth-child(3) { transition-delay: 0.2s; }
-
     .team-card-img {
       width: 100%;
-      aspect-ratio: 1;
+      aspect-ratio: 3/2;
       overflow: hidden;
       background: hsl(45, 18%, 80%);
       display: flex;
@@ -967,18 +1042,95 @@
 
     .team-card-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 400;
       color: var(--foreground);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
     .team-card-role {
       font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .team-card-atuacao {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .team-card-reg {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+    }
+
+    /* Navegação */
+    .team-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .team-nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .team-nav-btn:hover {
+      border-color: var(--foreground);
+      color: var(--foreground);
+    }
+
+    .team-nav-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .team-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .team-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      padding: 0;
+    }
+
+    .team-dot.active {
+      background: var(--foreground);
+      transform: scale(1.4);
     }
 
     /* ─────────────────────────────────────────
@@ -1530,7 +1682,11 @@
   <section class="hero" id="hero">
     <div class="hero-sticky">
 
-      <div class="hero-bg" id="heroBg"></div>
+      <div class="hero-bg" id="heroBg">
+        <video id="heroBgVideo" muted playsinline preload="auto" poster="hero-bg.png">
+          <source src="animaBG.mp4" type="video/mp4" />
+        </video>
+      </div>
 
 
 <!-- Conteúdo centralizado -->
@@ -1710,46 +1866,183 @@
       </div>
     </div>
 
-    <!-- Demais membros -->
-    <div class="team-grid" id="teamGrid">
+    <!-- Carrossel de membros -->
+    <div class="team-carousel-wrap">
+      <div class="team-track-outer" id="teamTrackOuter">
+        <div class="team-track" id="teamTrack">
 
-      <div class="team-card">
-        <div class="team-card-img">
-          <div class="team-card-placeholder">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span>Foto</span>
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Cristiane Simão Robini</p>
+              <p class="team-card-role">Dentística Restauradora</p>
+              <p class="team-card-atuacao">Clínica geral, Dentística e atendimento de crianças.</p>
+              <span class="team-card-reg">CRO-SC 10068</span>
+            </div>
           </div>
-        </div>
-        <div class="team-card-body">
-          <p class="team-card-name">Dr. Nome Sobrenome</p>
-          <p class="team-card-role">Implantodontia · CRO-SC 00000</p>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Maria Luisa Seixas Silva</p>
+              <p class="team-card-role">Ortodontia e Ortopedia Facial</p>
+              <p class="team-card-atuacao">Atendimento adulto e infantil.</p>
+              <span class="team-card-reg">CRO 16223</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Luiza Jacques Rocha</p>
+              <p class="team-card-role">Harmonização Orofacial</p>
+              <p class="team-card-atuacao">Especialista em Harmonização Orofacial.</p>
+              <span class="team-card-reg">CRO-SC 25970</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Giovanna Slongo dos Santos</p>
+              <p class="team-card-role">Endodontia e Clínica Geral</p>
+              <p class="team-card-atuacao">Especialista em Endodontia, Prótese e Dentística.</p>
+              <span class="team-card-reg">CRO 15806</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Monique Ariadine B. de Castro</p>
+              <p class="team-card-role">Dentística e Periodontia</p>
+              <p class="team-card-atuacao">Especialista em Dentística e Periodontia.</p>
+              <span class="team-card-reg">CRO 14903</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Camila Zordenunes Borges</p>
+              <p class="team-card-role">Enfermeira Estomaterapeuta</p>
+              <p class="team-card-atuacao">Feridas e cicatrização avançada, Matriz de Fibrina e Laserterapia.</p>
+              <span class="team-card-reg">COREN 766705</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Duda Camargo</p>
+              <p class="team-card-role">Nutricionista</p>
+              <p class="team-card-atuacao">Acompanhamento nutricional para diabetes tipo 1, tipo 2, pré-diabetes, diabetes gestacional e saúde metabólica.</p>
+              <span class="team-card-reg">CRN 10 7247</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Gabriela Schurhaus</p>
+              <p class="team-card-role">Nutricionista Clínica e Comportamental</p>
+              <p class="team-card-atuacao">Atendimento em adultos e idosos.</p>
+              <span class="team-card-reg">CRN 10 14892</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Ronaldo Alves de Mattos</p>
+              <p class="team-card-role">Fisioterapeuta</p>
+              <p class="team-card-atuacao">Reabilitação da coluna vertebral e disfunções de cabeça e pescoço.</p>
+              <span class="team-card-reg">CREFITO 225728</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Thiago Ludtke N. De Masi</p>
+              <p class="team-card-role">Implantodontista</p>
+              <p class="team-card-atuacao">Cirurgia Oral Menor, Implantodontia e Periodontia.</p>
+              <span class="team-card-reg">CRO/SC 17.918</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Ana Beatriz S. Lima Avila</p>
+              <p class="team-card-role">Clínica Geral</p>
+              <p class="team-card-atuacao">Clínica geral e cirurgia oral menor.</p>
+              <span class="team-card-reg">CRO/SC 26923</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Janaína de Souza Barbosa</p>
+              <p class="team-card-role">Psicóloga · Neuropsicóloga</p>
+              <p class="team-card-atuacao">TCC — Terapia Cognitivo Comportamental e Laudos Neuropsicológicos.</p>
+              <span class="team-card-reg">CRP 12/07646</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Mayra Talaska</p>
+              <p class="team-card-role">Endodontista</p>
+              <p class="team-card-atuacao">Cirurgia Oral Menor, Periodontia, sedação consciente, laserterapia e i-PRF/L-PRF.</p>
+              <span class="team-card-reg">CRO 20185/SC</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Monick Torrinelli de Campos</p>
+              <p class="team-card-role">Psicóloga Clínica</p>
+              <p class="team-card-atuacao">Psicoterapia de orientação psicanalítica. Atendimento individual de adultos e adolescentes.</p>
+              <span class="team-card-reg">CRP 12/32000</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Nara Märcelino</p>
+              <p class="team-card-role">Nutricionista · Terapeuta Integrativa</p>
+              <p class="team-card-atuacao">Acupuntura, Auriculoterapia, Aromaterapia e Reiki. Atendimento adulto, idoso e infantil.</p>
+              <span class="team-card-reg">CRN 10 15157</span>
+            </div>
+          </div>
+
+          <div class="team-card">
+            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-body">
+              <p class="team-card-name">Stefanie Silveira do Nascimento</p>
+              <p class="team-card-role">Psicóloga Clínica</p>
+              <p class="team-card-atuacao">Abordagem Relacional Sistêmica. Atendimento para adultos e casais.</p>
+              <span class="team-card-reg">CRP 12/18846</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="team-card">
-        <div class="team-card-img">
-          <div class="team-card-placeholder">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span>Foto</span>
-          </div>
-        </div>
-        <div class="team-card-body">
-          <p class="team-card-name">Dra. Nome Sobrenome</p>
-          <p class="team-card-role">Ortodontia · CRO-SC 00000</p>
-        </div>
-      </div>
-
-      <div class="team-card">
-        <div class="team-card-img">
-          <div class="team-card-placeholder">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span>Foto</span>
-          </div>
-        </div>
-        <div class="team-card-body">
-          <p class="team-card-name">Dra. Nome Sobrenome</p>
-          <p class="team-card-role">Periodontia · CRO-SC 00000</p>
-        </div>
+      <!-- Navegação -->
+      <div class="team-nav">
+        <button class="team-nav-btn" id="teamPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="team-dots" id="teamDots"></div>
+        <button class="team-nav-btn" id="teamNext" aria-label="Próximo">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
 
     </div>
@@ -2136,6 +2429,69 @@
       const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
       heroFade.style.opacity = fadeT;
     });
+
+    // ── Vídeo hero em reprodução reversa ──
+    const heroBgVideo = document.getElementById('heroBgVideo');
+    let reverseStarted = false;
+    let videoReady = false;
+
+    heroBgVideo.addEventListener('loadedmetadata', () => {
+      heroBgVideo.currentTime = heroBgVideo.duration;
+      // Sincroniza duração da animação CSS com o vídeo
+      heroBgVideo.style.animationDuration = heroBgVideo.duration + 's';
+    });
+
+    heroBgVideo.addEventListener('seeked', () => {
+      if (!videoReady) videoReady = true;
+    });
+
+    function startReverseOnce() {
+      if (reverseStarted || !videoReady) return;
+      reverseStarted = true;
+
+      // Inicia zoom via CSS
+      heroBgVideo.classList.add('playing');
+
+      // Seek throttlado a 30fps para reduzir carga
+      const SEEK_FPS = 1 / 30;
+      let lastTime = null;
+      let seekAccum = 0;
+
+      function stepReverse(timestamp) {
+        if (lastTime !== null) {
+          const delta = (timestamp - lastTime) / 1000;
+          seekAccum += delta;
+
+          if (seekAccum >= SEEK_FPS) {
+            heroBgVideo.currentTime = Math.max(0, heroBgVideo.currentTime - seekAccum);
+            seekAccum = 0;
+
+            if (heroBgVideo.currentTime <= 2) {
+              heroBgVideo.currentTime = 0;
+              document.body.style.overflow = '';
+              return;
+            }
+          }
+        }
+        lastTime = timestamp;
+        requestAnimationFrame(stepReverse);
+      }
+      requestAnimationFrame(stepReverse);
+    }
+
+    function onFirstScroll(e) {
+      e.preventDefault();
+      window.removeEventListener('wheel',     onFirstScroll);
+      window.removeEventListener('touchmove', onFirstScroll);
+
+      // Bloqueia scroll da página durante o vídeo
+      document.body.style.overflow = 'hidden';
+
+      startReverseOnce();
+    }
+
+    window.addEventListener('wheel',     onFirstScroll, { passive: false });
+    window.addEventListener('touchmove', onFirstScroll, { passive: false });
   </script>
 
   <script>
@@ -2231,17 +2587,46 @@
 
     // ─── Corpo Clínico ────────────────────────────
     const teamFeatured = document.getElementById('teamFeatured');
-    const teamCards    = document.querySelectorAll('.team-card');
-
     const teamFeaturedObs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); teamFeaturedObs.unobserve(e.target); } });
     }, { threshold: 0.15 });
     teamFeaturedObs.observe(teamFeatured);
 
-    const teamCardObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); teamCardObs.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    teamCards.forEach(c => teamCardObs.observe(c));
+    // Carrossel
+    const teamTrack     = document.getElementById('teamTrack');
+    const teamOuter     = document.getElementById('teamTrackOuter');
+    const teamDotsWrap  = document.getElementById('teamDots');
+    const teamPrevBtn   = document.getElementById('teamPrev');
+    const teamNextBtn   = document.getElementById('teamNext');
+    const teamCards     = teamTrack.querySelectorAll('.team-card');
+    const TEAM_PER_PAGE = 3;
+    const teamPages     = Math.ceil(teamCards.length / TEAM_PER_PAGE);
+    let teamPage        = 0;
+
+    for (let i = 0; i < teamPages; i++) {
+      const d = document.createElement('button');
+      d.className = 'team-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Página ${i + 1}`);
+      d.addEventListener('click', () => goTeam(i));
+      teamDotsWrap.appendChild(d);
+    }
+
+    function goTeam(idx) {
+      teamPage = Math.max(0, Math.min(idx, teamPages - 1));
+      const cardW = teamCards[0].offsetWidth + 20;
+      teamTrack.style.transform = `translateX(-${teamPage * TEAM_PER_PAGE * cardW}px)`;
+      teamDotsWrap.querySelectorAll('.team-dot').forEach((d, i) => d.classList.toggle('active', i === teamPage));
+    }
+
+    teamPrevBtn.addEventListener('click', () => goTeam(teamPage - 1));
+    teamNextBtn.addEventListener('click', () => goTeam(teamPage + 1));
+
+    let teamStartX = 0, teamDragging = false;
+    teamOuter.addEventListener('mousedown',  e => { teamDragging = true; teamStartX = e.clientX; });
+    teamOuter.addEventListener('touchstart', e => { teamDragging = true; teamStartX = e.touches[0].clientX; }, { passive: true });
+    teamOuter.addEventListener('mousemove',  e => { if (teamDragging) e.preventDefault(); }, { passive: false });
+    teamOuter.addEventListener('mouseup',    e => { if (!teamDragging) return; teamDragging = false; const dx = e.clientX - teamStartX; if (dx < -50) goTeam(teamPage + 1); else if (dx > 50) goTeam(teamPage - 1); });
+    teamOuter.addEventListener('touchend',   e => { if (!teamDragging) return; teamDragging = false; const dx = e.changedTouches[0].clientX - teamStartX; if (dx < -50) goTeam(teamPage + 1); else if (dx > 50) goTeam(teamPage - 1); });
 
     // ─── FAQ — accordion + entrada ────────────────
     const faqItems = document.querySelectorAll('.faq-item');
