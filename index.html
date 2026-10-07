@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Espaço Cora — Clínica Odontológica</title>
+  <title>Espaço Cora — Consultórios para Profissionais de Saúde · Florianópolis</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +25,7 @@
       --transition:     all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; background: var(--background); }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -57,7 +57,7 @@
       background: rgba(223, 217, 203, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 4px 32px rgba(92, 51, 23, 0.12);
+      box-shadow: 0 2px 8px rgba(60, 30, 10, 0.10), 0 1px 0 rgba(92, 51, 23, 0.08);
     }
 
     /* Logo */
@@ -145,6 +145,7 @@
     .hero {
       position: relative;
       height: 220vh;
+      background: var(--primary);
     }
 
     .hero-sticky {
@@ -154,40 +155,34 @@
       overflow: hidden;
     }
 
-    /* Vídeo de fundo — cobre 100% */
     .hero-bg {
       position: absolute;
       inset: 0;
       overflow: hidden;
     }
 
-    .hero-bg video {
+    .hero-bg img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center center;
-      display: block;
-      transform-origin: center center;
-      transform: scale(1);
-      will-change: transform;
-      animation: heroZoom linear forwards;
-      animation-play-state: paused;
+      object-position: top center;
+      transform-origin: top center;
+      animation: heroBgKen 14s ease-in-out forwards;
     }
 
-    .hero-bg video.playing {
-      animation-play-state: running;
-    }
-
-    @keyframes heroZoom {
-      from { transform: scale(1); }
-      to   { transform: scale(1.35); }
+    @keyframes heroBgKen {
+      0%   { transform: scale(1)    translateX(0%)    translateY(0%); }
+      40%  { transform: scale(1.08) translateX(-1.5%) translateY(1%); }
+      100% { transform: scale(1.22) translateX(2%)    translateY(2%); }
     }
 
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: hsla(32, 39%, 22%, 0.8);
+      background: hsla(32, 39%, 22%, 0.5);
       pointer-events: none;
     }
 
@@ -240,11 +235,23 @@
       margin-bottom: 2.5rem;
     }
 
+    .hero-headline {
+      font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+    }
+
     .hero-cta {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
+    }
+
+    .hero-support {
+      margin-top: 1rem;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: hsla(45, 20%, 90%, 0.5);
+      letter-spacing: 0.02em;
     }
 
     .btn-hero-primary {
@@ -367,12 +374,12 @@
     ───────────────────────────────────────── */
     .services {
       background: hsl(32, 39%, 22%);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
     }
 
     .services-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 3rem;
     }
 
     .section-eyebrow {
@@ -399,13 +406,6 @@
       font-weight: 400;
     }
 
-    .section-rule {
-      width: 36px;
-      height: 1px;
-      background: var(--border);
-      margin: 0 auto;
-    }
-
     /* Overrides de cor para fundo escuro */
     .services .section-eyebrow {
       color: hsla(45, 28%, 88%, 0.6);
@@ -415,127 +415,223 @@
       color: hsl(45, 28%, 94%);
     }
 
-    .services .section-rule {
-      background: hsla(45, 28%, 88%, 0.3);
+    .services-sub {
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: hsla(45, 28%, 88%, 0.55);
+      line-height: 1.75;
     }
 
-    .services .service-card {
-      border-color: hsla(45, 28%, 88%, 0.15);
-      background: hsla(45, 28%, 88%, 0.05);
-    }
-
-    .services .service-card:hover {
-      border-color: hsla(45, 28%, 88%, 0.35);
-      background: hsla(45, 28%, 88%, 0.09);
-    }
-
-    .services .service-card-title {
-      color: hsl(45, 28%, 92%);
-    }
-
-    .services .service-card-rule {
-      background: hsla(45, 28%, 88%, 0.3);
-    }
-
-    .services .service-card-text {
-      color: hsla(45, 28%, 88%, 0.65);
-    }
-
-    /* Grid de cards */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+    .salas-footer {
       max-width: 1100px;
-      margin: 0 auto;
+      margin: 2.5rem auto 0;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: hsla(45, 28%, 88%, 0.5);
+      line-height: 1.8;
+      text-align: center;
     }
 
-    /* Card */
-    .service-card {
-      padding: 2.5rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+    /* ── Accordion de salas ── */
+    .salas-accordion {
       display: flex;
-      flex-direction: column;
+      margin: 0 -2rem;
+      height: 540px;
+      overflow: hidden;
+    }
 
+    .sala-panel {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: hsl(32, 39%, 13%) center/cover no-repeat;
+      transition: flex 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sala-panel + .sala-panel {
+      border-left: 1px solid hsla(45, 28%, 88%, 0.07);
+    }
+
+    .salas-accordion:hover .sala-panel        { flex: 0.45; }
+    .salas-accordion:hover .sala-panel:hover  { flex: 3.1; }
+
+    /* Gradiente de base */
+    .sala-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        hsla(32, 39%, 7%, 0.95) 0%,
+        hsla(32, 39%, 10%, 0.4) 45%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Número vertical — sempre visível */
+    .sala-num {
+      position: absolute;
+      top: 2.2rem;
+      left: 1.75rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      color: hsla(45, 28%, 88%, 0.28);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      transition: color 0.4s ease;
+      user-select: none;
+    }
+
+    .sala-panel:hover .sala-num {
+      color: hsla(45, 28%, 88%, 0.55);
+    }
+
+    /* Tag — canto superior direito */
+    .sala-tag {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: hsla(45, 28%, 88%, 0.4);
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease, border-color 0.3s ease;
+      transform: translateY(-5px);
+      transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s;
+      white-space: nowrap;
     }
 
-    .service-card:hover {
-      border-color: hsl(45, 20%, 68%);
-    }
-
-    .service-card.visible {
+    .sala-panel:hover .sala-tag {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .service-card:nth-child(2) { transition-delay: 0.14s; }
-    .service-card:nth-child(3) { transition-delay: 0.28s; }
+    /* Conteúdo texto — âncora no rodapé */
+    .sala-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 2.75rem 3rem;
+    }
 
-    .service-card-title {
+    .sala-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 400;
-      color: var(--foreground);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .service-card-rule {
-      width: 24px;
-      height: 1px;
-      background: var(--border);
-      margin-bottom: 1rem;
-      transition: width 0.4s ease;
-    }
-
-    .service-card:hover .service-card-rule {
-      width: 40px;
-    }
-
-    .service-card-text {
-      font-size: 1rem;
+      font-size: clamp(1.5rem, 1.9vw, 2.1rem);
       font-weight: 300;
-      color: var(--muted);
-      line-height: 1.8;
+      color: hsl(45, 28%, 93%);
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+      opacity: 0.38;
+      transform: translateY(0);
+      transition: opacity 0.45s ease, transform 0.45s ease;
     }
+
+    .sala-rule {
+      width: 22px;
+      height: 1px;
+      background: hsla(45, 28%, 88%, 0.3);
+      margin-bottom: 0.9rem;
+      opacity: 0.25;
+      transition: opacity 0.4s ease, width 0.5s ease;
+    }
+
+    .sala-desc {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: hsla(45, 28%, 88%, 0.55);
+      line-height: 1.85;
+      max-width: 52ch;
+      opacity: 0.28;
+      transform: translateY(0);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .sala-panel:hover .sala-title { opacity: 1; }
+    .sala-panel:hover .sala-rule  { opacity: 1; width: 38px; }
+    .sala-panel:hover .sala-desc  { opacity: 1; }
+
+    /* Dimmer os painéis não-hovered quando o accordion está em interação */
+    .salas-accordion:hover .sala-panel:not(:hover) .sala-title { opacity: 0.18; }
+    .salas-accordion:hover .sala-panel:not(:hover) .sala-rule  { opacity: 0.12; }
+    .salas-accordion:hover .sala-panel:not(:hover) .sala-desc  { opacity: 0.12; }
 
     /* ─────────────────────────────────────────
        COMO FUNCIONA
     ───────────────────────────────────────── */
     .how-it-works {
       background: var(--background);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
     }
 
     .how-it-works-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    /* ── Logo animado (SVG Disney-style) ── */
+    .conceito-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .conceito-logo-svg {
+      width: min(1000px, 100%);
+      overflow: visible;
+    }
+
+    /* Arco — desenha dos dois lados ao mesmo tempo */
+    .ls-arch-l { stroke-dasharray: 149.2; stroke-dashoffset: 149.2; }
+    .ls-arch-r { stroke-dasharray: 149.2; stroke-dashoffset: 149.2; }
+    .conceito-logo-svg.animated .ls-arch-l,
+    .conceito-logo-svg.animated .ls-arch-r {
+      animation: ls-draw 1s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+    }
+    @keyframes ls-draw { to { stroke-dashoffset: 0; } }
+
+    /* Textos — aparecem em sequência */
+    .ls-text-espaco, .ls-text-cora { opacity: 0; }
+    .conceito-logo-svg.animated .ls-text-espaco { animation: ls-text-in .8s ease 0.9s  forwards; }
+    .conceito-logo-svg.animated .ls-text-cora   { animation: ls-text-in .8s ease 1.1s forwards; }
+    @keyframes ls-text-in { from { opacity: 0; } to { opacity: 1; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .conceito-logo-svg.animated .ls-arch-l,
+      .conceito-logo-svg.animated .ls-arch-r,
+      .conceito-logo-svg.animated .ls-text-espaco,
+      .conceito-logo-svg.animated .ls-text-cora {
+        animation: none !important;
+        opacity: 1 !important;
+        stroke-dashoffset: 0 !important;
+      }
+    }
+
+    /* ── Conteúdo direito ── */
+    .conceito-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
     .how-it-works-header {
-      position: sticky;
-      top: 8rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .how-it-works-header.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .how-it-works-header .section-eyebrow { text-align: left; }
-    .how-it-works-header .section-title   { text-align: left; }
-    .how-it-works-header .section-rule    { margin: 0; }
+    .how-it-works-header .section-eyebrow { text-align: left; color: var(--muted); }
+    .how-it-works-header .section-title   { text-align: left; color: var(--foreground); }
 
     .steps-wrap {
       position: relative;
@@ -615,12 +711,44 @@
       line-height: 1.8;
     }
 
+    /* Conceito body */
+    .conceito-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    }
+
+    .conceito-body.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .conceito-text {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .conceito-quote {
+      margin-top: 0.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--foreground);
+      line-height: 1.65;
+    }
+
     /* ─────────────────────────────────────────
        ESTRUTURA & LOCALIZAÇÃO
     ───────────────────────────────────────── */
     .structure {
       background: var(--background);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
     }
 
     .structure-inner {
@@ -631,14 +759,41 @@
     .structure-top {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+      gap: 4rem;
+      align-items: stretch;
       margin-bottom: 4rem;
+    }
+
+    .structure-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .structure-map {
+      border-radius: 14px;
+      overflow: hidden;
+      min-height: 400px;
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+    }
+
+    .structure-map.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .structure-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      min-height: 400px;
     }
 
     .structure-text .section-eyebrow { text-align: left; }
     .structure-text .section-title   { text-align: left; }
-    .structure-text .section-rule    { margin: 0; margin-bottom: 2rem; }
 
     .structure-desc {
       margin-top: 2rem;
@@ -702,11 +857,21 @@
       line-height: 1.6;
     }
 
+    .structure-social-link {
+      text-decoration: none;
+      color: var(--foreground);
+      transition: color 0.2s ease;
+    }
+
+    .structure-social-link:hover {
+      color: var(--muted);
+    }
+
     /* Galeria de fotos */
     .structure-gallery {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 260px 260px;
+      grid-template-rows: 350px 350px;
       gap: 0.75rem;
     }
 
@@ -732,6 +897,8 @@
     .gallery-item:nth-child(5) { transition-delay: 0.25s; }
 
     .gallery-item img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -794,11 +961,871 @@
     }
 
     /* ─────────────────────────────────────────
+       TEAM INTRO
+    ───────────────────────────────────────── */
+    .team-intro {
+      max-width: 600px;
+      margin: 1.5rem auto 0;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    /* ─────────────────────────────────────────
+       ESTRUTURA INCLUSA
+    ───────────────────────────────────────── */
+    .estrutura {
+      background: var(--background);
+    }
+
+    .estrutura-top {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 3rem 2.5rem 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .estrutura-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .estrutura-top-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Stack de cards com scroll-driven animation ── */
+    .estrutura-stack {
+      position: relative;
+      padding: 2rem 2.5rem 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .estrutura-item {
+      position: sticky;
+      display: flex;
+      flex-direction: row;
+      background: hsl(45, 28%, 82%);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+
+      /* Espaço de scroll entre cada card — quanto o usuário rola antes do próximo cobrir */
+      margin-top: clamp(260px, 30vh, 380px);
+
+      /* Scroll-driven: entra rotacionado, endireita ao entrar na tela */
+      animation: estrutura-rotate-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 12%;
+      transform-origin: center bottom;
+    }
+
+    .estrutura-item:first-child {
+      margin-top: 0;
+    }
+
+    /* top = centro do viewport menos metade da altura estimada do card (~200px) */
+    .estrutura-item:nth-child(1) { top: calc(50vh - 200px); z-index: 1; }
+    .estrutura-item:nth-child(2) { top: calc(50vh - 195px); z-index: 2; }
+    .estrutura-item:nth-child(3) { top: calc(50vh - 190px); z-index: 3; }
+    .estrutura-item:nth-child(4) { top: calc(50vh - 185px); z-index: 4; }
+
+    /* Alterna layout: par = imagem à esquerda */
+    .estrutura-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    @keyframes estrutura-rotate-in {
+      from { transform: rotate(18deg) translateY(30px); }
+      to   { transform: rotate(0deg)  translateY(0);    }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .estrutura-item { animation: none; }
+    }
+
+    /* ── Lado do texto ── */
+    .estrutura-item-text {
+      flex: 1;
+      padding: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 4vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .estrutura-item-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+    }
+
+    .estrutura-item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--foreground);
+    }
+
+    .estrutura-item-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .estrutura-item-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.93rem;
+      font-weight: 300;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .estrutura-item-list li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.5em;
+    }
+
+    /* ── Lado da imagem ── */
+    .estrutura-item-media {
+      flex: 1;
+      min-height: clamp(280px, 38vw, 460px);
+      background: var(--primary);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .estrutura-item-media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      /* Encolhe levemente conforme o scroll avança (igual à referência) */
+      animation: estrutura-shrink linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+      transform-origin: center center;
+    }
+
+    @keyframes estrutura-shrink {
+      from { transform: scale(1.12); }
+      to   { transform: scale(1);    }
+    }
+
+    .estrutura-item-placeholder {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: hsla(45, 28%, 88%, 0.35);
+      pointer-events: none;
+    }
+
+    /* ── Espaçador final para o último card sair do sticky ── */
+    .estrutura-spacer {
+      height: 6rem;
+    }
+
+    @media (max-width: 768px) {
+      .estrutura-item {
+        flex-direction: column !important;
+        min-height: auto;
+        margin-top: 16vh;
+      }
+
+      .estrutura-item-media {
+        min-height: 240px;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       ZERO BUROCRACIA
+    ───────────────────────────────────────── */
+    .zero-burocracia {
+      background: var(--background);
+      padding: 10rem 2rem;
+    }
+
+    .zero-burocracia .section-eyebrow { color: var(--muted); }
+    .zero-burocracia .section-title   { color: var(--foreground); }
+
+    .zero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .zero-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .zero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .zero-card {
+      border: 1px solid hsla(32, 39%, 22%, 0.12);
+      border-radius: 14px;
+      padding: 0 2.5rem 2.75rem;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease,
+                  border-color 0.35s ease, background 0.35s ease;
+    }
+
+    .zero-card:hover {
+      border-color: hsla(32, 39%, 22%, 0.28);
+      background: transparent;
+    }
+
+    .zero-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .zero-card:nth-child(2) { transition-delay: 0.12s; }
+    .zero-card:nth-child(3) { transition-delay: 0.24s; }
+
+    /* ── Área de ilustração ── */
+    .zero-card-illus {
+      margin: 0 -2.5rem 2rem;
+      height: 152px;
+      background: transparent;
+      border-bottom: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: hsla(32, 39%, 22%, 0.32);
+      transition: color 0.4s ease, background 0.4s ease;
+    }
+
+    .zero-card:hover .zero-card-illus {
+      color: hsla(32, 39%, 22%, 0.85);
+      background: transparent;
+    }
+
+    .zero-card-illus svg {
+      width: 180px;
+      height: 150px;
+      overflow: visible;
+    }
+
+    .zero-card-illus svg [data-layer] {
+      transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── SVG 01 — Contenção ── */
+    /* Moldura visível em repouso com baixa opacidade */
+    .illus-protection [data-layer="structure"] line {
+      stroke-dashoffset: 0;
+      stroke-dasharray: var(--len);
+      opacity: 0.2;
+    }
+    .illus-protection [data-layer="corners"] { opacity: 0.2; }
+
+    @media (hover: hover) {
+      .zero-card:hover .illus-protection [data-layer="structure"] .fh1 { stroke-dashoffset: var(--len); opacity: 0; transition-delay: 0s; }
+      .zero-card:hover .illus-protection [data-layer="structure"] .fv1 { stroke-dashoffset: var(--len); opacity: 0; transition-delay: 0s; }
+      .zero-card:hover .illus-protection [data-layer="structure"] .fh2 { stroke-dashoffset: var(--len); opacity: 0; transition-delay: 0s; }
+      .zero-card:hover .illus-protection [data-layer="structure"] .fv2 { stroke-dashoffset: var(--len); opacity: 0; transition-delay: 0s; }
+      .zero-card:hover .illus-protection [data-layer="corners"] { opacity: 0; transition-delay: 0s; }
+    }
+    /* Re-desenha ao soltar o hover (volta ao estado visível) — mas no hover anima */
+    /* Usamos uma abordagem inversa: animação acontece ao entrar no hover via keyframes */
+    .illus-protection .fh1,
+    .illus-protection .fh2,
+    .illus-protection .fv1,
+    .illus-protection .fv2 { animation: none; }
+
+    @media (hover: hover) {
+      .zero-card:hover .illus-protection .fh1 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card:hover .illus-protection .fv1 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.11s forwards; }
+      .zero-card:hover .illus-protection .fh2 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.22s forwards; }
+      .zero-card:hover .illus-protection .fv2 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.33s forwards; }
+      .zero-card:hover .illus-protection [data-layer="corners"] { animation: fadeIn 0.3s ease 0.42s forwards; }
+    }
+    @media (hover: none) {
+      .zero-card.illus-active .illus-protection .fh1 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card.illus-active .illus-protection .fv1 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.11s forwards; }
+      .zero-card.illus-active .illus-protection .fh2 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.22s forwards; }
+      .zero-card.illus-active .illus-protection .fv2 { animation: drawLine 0.45s cubic-bezier(0.4,0,0.2,1) 0.33s forwards; }
+      .zero-card.illus-active .illus-protection [data-layer="corners"] { animation: fadeIn 0.3s ease 0.42s forwards; }
+    }
+
+    @keyframes drawLine {
+      0%   { stroke-dashoffset: var(--len); opacity: 1; }
+      100% { stroke-dashoffset: 0;          opacity: 1; }
+    }
+    @keyframes fadeIn {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* ── SVG 02 — Preenchimento temporal ── */
+    .illus-schedule [data-col] {
+      opacity: 0.2;
+      transform: translateY(0);
+      transform-box: fill-box;
+      transform-origin: top center;
+    }
+
+    @media (hover: hover) {
+      .zero-card:hover .illus-schedule [data-col="1"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card:hover .illus-schedule [data-col="2"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0.12s forwards; }
+      .zero-card:hover .illus-schedule [data-col="3"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0.24s forwards; }
+    }
+    @media (hover: none) {
+      .zero-card.illus-active .illus-schedule [data-col="1"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card.illus-active .illus-schedule [data-col="2"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0.12s forwards; }
+      .zero-card.illus-active .illus-schedule [data-col="3"] { animation: colReveal 0.45s cubic-bezier(0.4,0,0.2,1) 0.24s forwards; }
+    }
+
+    @keyframes colReveal {
+      0%   { opacity: 0.2; transform: translateY(5px); }
+      100% { opacity: 1;   transform: translateY(0); }
+    }
+
+    /* ── SVG 03 — Propagação ── */
+    .illus-broadcast [data-ring] {
+      transform-box: fill-box;
+      transform-origin: center;
+      transform: scale(1);
+      opacity: 0.2;
+    }
+
+    @media (hover: hover) {
+      .zero-card:hover .illus-broadcast [data-ring="1"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card:hover .illus-broadcast [data-ring="2"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0.13s forwards; }
+      .zero-card:hover .illus-broadcast [data-ring="3"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0.26s forwards; }
+    }
+    @media (hover: none) {
+      .zero-card.illus-active .illus-broadcast [data-ring="1"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0s    forwards; }
+      .zero-card.illus-active .illus-broadcast [data-ring="2"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0.13s forwards; }
+      .zero-card.illus-active .illus-broadcast [data-ring="3"] { animation: ringPulse 0.55s cubic-bezier(0.4,0,0.2,1) 0.26s forwards; }
+    }
+
+    @keyframes ringPulse {
+      0%   { transform: scale(0.25); opacity: 0.2; }
+      100% { transform: scale(1);    opacity: 0.65; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .zero-card-illus svg [data-layer] { transition: none !important; }
+    }
+
+    .zero-card-number { display: none; }
+
+    .zero-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--foreground);
+      line-height: 1.25;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      margin-bottom: 0.65rem;
+    }
+
+    .zero-card-text {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    /* ─────────────────────────────────────────
+       FLEXIBILIDADE
+    ───────────────────────────────────────── */
+    .flexibilidade {
+      background: var(--background);
+      padding: 10rem 2rem;
+    }
+
+    .flex-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .flex-header .section-eyebrow { text-align: left; }
+    .flex-header .section-title   { text-align: left; }
+
+    .flex-header-desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    .flex-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .flex-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.5rem 1.75rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .flex-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .flex-item:nth-child(2) { transition-delay: 0.1s; }
+    .flex-item:nth-child(3) { transition-delay: 0.2s; }
+
+    .flex-item-dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.45em;
+      margin-bottom: 0.75rem;
+    }
+
+    .flex-item-body strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--foreground);
+      margin-bottom: 0.3rem;
+    }
+
+    .flex-item-body p {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .flex-cta {
+      margin-top: 2.5rem;
+    }
+
+    .btn-flex {
+      display: inline-block;
+      background: var(--btn);
+      color: white;
+      border: none;
+      padding: 0.85rem 2.2rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-flex:hover {
+      background: var(--btn-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(92, 51, 23, 0.3);
+    }
+
+    .flex-visual {
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+    }
+
+    .flex-visual.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─────────────────────────────────────────
+       TABELA COMPARATIVA
+    ───────────────────────────────────────── */
+    .comparativo {
+      background: hsl(32, 39%, 22%);
+      overflow: hidden;
+    }
+
+    .comparativo-layout {
+      display: flex;
+      min-height: 700px;
+    }
+
+    .comparativo-img-col {
+      flex: 0 0 40%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparativo-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .comparativo-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: hsla(32, 39%, 10%, 0.75);
+      pointer-events: none;
+    }
+
+    .comparativo .section-title { color: hsl(45, 28%, 94%); }
+
+    .comparativo-inner {
+      flex: 1;
+      padding: 7rem 4rem 7rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .comparativo-header {
+      position: absolute;
+      top: 4rem;
+      left: 3rem;
+      right: 3rem;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .comparativo-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .comparativo-table.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .comparativo-table thead th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .comparativo-table thead th:first-child {
+      color: hsla(45, 28%, 88%, 0.35);
+      width: 46%;
+      padding-right: 1.5rem;
+    }
+
+    .comparativo-table thead th:last-child {
+      color: hsl(84, 22%, 72%);
+      padding-left: 1.5rem;
+    }
+
+    .comparativo-table tbody tr:hover {
+      background: hsla(45, 28%, 88%, 0.03);
+    }
+
+    .comparativo-table td {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid hsla(45, 28%, 88%, 0.08);
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.6;
+      vertical-align: top;
+    }
+
+    .comparativo-table td:first-child {
+      color: hsla(45, 28%, 88%, 0.45);
+      padding-right: 1.5rem;
+      width: 46%;
+    }
+
+    .comparativo-table td:last-child {
+      padding-left: 1.5rem;
+    }
+
+    .comparativo-table .col-gap {
+      width: 8%;
+      border-top: none !important;
+    }
+
+    .comparativo-table td:last-child {
+      color: hsla(45, 28%, 88%, 0.85);
+    }
+
+    .comparativo-table td:last-child::before {
+      content: '✓ ';
+      color: hsl(84, 30%, 65%);
+      font-weight: 500;
+    }
+
+    .comparativo-cta {
+      text-align: left;
+      margin-top: 2rem;
+    }
+
+    .btn-comparativo {
+      display: inline-block;
+      background: hsl(45, 45%, 72%);
+      color: hsl(32, 39%, 16%);
+      border: none;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-comparativo:hover {
+      background: hsl(45, 50%, 78%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+    }
+
+    /* ─────────────────────────────────────────
+       CRESCER JUNTO + FUNDADORA
+    ───────────────────────────────────────── */
+    .crescer-junto {
+      background: var(--background);
+      padding: 10rem 2rem;
+    }
+
+    .crescer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .crescer-text-col {
+      opacity: 0;
+      transform: translateX(-24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .crescer-text-col.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .crescer-text-col .section-eyebrow { text-align: left; }
+    .crescer-text-col .section-title   { text-align: left; }
+
+    .crescer-p {
+      font-size: 0.975rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+      max-width: 85%;
+    }
+
+    .crescer-card {
+      border-radius: 16px;
+      overflow: visible;
+      position: relative;
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.7s ease 0.12s, transform 0.7s ease 0.12s;
+    }
+
+    .crescer-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .crescer-card-img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      border-radius: 16px;
+      background: hsl(32, 30%, 22%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .crescer-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transition: transform 0.6s ease;
+    }
+
+    .crescer-card:hover .crescer-card-img img {
+      transform: scale(1.03);
+    }
+
+    .crescer-card-body {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 3rem);
+      padding: 1.5rem 1.75rem;
+      background: hsla(45, 28%, 94%, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      border: 1px solid hsla(45, 28%, 78%, 0.4);
+    }
+
+    .crescer-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--foreground);
+      margin-bottom: 0.3rem;
+    }
+
+    .crescer-card-role {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─────────────────────────────────────────
+       COOKIE BANNER
+    ───────────────────────────────────────── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      width: calc(100% - 3rem);
+      max-width: 680px;
+      background: hsl(32, 28%, 10%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 999;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-wrap: wrap;
+    }
+
+    .cookie-banner.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .cookie-text {
+      flex: 1;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      min-width: 200px;
+    }
+
+    .cookie-text a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: underline;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .btn-cookie-accept {
+      background: hsl(45, 45%, 72%);
+      color: hsl(32, 39%, 16%);
+      border: none;
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-cookie-accept:hover { background: hsl(45, 50%, 78%); }
+
+    .btn-cookie-refuse {
+      background: transparent;
+      color: rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-cookie-refuse:hover {
+      color: rgba(255,255,255,0.65);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    /* ─────────────────────────────────────────
        CORPO CLÍNICO
     ───────────────────────────────────────── */
     .team {
       background: var(--background);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
       overflow: hidden;
     }
 
@@ -981,7 +2008,7 @@
     }
 
     .team-card {
-      flex: 0 0 calc((100% - 2.5rem) / 3);
+      flex: 0 0 calc((100% - 3.75rem) / 4);
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -995,7 +2022,7 @@
 
     .team-card-img {
       width: 100%;
-      aspect-ratio: 3/2;
+      aspect-ratio: 3/4;
       overflow: hidden;
       background: hsl(45, 18%, 80%);
       display: flex;
@@ -1138,13 +2165,12 @@
     ───────────────────────────────────────── */
     .testimonials {
       background: hsl(32, 30%, 20%);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
       overflow: hidden;
     }
 
     .testimonials .section-eyebrow { color: rgba(255,255,255,0.45); }
     .testimonials .section-title   { color: rgba(255,255,255,0.92); }
-    .testimonials .section-rule    { background: rgba(255,255,255,0.2); }
 
     .testimonials .services-header {
       margin-bottom: 4rem;
@@ -1254,7 +2280,7 @@
     ───────────────────────────────────────── */
     .before-after {
       background: var(--background);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
       text-align: center;
       overflow: hidden;
     }
@@ -1316,7 +2342,7 @@
     ───────────────────────────────────────── */
     .faq {
       background: var(--background);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
     }
 
     .faq-inner {
@@ -1358,8 +2384,8 @@
       border: none;
       cursor: pointer;
       text-align: left;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
       font-weight: 400;
       color: var(--foreground);
       transition: color 0.3s ease;
@@ -1443,7 +2469,7 @@
     ───────────────────────────────────────── */
     .cta-final {
       background: hsl(32, 30%, 20%);
-      padding: 7rem 2rem;
+      padding: 10rem 2rem;
     }
 
     .cta-final-inner {
@@ -1568,6 +2594,40 @@
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
     }
 
+    .form-checks {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      cursor: pointer;
+    }
+
+    .form-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 0.15em;
+      accent-color: hsl(45, 45%, 72%);
+      cursor: pointer;
+    }
+
+    .form-check span {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+
+    .form-policy-link {
+      color: rgba(255,255,255,0.5);
+    }
+
     .form-note {
       font-size: 0.72rem;
       color: rgba(255,255,255,0.2);
@@ -1659,20 +2719,20 @@
 
     <div class="navbar-logo">
       <img
-        src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-scrolled-BhTATvRn.png"
+        src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-scrolled-BhTATvRn.webp"
         alt="Espaço Cora"
       />
     </div>
 
     <ul class="navbar-nav">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#servicos">Serviços</a></li>
-      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#conceito">O espaço</a></li>
+      <li><a href="#salas">Salas</a></li>
+      <li><a href="#equipe">Equipe</a></li>
       <li><a href="#localizacao">Localização</a></li>
     </ul>
 
     <div class="navbar-cta">
-      <button class="btn-nav">Realizar agendamento</button>
+      <button class="btn-nav" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">Quero atender no Cora</button>
     </div>
 
   </nav>
@@ -1683,25 +2743,23 @@
     <div class="hero-sticky">
 
       <div class="hero-bg" id="heroBg">
-        <video id="heroBgVideo" muted playsinline preload="auto" poster="hero-bg.png">
-          <source src="animaBG.mp4" type="video/mp4" />
-        </video>
+        <img src="espaco-cora/Assets/BG-Hero.webp" alt="" />
       </div>
 
 
 <!-- Conteúdo centralizado -->
       <div class="hero-content" id="heroContent">
-        <p class="hero-eyebrow">Clínica Odontológica · Florianópolis, SC</p>
+        <p class="hero-eyebrow">Espaço Cora · Florianópolis, SC</p>
         <h1 class="hero-headline">
-          Onde o cuidado<br><em>encontra o afeto</em>
+          Um espaço de saúde com alma<br>de spa brasileiro e <em>estrutura completa</em><br>para você só se preocupar em atender.
         </h1>
         <p class="hero-sub">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          Consultórios equipados no coração de Florianópolis, com estrutura de alto padrão, zero burocracia e liberdade para você montar a sua agenda.
         </p>
         <div class="hero-cta">
-          <button class="btn-hero-primary">Realizar agendamento</button>
-          <button class="btn-hero-ghost">Conhecer serviços</button>
+          <button class="btn-hero-primary" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">Quero atender no Espaço Cora</button>
         </div>
+        <p class="hero-support">Preencha o formulário e continue a conversa pelo WhatsApp.</p>
       </div>
 
       <!-- Indicador de scroll -->
@@ -1717,85 +2775,543 @@
   </section>
 
 
-  <!-- ═══════════ SERVIÇOS ═══════════ -->
-  <section class="services" id="servicos">
+  <!-- ═══════════ SALAS ═══════════ -->
+  <section class="services" id="salas">
 
     <div class="services-header">
-      <span class="section-eyebrow">Tratamentos</span>
-      <h2 class="section-title">O que fazemos pelo<br><em>seu sorriso</em></h2>
+      <h2 class="section-title">Salas pensadas para<br><em>o seu tipo de atendimento.</em></h2>
       <div class="section-rule"></div>
+      <p class="services-sub">São três salas, todas com vista, isolamento acústico e muito conforto para você e para o seu paciente.</p>
     </div>
 
-    <div class="services-grid">
+    <!-- Accordion de salas -->
+    <div class="salas-accordion">
 
-      <!-- Card 1 — Facetas -->
-      <div class="service-card">
-        <h3 class="service-card-title">Facetas em porcelana ou resina</h3>
-        <div class="service-card-rule"></div>
-        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      <!-- Painel 1 -->
+      <div class="sala-panel" style="background-image: url('espaco-cora/Assets/EmptyName 207.webp')">
+        <div class="sala-overlay"></div>
+        <span class="sala-num">01</span>
+        <span class="sala-tag">2 salas disponíveis</span>
+        <div class="sala-content">
+          <h3 class="sala-title">Salas de procedimentos</h3>
+          <div class="sala-rule"></div>
+          <p class="sala-desc">Equipadas com cadeiras de alto padrão, ideais para procedimentos e atendimentos faciais.</p>
+        </div>
       </div>
 
-      <!-- Card 2 — Implantes -->
-      <div class="service-card">
-        <h3 class="service-card-title">Implantes dentários</h3>
-        <div class="service-card-rule"></div>
-        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      <!-- Painel 2 -->
+      <div class="sala-panel" style="background-image: url('espaco-cora/Assets/EmptyName 192.webp')">
+        <div class="sala-overlay"></div>
+        <span class="sala-num">02</span>
+        <span class="sala-tag">2 salas disponíveis</span>
+        <div class="sala-content">
+          <h3 class="sala-title">Salas de procedimentos</h3>
+          <div class="sala-rule"></div>
+          <p class="sala-desc">Equipadas com cadeiras de alto padrão, ideais para procedimentos e atendimentos faciais.</p>
+        </div>
       </div>
 
-      <!-- Card 3 — Invisalign -->
-      <div class="service-card">
-        <h3 class="service-card-title">Ortodontia com Invisalign</h3>
-        <div class="service-card-rule"></div>
-        <p class="service-card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      <!-- Painel 3 -->
+      <div class="sala-panel" style="background-image: url('espaco-cora/Assets/EmptyName 196.webp')">
+        <div class="sala-overlay"></div>
+        <span class="sala-num">03</span>
+        <span class="sala-tag">Modulável</span>
+        <div class="sala-content">
+          <h3 class="sala-title">Sala multiprofissional</h3>
+          <div class="sala-rule"></div>
+          <p class="sala-desc">Para consultas e terapias. A maca é removível e os móveis são modulares — a sala se adapta à forma como você atende.</p>
+        </div>
       </div>
 
     </div>
+
+    <p class="salas-footer"><span style="font-size: 1.05rem; color: hsla(45, 28%, 88%, 0.72);">Precisa de algum móvel, equipamento ou ajuste para o seu atendimento?</span><br>Aqui tudo é conversável. A gente busca o que faz sentido para você e para o espaço.</p>
+
   </section>
 
 
-  <!-- ═══════════ COMO FUNCIONA ═══════════ -->
-  <section class="how-it-works" id="consulta">
+  <!-- ═══════════ O CONCEITO ═══════════ -->
+  <section class="how-it-works" id="conceito">
     <div class="how-it-works-inner">
 
-        <div class="how-it-works-header" id="howHeader">
-          <span class="section-eyebrow">O processo</span>
-          <h2 class="section-title">Como funciona<br><em>a sua consulta</em></h2>
-          <div class="section-rule"></div>
-        </div>
+      <div class="conceito-logo-wrap" id="conceitoLogoWrap">
+        <svg class="conceito-logo-svg" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
+          <defs>
+            <filter id="cora-glow" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
 
-        <div class="steps-wrap">
+          <!-- Arco esquerdo: apex → ponto esquerdo (quarter circle) -->
+          <path class="ls-arch-l"
+            d="M 150,60 A 95,95 0 0,0 55,155"
+            stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-body">
-          <h3 class="step-title">Agendamento</h3>
-          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+          <!-- Arco direito: apex → ponto direito (quarter circle) -->
+          <path class="ls-arch-r"
+            d="M 150,60 A 95,95 0 0,1 245,155"
+            stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- ESPAÇO -->
+          <text class="ls-text-espaco" x="150" y="190"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, serif"
+            font-size="21"
+            font-weight="400"
+            letter-spacing="7"
+            fill="hsl(32,39%,22%)">ESPA&#199;O</text>
+
+          <!-- CORA -->
+          <text class="ls-text-cora" x="150" y="260"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, serif"
+            font-size="76"
+            font-weight="400"
+            fill="hsl(32,39%,22%)">CORA</text>
+        </svg>
+      </div>
+
+      <div class="conceito-content">
+        <div class="how-it-works-header">
+          <h2 class="section-title">Um lugar de cuidado com cara, cheiro e <em>textura do Brasil.</em></h2>        </div>
+
+        <div class="conceito-body" id="conceitoBody">
+          <p class="conceito-text">O Espaço Cora nasceu para que pacientes e profissionais sintam, ao entrar, que chegaram a um lugar de cuidado de verdade. Algo próximo de um spa, mas com a nossa identidade: acolhedor, brasileiro e pensado para quem cuida do corpo e de quem cuida da mente.</p>
+          <p class="conceito-text">Tudo isso sem abrir mão do rigor. Aqui, o ambiente é elegante e aconchegante, e a prática é baseada em ciência, com equipamentos e materiais de alta tecnologia.</p>
+          <blockquote class="conceito-quote">
+            Nada de consultório engessado, móveis antigos ou ambiente frio. No Cora, o profissional atende com estrutura de alto padrão em um espaço onde o paciente se sente em casa.
+          </blockquote>
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-body">
-          <h3 class="step-title">Avaliação detalhada</h3>
-          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+    </div>
+  </section>
+
+
+
+  <section class="estrutura" id="estrutura-inclusa">
+
+    <div class="estrutura-stack">
+
+      <!-- Card 1 — Para o seu paciente -->
+      <div class="estrutura-item">
+        <div class="estrutura-item-text">
+          <span class="estrutura-item-label">Para o seu paciente</span>
+          <h2 class="estrutura-item-title">Você chega<br>e atende.</h2>
+          <ul class="estrutura-item-list">
+            <li>Recepção aconchegante, com água e café</li>
+            <li>Banheiro exclusivo para pacientes</li>
+            <li>Banheiro acessível</li>
+          </ul>
+        </div>
+        <div class="estrutura-item-media">
+          <img src="espaco-cora/Assets/EmptyName 118.webp" alt="Recepção Espaço Cora" />
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-body">
-          <h3 class="step-title">Planejamento</h3>
-          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      <!-- Card 2 — Para você (invertido) -->
+      <div class="estrutura-item">
+        <div class="estrutura-item-text">
+          <span class="estrutura-item-label">Para você</span>
+          <h2 class="estrutura-item-title">O resto<br>já está pronto.</h2>
+          <ul class="estrutura-item-list">
+            <li>Banheiro e cozinha exclusivos para profissionais</li>
+            <li>Cozinha com micro-ondas e geladeira</li>
+            <li>Salas com isolamento acústico</li>
+          </ul>
+        </div>
+        <div class="estrutura-item-media">
+          <img src="espaco-cora/Assets/EmptyName 168.webp" alt="Banheiro Espaço Cora" />
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-body">
-          <h3 class="step-title">Tratamento</h3>
-          <p class="step-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim veniam quis.</p>
+      <!-- Card 3 — Tecnologia -->
+      <div class="estrutura-item">
+        <div class="estrutura-item-text">
+          <span class="estrutura-item-label">Tecnologia</span>
+          <h2 class="estrutura-item-title">Equipamento<br>de alto padrão.</h2>
+          <ul class="estrutura-item-list">
+            <li>Scanner</li>
+            <li>Estúdio fotográfico disponível</li>
+            <li>Cadeiras e equipamentos de referência</li>
+          </ul>
+        </div>
+        <div class="estrutura-item-media">
+          <img src="espaco-cora/Assets/EmptyName 199.webp" alt="Equipamentos Espaço Cora" />
         </div>
       </div>
+
+      <!-- Card 4 — Biossegurança (invertido) -->
+      <div class="estrutura-item">
+        <div class="estrutura-item-text">
+          <span class="estrutura-item-label">Biossegurança</span>
+          <h2 class="estrutura-item-title">Tudo em dia,<br>sem preocupação.</h2>
+          <ul class="estrutura-item-list">
+            <li>Esterilização dos materiais de pequenos procedimentos</li>
+            <li>Coleta e descarte de resíduos contaminados</li>
+            <li>Toda a documentação necessária em dia</li>
+          </ul>
+        </div>
+        <div class="estrutura-item-media">
+          <img src="espaco-cora/Assets/EmptyName 206.webp" alt="Biossegurança Espaço Cora" />
+        </div>
+      </div>
+
+    </div>
+    <div class="estrutura-spacer"></div>
+
+  </section>
+
+
+  <!-- ═══════════ ZERO BUROCRACIA ═══════════ -->
+  <section class="zero-burocracia" id="zero-burocracia">
+    <div class="zero-inner">
+
+      <div class="zero-header">
+        <h2 class="section-title">A burocracia<br><em>fica com a gente.</em></h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="zero-grid">
+
+        <div class="zero-card">
+          <div class="zero-card-illus">
+            <svg viewBox="0 0 120 100" fill="none" class="illus-protection" aria-hidden="true">
+              <g data-layer="hidden-lines" stroke="currentColor" stroke-dasharray="2.5 3" opacity="0.35">
+                <line x1="60" y1="28" x2="60" y2="12"/>
+                <line x1="76" y1="50" x2="104" y2="50"/>
+                <line x1="60" y1="72" x2="60" y2="88"/>
+                <line x1="44" y1="50" x2="16" y2="50"/>
+              </g>
+              <g data-layer="base" stroke="currentColor">
+                <rect x="44" y="28" width="32" height="44" rx="1" stroke-width="1"/>
+                <line x1="51" y1="40" x2="69" y2="40" stroke-width="0.65" opacity="0.55"/>
+                <line x1="51" y1="47" x2="69" y2="47" stroke-width="0.65" opacity="0.55"/>
+                <line x1="51" y1="54" x2="63" y2="54" stroke-width="0.65" opacity="0.55"/>
+              </g>
+              <g data-layer="structure" stroke="currentColor" stroke-width="0.75">
+                <line class="fh1" x1="16"  y1="12" x2="104" y2="12"  style="--len:88"/>
+                <line class="fv1" x1="104" y1="12" x2="104" y2="88"  style="--len:76"/>
+                <line class="fh2" x1="104" y1="88" x2="16"  y2="88"  style="--len:88"/>
+                <line class="fv2" x1="16"  y1="88" x2="16"  y2="12"  style="--len:76"/>
+              </g>
+              <g data-layer="corners" stroke="currentColor" stroke-width="1.5">
+                <line x1="16" y1="12" x2="22" y2="12"/>  <line x1="16" y1="12" x2="16" y2="18"/>
+                <line x1="104" y1="12" x2="98" y2="12"/> <line x1="104" y1="12" x2="104" y2="18"/>
+                <line x1="104" y1="88" x2="98" y2="88"/> <line x1="104" y1="88" x2="104" y2="82"/>
+                <line x1="16" y1="88" x2="22" y2="88"/>  <line x1="16" y1="88" x2="16" y2="82"/>
+              </g>
+            </svg>
+          </div>
+          <span class="zero-card-number">01</span>
+          <h3 class="zero-card-title">Alvarás e licenças por nossa conta</h3>
+          <p class="zero-card-text">Toda a parte legal do espaço é responsabilidade do Cora. Você não precisa se preocupar com nenhuma exigência burocrática.</p>
+        </div>
+
+        <div class="zero-card">
+          <div class="zero-card-illus">
+            <svg viewBox="0 0 120 100" fill="none" class="illus-schedule" aria-hidden="true">
+              <g data-layer="base" stroke="currentColor" stroke-width="0.65" opacity="0.35">
+                <line x1="18" y1="18" x2="102" y2="18"/>
+                <line x1="18" y1="34" x2="102" y2="34"/>
+                <line x1="18" y1="50" x2="102" y2="50"/>
+                <line x1="18" y1="66" x2="102" y2="66"/>
+                <line x1="18" y1="82" x2="102" y2="82"/>
+                <line x1="18"  y1="18" x2="18"  y2="82"/>
+                <line x1="46"  y1="18" x2="46"  y2="82"/>
+                <line x1="74"  y1="18" x2="74"  y2="82"/>
+                <line x1="102" y1="18" x2="102" y2="82"/>
+              </g>
+              <g data-layer="header" stroke="currentColor" stroke-width="0.75" opacity="0.55">
+                <rect x="18" y="18" width="28" height="16" fill="currentColor" fill-opacity="0.08"/>
+                <rect x="46" y="18" width="28" height="16" fill="currentColor" fill-opacity="0.08"/>
+                <rect x="74" y="18" width="28" height="16" fill="currentColor" fill-opacity="0.08"/>
+              </g>
+              <g data-layer="slots" data-col="1" stroke="currentColor">
+                <line x1="24" y1="43" x2="40" y2="43" stroke-width="1.5"/>
+                <line x1="24" y1="59" x2="40" y2="59" stroke-width="1.5"/>
+                <line x1="24" y1="74" x2="36" y2="74" stroke-width="1.5"/>
+              </g>
+              <g data-layer="slots" data-col="2" stroke="currentColor">
+                <line x1="52" y1="43" x2="68" y2="43" stroke-width="1.5"/>
+                <line x1="52" y1="59" x2="62" y2="59" stroke-width="1.5"/>
+                <line x1="52" y1="74" x2="68" y2="74" stroke-width="1.5"/>
+              </g>
+              <g data-layer="slots" data-col="3" stroke="currentColor">
+                <line x1="80" y1="43" x2="96" y2="43" stroke-width="1.5"/>
+                <line x1="80" y1="74" x2="96" y2="74" stroke-width="1.5"/>
+              </g>
+            </svg>
+          </div>
+          <span class="zero-card-number">02</span>
+          <h3 class="zero-card-title">Sistema de agendamento gratuito</h3>
+          <p class="zero-card-text">Você recebe acesso ao nosso sistema para agendar pacientes e registrar a evolução de cada atendimento, sem pagar nada a mais por isso.</p>
+        </div>
+
+        <div class="zero-card">
+          <div class="zero-card-illus">
+            <svg viewBox="0 0 120 100" fill="none" class="illus-broadcast" aria-hidden="true">
+              <g data-layer="base" stroke="currentColor">
+                <line x1="54" y1="50" x2="57" y2="50" stroke-width="0.75" opacity="0.7"/>
+                <line x1="63" y1="50" x2="66" y2="50" stroke-width="0.75" opacity="0.7"/>
+                <line x1="60" y1="44" x2="60" y2="47" stroke-width="0.75" opacity="0.7"/>
+                <line x1="60" y1="53" x2="60" y2="56" stroke-width="0.75" opacity="0.7"/>
+                <circle cx="60" cy="50" r="2.5" fill="currentColor" opacity="0.8"/>
+              </g>
+              <circle data-layer="ring" data-ring="1" cx="60" cy="50" r="13" stroke="currentColor" stroke-width="0.75"/>
+              <circle data-layer="ring" data-ring="2" cx="60" cy="50" r="25" stroke="currentColor" stroke-width="0.65" stroke-dasharray="4 3"/>
+              <circle data-layer="ring" data-ring="3" cx="60" cy="50" r="38" stroke="currentColor" stroke-width="0.55" stroke-dasharray="3 4"/>
+            </svg>
+          </div>
+          <span class="zero-card-number">03</span>
+          <h3 class="zero-card-title">Endereço para a sua divulgação</h3>
+          <p class="zero-card-text">Use o endereço do Espaço Cora nas suas redes e materiais de divulgação, sem custo extra.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ FLEXIBILIDADE ═══════════ -->
+  <section class="flexibilidade" id="flexibilidade">
+    <div class="flex-inner">
+
+      <div class="flex-header" id="flexHeader">
+        <span class="section-eyebrow">Flexibilidade</span>
+        <h2 class="section-title">Sua agenda,<br><em>do seu jeito.</em></h2>
+        <div class="section-rule"></div>
+        <p class="flex-header-desc">Seja para quem está começando ou para quem já tem uma carteira fixa de pacientes, o modelo do Cora se adapta ao seu momento.</p>
+        <div class="flex-cta">
+          <button class="btn-flex" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">Quero saber as condições</button>
+        </div>
+      </div>
+
+      <div class="flex-visual" id="flexVisual">
+        <div class="flex-items">
+          <div class="flex-item" id="flexItem1">
+            <div class="flex-item-dot"></div>
+            <div class="flex-item-body">
+              <strong>Mensal, por pacote de horas ou avulso</strong>
+              <p>Escolha o formato de locação que faz sentido para o seu volume de atendimentos.</p>
+            </div>
+          </div>
+          <div class="flex-item" id="flexItem2">
+            <div class="flex-item-dot"></div>
+            <div class="flex-item-body">
+              <strong>Autonomia total</strong>
+              <p>Você agenda seus pacientes direto no sistema e avisa no grupo dos profissionais.</p>
+            </div>
+          </div>
+          <div class="flex-item" id="flexItem3">
+            <div class="flex-item-dot"></div>
+            <div class="flex-item-body">
+              <strong>Horários estendidos</strong>
+              <p>Precisa atender fora do horário regular? É só combinar com antecedência.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ TABELA COMPARATIVA ═══════════ -->
+  <section class="comparativo" id="comparativo">
+    <div class="comparativo-layout">
+    <div class="comparativo-img-col">
+      <img class="comparativo-bg" src="espaco-cora/Assets/Imagem JPEG.webp" alt="" />
+      <div class="comparativo-bg-overlay"></div>
+      <div class="comparativo-header">
+        <h2 class="section-title">Não é só uma clínica.<br><em>É outra forma de atender.</em></h2>
+      </div>
+    </div>
+    <div class="comparativo-inner">
+
+      <table class="comparativo-table" id="comparativoTable">
+        <thead>
+          <tr>
+            <th>Em muitos espaços tradicionais</th>
+            <th class="col-gap"></th>
+            <th>No Espaço Cora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ambiente engessado, com cara de consultório frio</td>
+            <td class="col-gap"></td>
+            <td>Acolhimento de spa brasileiro, com estrutura de alto padrão</td>
+          </tr>
+          <tr>
+            <td>Alvarás e burocracia costumam ficar por conta do profissional</td>
+            <td class="col-gap"></td>
+            <td>Alvarás e licenças por conta do Cora</td>
+          </tr>
+          <tr>
+            <td>Sistema de agendamento pago à parte</td>
+            <td class="col-gap"></td>
+            <td>Sistema de agendamento e prontuário gratuito</td>
+          </tr>
+          <tr>
+            <td>Cobrança extra para usar o endereço na divulgação</td>
+            <td class="col-gap"></td>
+            <td>Endereço liberado para divulgação, sem custo</td>
+          </tr>
+          <tr>
+            <td>Contratos rígidos</td>
+            <td class="col-gap"></td>
+            <td>Locação mensal, por pacote de horas ou avulsa</td>
+          </tr>
+          <tr>
+            <td>Esterilização e descarte por sua conta</td>
+            <td class="col-gap"></td>
+            <td>Biossegurança inclusa, com documentação em dia</td>
+          </tr>
+          <tr>
+            <td>Um espaço que não muda</td>
+            <td class="col-gap"></td>
+            <td>Uma gestão que ouve os profissionais e investe no espaço</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="comparativo-cta">
+        <button class="btn-comparativo" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">Quero atender no Espaço Cora</button>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ CRESCER JUNTO + FUNDADORA ═══════════ -->
+  <section class="crescer-junto" id="crescer-junto">
+    <div class="crescer-inner">
+
+      <div class="crescer-card" id="crescerCard">
+        <div class="crescer-card-img">
+          <img
+            src="espaco-cora/Assets/EmptyName 1.webp"
+            alt="Dra. Laise Cândido"
+          />
+        </div>
+        <div class="crescer-card-body">
+          <p class="crescer-card-name">Dra. Laise Cândido</p>
+          <p class="crescer-card-role">Cirurgiã-Dentista · CRO-SC 16246<br>Fundadora e diretora do Espaço Cora</p>
+        </div>
+      </div>
+
+      <div class="crescer-text-col" id="crescerText">
+        <h2 class="section-title">Um espaço que cresce<br><em>com quem está nele.</em></h2>
+        <p class="crescer-p">O Espaço Cora ainda é jovem e está em constante evolução. E a ideia é justamente essa: crescer junto com cada profissional que faz parte dele.</p>
+        <p class="crescer-p">Por isso, a escuta é parte da rotina. As necessidades de quem atende aqui orientam os próximos investimentos no espaço, para que ele atenda cada vez melhor cada profissional e cada paciente.</p>
+        <p class="crescer-p">Se você tem vontade de crescer e expandir o seu trabalho, o Cora quer crescer com você.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════ ESTRUTURA & LOCALIZAÇÃO ═══════════ -->
+  <section class="structure" id="localizacao">
+    <div class="structure-inner">
+
+      <!-- Texto + info de localização | Mapa -->
+      <div class="structure-top">
+
+        <!-- Coluna esquerda: texto + localização -->
+        <div class="structure-left">
+
+          <div class="structure-text" id="structureText">
+            <span class="section-eyebrow">Localização</span>
+            <h2 class="section-title">No centro<br><em>de Florianópolis.</em></h2>
+            <div class="section-rule"></div>
+            <p class="structure-desc">
+              O Espaço Cora fica na Agronômica, em um ponto de fácil acesso para quem vem do norte, do sul, do leste da Ilha ou do continente.
+            </p>
+          </div>
+
+          <div class="structure-location" id="structureLocation">
+
+            <div class="structure-location-item">
+              <div class="structure-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              </div>
+              <div class="structure-item-body">
+                <span class="structure-item-label">Endereço</span>
+                <span class="structure-item-value">Edifício Somma Tower<br>R. Dr. Carlos Corrêa, 141 — Sala 601/602<br>Agronômica, Florianópolis — SC, 88025-250</span>
+              </div>
+            </div>
+
+            <div class="structure-location-item">
+              <div class="structure-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="structure-item-body">
+                <span class="structure-item-label">Horário de atendimento</span>
+                <span class="structure-item-value">Segunda a sexta: 8h às 20h</span>
+              </div>
+            </div>
+
+            <div class="structure-location-item">
+              <div class="structure-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </div>
+              <div class="structure-item-body">
+                <span class="structure-item-label">Redes sociais</span>
+                <a href="https://www.instagram.com/cora.espaco/" target="_blank" rel="noopener" class="structure-item-value structure-social-link">@cora.espaco</a>
+              </div>
+            </div>
+
+            <div class="structure-location-item">
+              <div class="structure-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2.5-6h11L19 12v5h-2"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/><path d="M5 12h14"/></svg>
+              </div>
+              <div class="structure-item-body">
+                <span class="structure-item-label">Estacionamento</span>
+                <span class="structure-item-value">Estacionamento do Angeloni · ao lado do prédio · na mesma rua</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Coluna direita: mapa -->
+        <div class="structure-map" id="structureMap">
+          <iframe
+            src="https://maps.google.com/maps?q=R.+Dr.+Carlos+Corr%C3%AAa,+141,+Agron%C3%B4mica,+Florian%C3%B3polis,+SC,+88025-250&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+      </div>
+
+      <!-- Galeria do consultório -->
+      <div class="structure-gallery" id="structureGallery">
+
+        <div class="gallery-item">
+          <img src="espaco-cora/Assets/Nova Pasta Com Itens/EmptyName 116.webp" alt="Espaço Cora" />
+        </div>
+
+        <div class="gallery-item">
+          <img src="espaco-cora/Assets/Nova Pasta Com Itens/EmptyName 157.webp" alt="Espaço Cora" />
+        </div>
+
+        <div class="gallery-item">
+          <img src="espaco-cora/Assets/Nova Pasta Com Itens/EmptyName 171.webp" alt="Espaço Cora" />
+        </div>
+
+        <div class="gallery-item">
+          <img src="espaco-cora/Assets/Nova Pasta Com Itens/EmptyName 183.webp" alt="Espaço Cora" />
+        </div>
+
+        <div class="gallery-item">
+          <img src="espaco-cora/Assets/Nova Pasta Com Itens/Warm Curved Hallway Retreat.webp" alt="Espaço Cora" />
+        </div>
 
       </div>
 
@@ -1803,67 +3319,14 @@
   </section>
 
 
-  <!-- ═══════════ CORPO CLÍNICO ═══════════ -->
+  <!-- ═══════════ EQUIPE ═══════════ -->
   <section class="team" id="equipe">
 
     <div class="services-header">
       <span class="section-eyebrow">Corpo clínico</span>
-      <h2 class="section-title">Quem cuida<br><em>de você</em></h2>
+      <h2 class="section-title">Quem já atende <em>no Cora</em></h2>
       <div class="section-rule"></div>
-    </div>
-
-    <!-- Dra. Laise — destaque -->
-    <div class="team-featured" id="teamFeatured">
-
-      <div class="team-featured-img">
-        <img
-          src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/dra-laise-CVv6nMIS.jpg"
-          alt="Dra. Laise Gonçalves"
-        />
-      </div>
-
-      <div class="team-featured-body">
-
-        <div class="team-badge">
-          <div class="team-badge-dot"></div>
-          <span>Fundadora & Diretora Clínica</span>
-        </div>
-
-        <div>
-          <h3 class="team-featured-name">Dra. Laise<br><em>Gonçalves</em></h3>
-          <p class="team-featured-role">Cirurgiã-Dentista · CRO-SC 12345</p>
-        </div>
-
-        <div class="team-featured-rule"></div>
-
-        <p class="team-featured-bio">
-          Especialista em Odontologia Estética e Reabilitação Oral, a Dra. Laise fundou o Espaço Cora com a missão de unir técnica de alto nível com um atendimento verdadeiramente humano. Com formação no Brasil e exterior, atua com protocolos personalizados que respeitam a individualidade de cada paciente.
-        </p>
-
-        <div class="team-tags">
-          <span class="team-tag">Odontologia Estética</span>
-          <span class="team-tag">Facetas & Lentes</span>
-          <span class="team-tag">Reabilitação Oral</span>
-          <span class="team-tag">Invisalign</span>
-          <span class="team-tag">Harmonização</span>
-        </div>
-
-        <div class="team-credentials">
-          <div class="team-credential">
-            <strong>8+</strong>
-            <span>Anos de experiência</span>
-          </div>
-          <div class="team-credential">
-            <strong>1.200+</strong>
-            <span>Pacientes atendidos</span>
-          </div>
-          <div class="team-credential">
-            <strong>3</strong>
-            <span>Especializações</span>
-          </div>
-        </div>
-
-      </div>
+      <p class="team-intro">Ambiente acolhedor e uma equipe multidisciplinar consolidada, com espaço aberto para profissionais de saúde que acreditam em um atendimento técnico, humano e baseado em ciência.</p>
     </div>
 
     <!-- Carrossel de membros -->
@@ -1872,7 +3335,7 @@
         <div class="team-track" id="teamTrack">
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Cristiane Robini.webp" alt="Cristiane Simão Robini" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Cristiane Simão Robini</p>
               <p class="team-card-role">Dentística Restauradora</p>
@@ -1892,7 +3355,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Luiza Jacques Rocha.webp" alt="Luiza Jacques Rocha" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Luiza Jacques Rocha</p>
               <p class="team-card-role">Harmonização Orofacial</p>
@@ -1902,7 +3365,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Giovanna Slongo.webp" alt="Giovanna Slongo dos Santos" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Giovanna Slongo dos Santos</p>
               <p class="team-card-role">Endodontia e Clínica Geral</p>
@@ -1922,7 +3385,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Camila Zordenunes Borges.webp" alt="Camila Zordenunes Borges" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Camila Zordenunes Borges</p>
               <p class="team-card-role">Enfermeira Estomaterapeuta</p>
@@ -1932,7 +3395,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Duda Camargo.webp" alt="Duda Camargo" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Duda Camargo</p>
               <p class="team-card-role">Nutricionista</p>
@@ -1952,7 +3415,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Ronaldo Alves de Mattos.webp" alt="Ronaldo Alves de Mattos" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Ronaldo Alves de Mattos</p>
               <p class="team-card-role">Fisioterapeuta</p>
@@ -1962,7 +3425,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Thiago Ludtke N. De Massi.webp" alt="Thiago Ludtke N. De Masi" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Thiago Ludtke N. De Masi</p>
               <p class="team-card-role">Implantodontista</p>
@@ -1992,7 +3455,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Mayra Talaska.webp" alt="Mayra Talaska" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Mayra Talaska</p>
               <p class="team-card-role">Endodontista</p>
@@ -2002,7 +3465,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Monick Torrinelli de Campos.webp" alt="Monick Torrinelli de Campos" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Monick Torrinelli de Campos</p>
               <p class="team-card-role">Psicóloga Clínica</p>
@@ -2012,7 +3475,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Nara Märcelino.webp" alt="Nara Märcelino" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Nara Märcelino</p>
               <p class="team-card-role">Nutricionista · Terapeuta Integrativa</p>
@@ -2022,7 +3485,7 @@
           </div>
 
           <div class="team-card">
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+            <div class="team-card-img"><img src="espaco-cora/Assets/Stefanie Silveira do Nascimento.webp" alt="Stefanie Silveira do Nascimento" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Stefanie Silveira do Nascimento</p>
               <p class="team-card-role">Psicóloga Clínica</p>
@@ -2050,196 +3513,9 @@
   </section>
 
 
-  <!-- ═══════════ DEPOIMENTOS ═══════════ -->
-  <section class="testimonials" id="depoimentos">
-
-    <div class="services-header">
-      <span class="section-eyebrow">Depoimentos</span>
-      <h2 class="section-title">O que dizem<br><em>nossos pacientes</em></h2>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="testimonials-track-wrap" id="testiWrap">
-      <div class="testimonials-track" id="testiTrack">
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
-          </div>
-          <p class="testi-text">"Fiz minhas facetas no Espaço Cora e o resultado superou todas as minhas expectativas. A Dra. Laise tem um olhar único para estética — cada detalhe foi pensado para parecer o mais natural possível."</p>
-          <div class="testi-author">
-            <strong>Fernanda Alves</strong>
-            <span>Facetas em porcelana</span>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
-          </div>
-          <p class="testi-text">"O ambiente já te coloca num estado de calma logo na entrada. Passei anos com medo de dentista e ali me senti completamente à vontade. O implante ficou perfeito e sem nenhuma dor no pós."</p>
-          <div class="testi-author">
-            <strong>Ricardo Mendes</strong>
-            <span>Implante dentário</span>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
-          </div>
-          <p class="testi-text">"Uso Invisalign há 8 meses e já vejo uma transformação enorme. A consulta de avaliação foi super detalhada, com simulação do resultado final. Isso deu muita segurança para começar o tratamento."</p>
-          <div class="testi-author">
-            <strong>Camila Nunes</strong>
-            <span>Ortodontia com Invisalign</span>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
-          </div>
-          <p class="testi-text">"Clínica diferenciada em todos os sentidos. Atendimento pontual, equipe gentil e a Dra. Laise explica cada etapa com muita clareza. Me senti parte do processo do início ao fim."</p>
-          <div class="testi-author">
-            <strong>Marcos Souza</strong>
-            <span>Tratamento completo</span>
-          </div>
-        </div>
-
-        <div class="testi-card">
-          <div class="testi-stars">
-            <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
-          </div>
-          <p class="testi-text">"Meu sorriso mudou completamente — e com ele, minha autoestima. O cuidado começa antes de sentar na cadeira: desde o agendamento até o acompanhamento pós-tratamento, tudo é impecável."</p>
-          <div class="testi-author">
-            <strong>Juliana Costa</strong>
-            <span>Facetas em resina</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="testi-dots" id="testiDots"></div>
-
-  </section>
 
 
-  <!-- ═══════════ ANTES & DEPOIS ═══════════ -->
-  <section class="before-after" id="resultados">
-
-    <div class="services-header">
-      <span class="section-eyebrow">Resultados</span>
-      <h2 class="section-title">Antes <em>& depois</em></h2>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="ba-stack-wrap" id="baStack">
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_01-C0qopQn_.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_02-D5Po86rJ.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_03-11UIgwiN.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_04-fMGzKvGK.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_05-2CPuQjt_.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_06-D3f-PmyU.jpg" alt="" /></div>
-      <div class="ba-card"><img src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/ba_07-MsQdWF0P.jpg" alt="" /></div>
-    </div>
-
-  </section>
-
-
-  <!-- ═══════════ ESTRUTURA & LOCALIZAÇÃO ═══════════ -->
-  <section class="structure" id="estrutura">
-    <div class="structure-inner">
-
-      <!-- Texto + info de localização -->
-      <div class="structure-top">
-
-        <div class="structure-text" id="structureText">
-          <span class="section-eyebrow">Espaço & localização</span>
-          <h2 class="section-title">Um ambiente feito<br><em>para acolher</em></h2>
-          <div class="section-rule"></div>
-          <p class="structure-desc">
-            Cada detalhe do Espaço Cora foi pensado para que você se sinta confortável desde o momento em que entra. Iluminação suave, materiais nobres e uma equipe que prioriza a sua experiência.
-          </p>
-        </div>
-
-        <div class="structure-location" id="structureLocation">
-
-          <div class="structure-location-item">
-            <div class="structure-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            </div>
-            <div class="structure-item-body">
-              <span class="structure-item-label">Endereço</span>
-              <span class="structure-item-value">Rua Lauro Linhares, 2055 — sala 706<br>Trindade, Florianópolis — SC</span>
-            </div>
-          </div>
-
-          <div class="structure-location-item">
-            <div class="structure-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div class="structure-item-body">
-              <span class="structure-item-label">Horário de atendimento</span>
-              <span class="structure-item-value">Segunda a sexta: 8h às 18h<br>Sábados: 8h às 13h</span>
-            </div>
-          </div>
-
-          <div class="structure-location-item">
-            <div class="structure-icon">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l1.27-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div class="structure-item-body">
-              <span class="structure-item-label">Agendamento</span>
-              <span class="structure-item-value">(48) 99999-0000 · @espacocora</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Galeria do consultório -->
-      <div class="structure-gallery" id="structureGallery">
-
-        <div class="gallery-item">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Foto do consultório</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Foto do consultório</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Foto do consultório</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Foto do consultório</span>
-          </div>
-        </div>
-
-        <div class="gallery-item">
-          <div class="gallery-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Foto do consultório</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
+  <!-- ═══════════ ESTRUTURA INCLUSA ═══════════ -->
 
 
   <!-- ═══════════ FAQ ═══════════ -->
@@ -2257,61 +3533,81 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>Como funciona o agendamento da primeira consulta?</span>
+            <span>Onde fica o Espaço Cora? Tem estacionamento?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>O agendamento pode ser feito pelo WhatsApp, telefone ou diretamente pelo nosso Instagram. Na primeira consulta fazemos uma avaliação completa, escutamos seus objetivos e apresentamos as opções de tratamento mais indicadas para o seu caso — sem compromisso.</p>
+            <p>Na R. Dr. Carlos Corrêa, 141, salas 601/602, no Ed. Somma Tower, na Agronômica — o centro de Florianópolis. Há estacionamentos ao lado do prédio, na mesma rua e no Angeloni.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>Quais formas de pagamento são aceitas?</span>
+            <span>Quais são os valores?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>Aceitamos cartões de crédito e débito, PIX e parcelamento sem juros em até 12x no cartão. Para tratamentos de maior extensão, oferecemos condições especiais de parcelamento — consulte nossa equipe.</p>
+            <p>As condições variam conforme o formato de locação e a quantidade de horas. Preencha o formulário e apresentamos a proposta pelo WhatsApp.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>A clínica atende convênio odontológico?</span>
+            <span>Posso alugar só algumas horas?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>O Espaço Cora é uma clínica particular e não opera com convênios odontológicos. Isso nos permite oferecer um atendimento mais personalizado, com tempo dedicado exclusivamente a cada paciente e uso dos melhores materiais disponíveis no mercado.</p>
+            <p>Sim. Você pode reservar horas avulsas, contratar um pacote mensal de horas ou alugar a sala mensalmente.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>Quanto tempo dura um tratamento com facetas?</span>
+            <span>Posso atender fora do horário comercial?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>Em média, o tratamento com facetas de porcelana é concluído em 3 a 4 consultas ao longo de duas a três semanas. Já as facetas de resina podem ser realizadas em uma única sessão. O prazo exato depende do número de dentes e do planejamento do caso.</p>
+            <p>Sim. Basta combinar com antecedência, e nos organizamos para manter o espaço aberto para o seu atendimento.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>O Invisalign funciona para todos os casos?</span>
+            <span>Preciso cuidar de alvará e documentação?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>O Invisalign é indicado para a maioria dos casos de má oclusão, desde apinhamentos leves até correções mais complexas. Na consulta de avaliação, realizamos um escaneamento digital para simular o resultado final e confirmar se o tratamento é adequado para você.</p>
+            <p>Não. Alvarás, licenças e toda a documentação do espaço são responsabilidade do Cora.</p>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            <span>Há garantia nos tratamentos realizados?</span>
+            <span>Como funciona o agendamento dos meus pacientes?</span>
             <div class="faq-icon"><span></span><span></span></div>
           </button>
           <div class="faq-answer">
-            <p>Sim. Todos os tratamentos realizados no Espaço Cora têm acompanhamento pós-procedimento e garantia conforme o protocolo de cada especialidade. Nosso compromisso vai além da cadeira — estamos disponíveis para qualquer dúvida ou necessidade após a conclusão do tratamento.</p>
+            <p>Você recebe acesso gratuito ao nosso sistema, agenda seus pacientes e avisa no grupo dos profissionais. No mesmo sistema, você também pode registrar a evolução dos atendimentos.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Posso adaptar a sala ao meu atendimento?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. Os móveis da sala multiprofissional são modulares e a maca é removível. Se você precisar de algum equipamento ou ajuste, conversamos para encontrar a melhor solução.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Que perfil de profissional atende no Cora?</span>
+            <div class="faq-icon"><span></span><span></span></div>
+          </button>
+          <div class="faq-answer">
+            <p>Profissionais de saúde com formação, registro no conselho de classe e uma prática fundamentada, que valorizam um atendimento técnico, humano e acolhedor.</p>
           </div>
         </div>
 
@@ -2321,14 +3617,14 @@
 
 
   <!-- ═══════════ CTA FINAL ═══════════ -->
-  <section class="cta-final" id="agendamento">
+  <section class="cta-final" id="formulario">
     <div class="cta-final-inner">
 
       <div class="cta-final-text" id="ctaText">
-        <span class="section-eyebrow">Agende sua consulta</span>
-        <h2 class="cta-final-headline">O seu sorriso<br>começa com<br><em>uma conversa</em></h2>
+        <span class="section-eyebrow">Fale com a gente</span>
+        <h2 class="cta-final-headline">Vamos conversar<br>sobre o seu espaço<br><em>no Cora?</em></h2>
         <p class="cta-final-sub">
-          Preencha o formulário e entraremos em contato para agendar sua avaliação. Sem compromisso — só cuidado.
+          Preencha seus dados e continue a conversa com a gente pelo WhatsApp. Vamos entender o seu atendimento e apresentar o formato ideal para você.
         </p>
       </div>
 
@@ -2350,9 +3646,25 @@
             <input type="email" id="form-email" name="email" placeholder="seu@email.com" autocomplete="email" required />
           </div>
 
-          <button type="submit" class="form-submit">Solicitar agendamento</button>
+          <div class="form-field">
+            <label for="form-area">Área de atuação</label>
+            <input type="text" id="form-area" name="area" placeholder="Ex.: psicologia, fisioterapia, endocrinologia…" required />
+          </div>
 
-          <p class="form-note">Suas informações são confidenciais e não serão compartilhadas.</p>
+          <div class="form-checks">
+            <label class="form-check">
+              <input type="checkbox" name="check-location" required />
+              <span>Estou ciente de que o Espaço Cora fica na Agronômica, Florianópolis (Ed. Somma Tower).</span>
+            </label>
+            <label class="form-check">
+              <input type="checkbox" name="check-privacy" required />
+              <span>Concordo com a <a href="#" class="form-policy-link">Política de Privacidade</a> e autorizo o contato do Espaço Cora.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="form-submit">Quero conversar com o Cora</button>
+
+          <p class="form-note">Ao enviar, você será direcionado para o WhatsApp do Espaço Cora.</p>
 
         </form>
       </div>
@@ -2369,42 +3681,52 @@
 
         <div class="footer-brand">
           <img
-            src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-transparent-qK_-2zKC.png"
+            src="site_extraido/espacocora.com.br/assets/espacocora.com.br/assets/logo-transparent-qK_-2zKC.webp"
             alt="Espaço Cora"
           />
-          <p>Clínica odontológica especializada em estética e saúde bucal, localizada em Florianópolis, SC. Cuidado que transforma.</p>
+          <p>Ed. Somma Tower · R. Dr. Carlos Corrêa, 141 · Salas 601/602<br>Agronômica, Florianópolis/SC · CEP 88025-250</p>
         </div>
 
         <div>
           <p class="footer-col-title">Navegação</p>
           <ul class="footer-links">
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#resultados">Resultados</a></li>
-            <li><a href="#depoimentos">Depoimentos</a></li>
+            <li><a href="#conceito">O espaço</a></li>
+            <li><a href="#salas">Salas</a></li>
+            <li><a href="#estrutura-inclusa">Estrutura</a></li>
+            <li><a href="#equipe">Equipe</a></li>
             <li><a href="#localizacao">Localização</a></li>
+            <li><a href="#formulario">Fale conosco</a></li>
           </ul>
         </div>
 
         <div>
           <p class="footer-col-title">Contato</p>
           <ul class="footer-links">
-            <li><a href="tel:+5548999990000">(48) 99999-0000</a></li>
-            <li><a href="https://wa.me/5548999990000" target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="https://instagram.com/espacocora" target="_blank" rel="noopener">@espacocora</a></li>
-            <li><a href="mailto:contato@espacocora.com.br">contato@espacocora.com.br</a></li>
+            <li><a href="https://wa.me/5548988547557" target="_blank" rel="noopener">WhatsApp: (48) 98854-7557</a></li>
+            <li><a href="https://www.instagram.com/cora.espaco/" target="_blank" rel="noopener">@cora.espaco</a></li>
+            <li><a href="mailto:oespacocora@gmail.com">oespacocora@gmail.com</a></li>
           </ul>
         </div>
 
       </div>
 
       <div class="footer-bottom">
-        <span>© 2025 Espaço Cora. Todos os direitos reservados.</span>
-        <span>Florianópolis, SC · CRO-SC 12345</span>
+        <span>© 2026 Espaço Cora. Todos os direitos reservados. · ESPACO CORA LTDA · CNPJ 58.913.355/0001-51</span>
+        <span>Resp. técnica: Dra. Laise Cândido · CRO-SC 16246</span>
       </div>
 
     </div>
   </footer>
+
+
+  <!-- ═══════════ COOKIE BANNER ═══════════ -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p class="cookie-text">Usamos cookies para melhorar sua experiência e medir os resultados dos nossos anúncios. Você pode aceitar ou recusar os cookies de marketing. <a href="#">Saiba mais</a></p>
+    <div class="cookie-buttons">
+      <button class="btn-cookie-accept" id="cookieAccept">Aceitar</button>
+      <button class="btn-cookie-refuse" id="cookieRefuse">Recusar</button>
+    </div>
+  </div>
 
 
   <!-- ═══════════ JS ═══════════ -->
@@ -2430,168 +3752,105 @@
       heroFade.style.opacity = fadeT;
     });
 
-    // ── Vídeo hero em reprodução reversa ──
-    const heroBgVideo = document.getElementById('heroBgVideo');
-    let reverseStarted = false;
-    let videoReady = false;
+  </script>
 
-    heroBgVideo.addEventListener('loadedmetadata', () => {
-      heroBgVideo.currentTime = heroBgVideo.duration;
-      // Sincroniza duração da animação CSS com o vídeo
-      heroBgVideo.style.animationDuration = heroBgVideo.duration + 's';
-    });
-
-    heroBgVideo.addEventListener('seeked', () => {
-      if (!videoReady) videoReady = true;
-    });
-
-    function startReverseOnce() {
-      if (reverseStarted || !videoReady) return;
-      reverseStarted = true;
-
-      // Inicia zoom via CSS
-      heroBgVideo.classList.add('playing');
-
-      // Seek throttlado a 30fps para reduzir carga
-      const SEEK_FPS = 1 / 30;
-      let lastTime = null;
-      let seekAccum = 0;
-
-      function stepReverse(timestamp) {
-        if (lastTime !== null) {
-          const delta = (timestamp - lastTime) / 1000;
-          seekAccum += delta;
-
-          if (seekAccum >= SEEK_FPS) {
-            heroBgVideo.currentTime = Math.max(0, heroBgVideo.currentTime - seekAccum);
-            seekAccum = 0;
-
-            if (heroBgVideo.currentTime <= 2) {
-              heroBgVideo.currentTime = 0;
-              document.body.style.overflow = '';
-              return;
-            }
+  <script>
+    // Conceito — logo SVG Disney-style
+    const conceitoLogoWrap = document.getElementById('conceitoLogoWrap');
+    if (conceitoLogoWrap) {
+      const logoObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelector('.conceito-logo-svg').classList.add('animated');
+            logoObs.unobserve(e.target);
           }
-        }
-        lastTime = timestamp;
-        requestAnimationFrame(stepReverse);
-      }
-      requestAnimationFrame(stepReverse);
+        });
+      }, { threshold: 0.3 });
+      logoObs.observe(conceitoLogoWrap);
     }
 
-    function onFirstScroll(e) {
-      e.preventDefault();
-      window.removeEventListener('wheel',     onFirstScroll);
-      window.removeEventListener('touchmove', onFirstScroll);
-
-      // Bloqueia scroll da página durante o vídeo
-      document.body.style.overflow = 'hidden';
-
-      startReverseOnce();
+    const conceitoBody = document.getElementById('conceitoBody');
+    if (conceitoBody) {
+      const conceitoObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); conceitoObs.unobserve(e.target); } });
+      }, { threshold: 0.2 });
+      conceitoObs.observe(conceitoBody);
     }
 
-    window.addEventListener('wheel',     onFirstScroll, { passive: false });
-    window.addEventListener('touchmove', onFirstScroll, { passive: false });
-  </script>
-
-  <script>
-    // Animação de entrada dos cards de serviço
-    const cards = document.querySelectorAll('.service-card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+    // Estrutura inclusa — animation-timeline: view() cuida da animação nativamente.
+    // Fallback para navegadores sem suporte a scroll-driven animations:
+    if (!CSS.supports('animation-timeline', 'view()')) {
+      document.querySelectorAll('.estrutura-item').forEach((el, i) => {
+        el.style.animation = 'none';
+        el.style.transform = 'none';
+        el.style.opacity = '0';
+        el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        el.style.transitionDelay = `${i * 0.12}s`;
+        const o = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.style.opacity = '1';
+              e.target.style.transform = 'none';
+              o.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        o.observe(el);
       });
-    }, { threshold: 0.15 });
-
-    cards.forEach(card => observer.observe(card));
-
-    // Título da seção "Como funciona"
-    const howHeader = document.getElementById('howHeader');
-    const howHeaderObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { howHeader.classList.add('visible'); howHeaderObs.unobserve(e.target); } });
-    }, { threshold: 0.3 });
-    howHeaderObs.observe(howHeader);
-
-    // Etapas — cada uma dispara individualmente ao chegar na tela
-    const steps = document.querySelectorAll('.step');
-    const stepObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          stepObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0,
-      rootMargin: '0px 0px -45% 0px' // só dispara quando o step subiu além dos 45% inferiores
-    });
-    steps.forEach(step => stepObserver.observe(step));
-
-    // Leque de antes & depois — dispara quando o stack chega ao centro da tela
-    const baStack = document.getElementById('baStack');
-    const fanObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          baStack.classList.add('fanned');
-        } else {
-          baStack.classList.remove('fanned');
-        }
-      });
-    }, {
-      threshold: 0,
-      rootMargin: '-38% 0px -38% 0px'  // dispara só quando está no centro do viewport
-    });
-
-    fanObserver.observe(baStack);
-  </script>
-
-  <script>
-    // ─── Depoimentos — carrossel drag + dots ──────
-    const track      = document.getElementById('testiTrack');
-    const dotsWrap   = document.getElementById('testiDots');
-    const testiWrap  = document.getElementById('testiWrap');
-    const testiCards = track.querySelectorAll('.testi-card');
-    let currentSlide = 0;
-
-    testiCards.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'testi-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', `Depoimento ${i + 1}`);
-      d.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(d);
-    });
-
-    function goTo(idx) {
-      const cardW = testiCards[0].offsetWidth + 24;
-      currentSlide = Math.max(0, Math.min(idx, testiCards.length - 1));
-      track.style.transform = `translateX(-${currentSlide * cardW}px)`;
-      dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
     }
 
-    let startX = 0, isDragging = false;
-    testiWrap.addEventListener('mousedown',  e => { isDragging = true; startX = e.clientX; });
-    testiWrap.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; }, { passive: true });
-    testiWrap.addEventListener('mousemove',  e => { if (isDragging) e.preventDefault(); }, { passive: false });
-    testiWrap.addEventListener('mouseup',    e => { if (!isDragging) return; isDragging = false; const dx = e.clientX - startX; if (dx < -50) goTo(currentSlide + 1); else if (dx > 50) goTo(currentSlide - 1); });
-    testiWrap.addEventListener('touchend',   e => { if (!isDragging) return; isDragging = false; const dx = e.changedTouches[0].clientX - startX; if (dx < -50) goTo(currentSlide + 1); else if (dx > 50) goTo(currentSlide - 1); });
+    // Zero burocracia cards
+    const isTouchOnly = window.matchMedia('(hover: none)').matches;
+    document.querySelectorAll('.zero-card').forEach(el => {
+      const o = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            if (isTouchOnly) e.target.classList.add('illus-active');
+            o.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.55 });
+      o.observe(el);
+    });
 
-    const testiObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); testiObs.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    testiCards.forEach(c => testiObs.observe(c));
+    // Flexibilidade
+    const flexVisual = document.getElementById('flexVisual');
+    if (flexVisual) {
+      const fvObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fvObs.unobserve(e.target); } });
+      }, { threshold: 0.2 });
+      fvObs.observe(flexVisual);
+    }
+    ['flexItem1','flexItem2','flexItem3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const o = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); o.unobserve(e.target); } });
+      }, { threshold: 0.2 });
+      o.observe(el);
+    });
 
-    setInterval(() => goTo(currentSlide + 1 < testiCards.length ? currentSlide + 1 : 0), 5000);
+    // Comparativo table
+    const comparativoTable = document.getElementById('comparativoTable');
+    if (comparativoTable) {
+      const ctObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ctObs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      ctObs.observe(comparativoTable);
+    }
+
+    // Crescer junto
+    ['crescerText','crescerCard'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const o = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); o.unobserve(e.target); } });
+      }, { threshold: 0.2 });
+      o.observe(el);
+    });
 
     // ─── Corpo Clínico ────────────────────────────
-    const teamFeatured = document.getElementById('teamFeatured');
-    const teamFeaturedObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); teamFeaturedObs.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    teamFeaturedObs.observe(teamFeatured);
-
     // Carrossel
     const teamTrack     = document.getElementById('teamTrack');
     const teamOuter     = document.getElementById('teamTrackOuter');
@@ -2654,16 +3913,20 @@
 
     function handleFormSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Enviado! Entraremos em contato.';
-      btn.style.background = 'hsl(84, 35%, 58%)';
-      btn.disabled = true;
+      const form = e.target;
+      const name  = form.querySelector('#form-name').value.trim();
+      const area  = form.querySelector('#form-area').value.trim();
+      const email = form.querySelector('#form-email').value.trim();
+      const msg = `Olá! Sou ${name}, atuo em ${area} e vim pela página do Espaço Cora. Tenho interesse em atender aí. Meu e-mail é ${email}.`;
+      const waUrl = `https://wa.me/5548988547557?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, '_blank');
     }
 
     // ─── Estrutura — entrada do texto e galeria ───
     const structureEls = [
       document.getElementById('structureText'),
       document.getElementById('structureLocation'),
+      document.getElementById('structureMap'),
     ];
     const galleryItems = document.querySelectorAll('.gallery-item');
 
@@ -2678,6 +3941,23 @@
     }, { threshold: 0.1 });
 
     galleryItems.forEach(el => galleryObs.observe(el));
+
+    // ─── Cookie banner ─────────────────────────────
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAccept = document.getElementById('cookieAccept');
+    const cookieRefuse = document.getElementById('cookieRefuse');
+
+    if (!localStorage.getItem('cookie_choice')) {
+      setTimeout(() => cookieBanner.classList.add('visible'), 1500);
+    }
+
+    function dismissCookie(accepted) {
+      localStorage.setItem('cookie_choice', accepted ? 'accepted' : 'refused');
+      cookieBanner.classList.remove('visible');
+    }
+
+    cookieAccept.addEventListener('click', () => dismissCookie(true));
+    cookieRefuse.addEventListener('click', () => dismissCookie(false));
   </script>
 
 
