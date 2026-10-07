@@ -25,7 +25,7 @@
       --transition:     all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html { scroll-behavior: auto; background: var(--background); }
+    html { scroll-behavior: auto; background: var(--background); overflow-x: hidden; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -2809,7 +2809,7 @@
       .salas-accordion {
         flex-direction: column;
         height: auto;
-        margin: 0 -1.25rem;
+        margin: 0;
       }
       .sala-panel { height: 260px; flex: none; }
       .sala-panel + .sala-panel {
@@ -2841,6 +2841,7 @@
       .zero-grid { grid-template-columns: 1fr; }
       .zero-card:nth-child(2),
       .zero-card:nth-child(3) { transition-delay: 0s; }
+      .zero-card-illus { margin: 0 0 2rem; }
 
       /* ════════ FLEXIBILIDADE ════════ */
       .flex-inner {
@@ -2913,6 +2914,8 @@
       .team-featured-bio { max-width: 100%; }
       .team-credentials { gap: 1.5rem; flex-wrap: wrap; }
       .team-card { flex: 0 0 calc(100% - 0.01px); }
+      .team-track-outer { overflow: hidden; max-width: 100%; }
+      .team-carousel-wrap { overflow: hidden; }
 
       /* ════════ FAQ ════════ */
       .faq-question { padding: 1.2rem 0; }
