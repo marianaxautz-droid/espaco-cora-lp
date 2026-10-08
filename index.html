@@ -365,7 +365,8 @@
       line-height: 1.7;
     }
 
-    .section-divider {
+    .section-divider,
+    .section-rule {
       width: 40px;
       height: 1px;
       background: var(--border);
@@ -4025,7 +4026,7 @@
 
     function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
 
-    window.addEventListener('scroll', () => {
+    function updateHeroState() {
       const scrollY = window.scrollY;
       const vh      = window.innerHeight;
 
@@ -4042,7 +4043,10 @@
         const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
         heroFade.style.opacity = fadeT;
       }
-    });
+    }
+
+    window.addEventListener('scroll', updateHeroState);
+    updateHeroState(); // inicializa estado correto ao carregar a página
 
   </script>
 
