@@ -2907,7 +2907,10 @@
       }
       .crescer-card { max-width: 100%; margin: 0; }
       .crescer-card-img { aspect-ratio: 3/4; }
-      .crescer-text-col { transform: none; opacity: 1; }
+      .crescer-text-col,
+      .crescer-text-col.visible { transform: none !important; opacity: 1 !important; transition: none !important; }
+      .crescer-card,
+      .crescer-card.visible { transform: none !important; opacity: 1 !important; transition: none !important; }
       .crescer-text-col,
       .crescer-text-col *,
       .crescer-text-col .section-eyebrow,
