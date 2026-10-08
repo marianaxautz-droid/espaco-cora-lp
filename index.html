@@ -2723,7 +2723,6 @@
     @media (max-width: 768px) {
 
       /* ── Section paddings ── */
-      .services,
       .how-it-works,
       .zero-burocracia,
       .flexibilidade,
@@ -2732,6 +2731,11 @@
       .faq,
       .structure,
       .cta-final { padding: 5rem 1.5rem; }
+
+      /* Salas — sem padding lateral p/ accordion ser edge-to-edge */
+      .services { padding: 5rem 0; }
+      .services-header { padding: 0 1.5rem; }
+      .salas-footer { padding: 0 1.5rem; }
 
       .section-title { font-size: clamp(1.9rem, 7vw, 2.4rem); }
 
@@ -2802,6 +2806,8 @@
       }
 
       /* ════════ HERO ════════ */
+      .hero { height: 115vh; }
+      .hero-fade { height: 180px; }
       .hero-headline { font-size: 2rem !important; line-height: 1.15; }
       .hero-sub { font-size: 0.88rem; max-width: 100%; }
 
@@ -3996,12 +4002,16 @@
 
       navbar.classList.toggle('scrolled', scrollY > 40);
 
+      const isMobile = window.innerWidth <= 768;
+
       // Hero content fades on scroll
-      const contentT = clamp(scrollY / (vh * 0.5), 0, 1);
+      const contentT = clamp(scrollY / (vh * (isMobile ? 0.35 : 0.5)), 0, 1);
       heroContent.style.opacity = 1 - contentT;
 
-      // Fade out to next section
-      const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
+      // Fade out to next section (earlier on mobile)
+      const fadeStart = isMobile ? vh * 0.3 : vh * 0.6;
+      const fadeDur   = isMobile ? vh * 0.2 : vh * 0.4;
+      const fadeT = clamp((scrollY - fadeStart) / fadeDur, 0, 1);
       heroFade.style.opacity = fadeT;
     });
 
