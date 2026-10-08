@@ -590,15 +590,15 @@
     }
 
     .conceito-logo-svg {
-      width: min(1000px, 100%);
-      height: auto;
+      width: min(440px, 100%);
+      aspect-ratio: 300 / 280;
       overflow: visible;
+      display: block;
     }
 
-    /* Arco — desenha dos dois lados ao mesmo tempo */
-    /* raio 110 → comprimento do arco = π × 110 / 2 ≈ 172.8 */
-    .ls-arch-l { stroke-dasharray: 172.8; stroke-dashoffset: 172.8; }
-    .ls-arch-r { stroke-dasharray: 172.8; stroke-dashoffset: 172.8; }
+    /* Arco — raio 120 → comprimento do arco = π × 120 / 2 ≈ 188.5 */
+    .ls-arch-l { stroke-dasharray: 188.5; stroke-dashoffset: 188.5; }
+    .ls-arch-r { stroke-dasharray: 188.5; stroke-dashoffset: 188.5; }
     .conceito-logo-svg.animated .ls-arch-l,
     .conceito-logo-svg.animated .ls-arch-r {
       animation: ls-draw 2s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
@@ -2863,7 +2863,7 @@
         gap: 3rem;
       }
       .conceito-logo-wrap { display: flex; }
-      .conceito-logo-svg { width: min(250px, 100%); }
+      .conceito-logo-svg { width: min(220px, 100%); }
 
       /* ════════ ESTRUTURA INCLUSA ════════ */
       .estrutura-top { padding: 2.5rem 1.25rem 0; }
@@ -3125,38 +3125,32 @@
     <div class="how-it-works-inner">
 
       <div class="conceito-logo-wrap" id="conceitoLogoWrap">
-        <svg class="conceito-logo-svg" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
-          <defs>
-            <filter id="cora-glow" x="-80%" y="-80%" width="260%" height="260%">
-              <feGaussianBlur stdDeviation="5" result="blur"/>
-              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
+        <svg class="conceito-logo-svg" viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
 
-          <!-- Arco esquerdo: apex → ponto esquerdo (raio 110) -->
+          <!-- Arco esquerdo: apex → ponto esquerdo (raio 120) -->
           <path class="ls-arch-l"
-            d="M 150,45 A 110,110 0 0,0 40,155"
+            d="M 150,32 A 120,120 0 0,0 30,152"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-          <!-- Arco direito: apex → ponto direito (raio 110) -->
+          <!-- Arco direito: apex → ponto direito (raio 120) -->
           <path class="ls-arch-r"
-            d="M 150,45 A 110,110 0 0,1 260,155"
+            d="M 150,32 A 120,120 0 0,1 270,152"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
           <!-- ESPAÇO -->
-          <text class="ls-text-espaco" x="150" y="190"
+          <text class="ls-text-espaco" x="150" y="185"
             text-anchor="middle"
             font-family="Cormorant Garamond, serif"
-            font-size="21"
+            font-size="20"
             font-weight="400"
-            letter-spacing="7"
+            letter-spacing="8"
             fill="hsl(32,39%,22%)">ESPA&#199;O</text>
 
           <!-- CORA -->
-          <text class="ls-text-cora" x="150" y="260"
+          <text class="ls-text-cora" x="150" y="258"
             text-anchor="middle"
             font-family="Cormorant Garamond, serif"
-            font-size="76"
+            font-size="80"
             font-weight="400"
             fill="hsl(32,39%,22%)">CORA</text>
         </svg>
