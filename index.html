@@ -1545,73 +1545,53 @@
       text-align: left;
     }
 
-    .comparativo-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
+    .comparativo-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 3rem;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .comparativo-table.visible {
+    .comparativo-cols.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .comparativo-table thead th {
-      padding: 1rem 1.5rem;
-      text-align: left;
-      font-size: 1rem;
+    .comparativo-col-head {
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
+      padding-bottom: 1rem;
+      margin-bottom: 0;
     }
 
-    .comparativo-table thead th:first-child {
-      color: hsla(45, 28%, 88%, 0.35);
-      width: 46%;
-      padding-right: 1.5rem;
+    .comparativo-col--them .comparativo-col-head { color: hsla(45, 28%, 88%, 0.35); }
+    .comparativo-col--us  .comparativo-col-head { color: hsl(84, 22%, 72%); }
+
+    .comparativo-col-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
-    .comparativo-table thead th:last-child {
-      color: hsl(84, 22%, 72%);
-      padding-left: 1.5rem;
-    }
-
-    .comparativo-table tbody tr:hover {
-      background: hsla(45, 28%, 88%, 0.03);
-    }
-
-    .comparativo-table td {
-      padding: 1.25rem 1.5rem;
+    .comparativo-col-list li {
+      padding: 1rem 0;
       border-top: 1px solid hsla(45, 28%, 88%, 0.08);
       font-size: 0.9rem;
       font-weight: 300;
       line-height: 1.6;
-      vertical-align: top;
     }
 
-    .comparativo-table td:first-child {
-      color: hsla(45, 28%, 88%, 0.45);
-      padding-right: 1.5rem;
-      width: 46%;
-    }
+    .comparativo-col--them .comparativo-col-list li { color: hsla(45, 28%, 88%, 0.45); }
 
-    .comparativo-table td:last-child {
-      padding-left: 1.5rem;
-    }
-
-    .comparativo-table .col-gap {
-      width: 8%;
-      border-top: none !important;
-    }
-
-    .comparativo-table td:last-child {
+    .comparativo-col--us .comparativo-col-list li {
       color: hsla(45, 28%, 88%, 0.85);
     }
 
-    .comparativo-table td:last-child::before {
+    .comparativo-col--us .comparativo-col-list li::before {
       content: '✓ ';
       color: hsl(84, 30%, 65%);
       font-weight: 500;
@@ -2915,15 +2895,7 @@
         font-size: clamp(1.8rem, 7vw, 2.4rem);
       }
       .comparativo-inner { padding: 2rem 1.25rem 3rem; }
-      .comparativo-table { font-size: 0.85rem; }
-      .comparativo-table thead tr,
-      .comparativo-table tbody tr { display: flex; flex-direction: column; }
-      .comparativo-table thead th,
-      .comparativo-table td { display: block; width: 100%; padding: 0.75rem 0; }
-      .comparativo-table .col-gap { display: none; }
-      .comparativo-table thead th:last-child { border-top: 1px solid hsla(45,28%,94%,0.2); margin-top: 0.25rem; }
-      .comparativo-table tbody tr { border-bottom: 1px solid hsla(45,28%,94%,0.12); }
-      .comparativo-table tbody tr td:last-child { border-top: 1px solid hsla(45,28%,94%,0.15); }
+      .comparativo-cols { grid-template-columns: 1fr; gap: 2.5rem 0; }
 
       /* ════════ CRESCER JUNTO ════════ */
       .crescer-inner {
@@ -3405,52 +3377,32 @@
     </div>
     <div class="comparativo-inner">
 
-      <table class="comparativo-table" id="comparativoTable">
-        <thead>
-          <tr>
-            <th>Em muitos espaços tradicionais</th>
-            <th class="col-gap"></th>
-            <th>No Espaço Cora</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ambiente engessado, com cara de consultório frio</td>
-            <td class="col-gap"></td>
-            <td>Acolhimento de spa brasileiro, com estrutura de alto padrão</td>
-          </tr>
-          <tr>
-            <td>Alvarás e burocracia costumam ficar por conta do profissional</td>
-            <td class="col-gap"></td>
-            <td>Alvarás e licenças por conta do Cora</td>
-          </tr>
-          <tr>
-            <td>Sistema de agendamento pago à parte</td>
-            <td class="col-gap"></td>
-            <td>Sistema de agendamento e prontuário gratuito</td>
-          </tr>
-          <tr>
-            <td>Cobrança extra para usar o endereço na divulgação</td>
-            <td class="col-gap"></td>
-            <td>Endereço liberado para divulgação, sem custo</td>
-          </tr>
-          <tr>
-            <td>Contratos rígidos</td>
-            <td class="col-gap"></td>
-            <td>Locação mensal, por pacote de horas ou avulsa</td>
-          </tr>
-          <tr>
-            <td>Esterilização e descarte por sua conta</td>
-            <td class="col-gap"></td>
-            <td>Biossegurança inclusa, com documentação em dia</td>
-          </tr>
-          <tr>
-            <td>Um espaço que não muda</td>
-            <td class="col-gap"></td>
-            <td>Uma gestão que ouve os profissionais e investe no espaço</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="comparativo-cols" id="comparativoTable">
+        <div class="comparativo-col comparativo-col--them">
+          <p class="comparativo-col-head">Em muitos espaços tradicionais</p>
+          <ul class="comparativo-col-list">
+            <li>Ambiente engessado, com cara de consultório frio</li>
+            <li>Alvarás e burocracia costumam ficar por conta do profissional</li>
+            <li>Sistema de agendamento pago à parte</li>
+            <li>Cobrança extra para usar o endereço na divulgação</li>
+            <li>Contratos rígidos</li>
+            <li>Esterilização e descarte por sua conta</li>
+            <li>Um espaço que não muda</li>
+          </ul>
+        </div>
+        <div class="comparativo-col comparativo-col--us">
+          <p class="comparativo-col-head">No Espaço Cora</p>
+          <ul class="comparativo-col-list">
+            <li>Acolhimento de spa brasileiro, com estrutura de alto padrão</li>
+            <li>Alvarás e licenças por conta do Cora</li>
+            <li>Sistema de agendamento e prontuário gratuito</li>
+            <li>Endereço liberado para divulgação, sem custo</li>
+            <li>Locação mensal, por pacote de horas ou avulsa</li>
+            <li>Biossegurança inclusa, com documentação em dia</li>
+            <li>Uma gestão que ouve os profissionais e investe no espaço</li>
+          </ul>
+        </div>
+      </div>
 
       <div class="comparativo-cta">
         <button class="btn-comparativo" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">Quero atender no Espaço Cora</button>
