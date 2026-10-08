@@ -591,12 +591,14 @@
 
     .conceito-logo-svg {
       width: min(1000px, 100%);
+      height: auto;
       overflow: visible;
     }
 
     /* Arco — desenha dos dois lados ao mesmo tempo */
-    .ls-arch-l { stroke-dasharray: 149.2; stroke-dashoffset: 149.2; }
-    .ls-arch-r { stroke-dasharray: 149.2; stroke-dashoffset: 149.2; }
+    /* raio 110 → comprimento do arco = π × 110 / 2 ≈ 172.8 */
+    .ls-arch-l { stroke-dasharray: 172.8; stroke-dashoffset: 172.8; }
+    .ls-arch-r { stroke-dasharray: 172.8; stroke-dashoffset: 172.8; }
     .conceito-logo-svg.animated .ls-arch-l,
     .conceito-logo-svg.animated .ls-arch-r {
       animation: ls-draw 2s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
@@ -3131,14 +3133,14 @@
             </filter>
           </defs>
 
-          <!-- Arco esquerdo: apex → ponto esquerdo (quarter circle) -->
+          <!-- Arco esquerdo: apex → ponto esquerdo (raio 110) -->
           <path class="ls-arch-l"
-            d="M 150,60 A 95,95 0 0,0 55,155"
+            d="M 150,45 A 110,110 0 0,0 40,155"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-          <!-- Arco direito: apex → ponto direito (quarter circle) -->
+          <!-- Arco direito: apex → ponto direito (raio 110) -->
           <path class="ls-arch-r"
-            d="M 150,60 A 95,95 0 0,1 245,155"
+            d="M 150,45 A 110,110 0 0,1 260,155"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
           <!-- ESPAÇO -->
