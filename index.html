@@ -1501,6 +1501,7 @@
     .comparativo-layout {
       display: flex;
       min-height: 700px;
+      position: relative;
     }
 
     .comparativo-img-col {
@@ -1540,7 +1541,7 @@
       position: absolute;
       top: 4rem;
       left: 3rem;
-      right: 3rem;
+      width: calc(40% - 6rem);
       z-index: 2;
       text-align: left;
     }
@@ -2904,7 +2905,8 @@
       }
       .comparativo-header {
         position: static;
-        padding: 2rem 1.25rem 0;
+        width: auto;
+        padding: 2.5rem 1.5rem 0;
       }
       .comparativo-header .section-title {
         color: hsl(45, 28%, 94%);
@@ -3387,12 +3389,12 @@
   <!-- ═══════════ TABELA COMPARATIVA ═══════════ -->
   <section class="comparativo" id="comparativo">
     <div class="comparativo-layout">
+    <div class="comparativo-header">
+      <h2 class="section-title">Não é só uma clínica.<br><em>É outra forma de atender.</em></h2>
+    </div>
     <div class="comparativo-img-col">
       <img class="comparativo-bg" src="Assets usados/imagem-comparativo.webp" alt="" />
       <div class="comparativo-bg-overlay"></div>
-      <div class="comparativo-header">
-        <h2 class="section-title">Não é só uma clínica.<br><em>É outra forma de atender.</em></h2>
-      </div>
     </div>
     <div class="comparativo-inner">
 
