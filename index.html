@@ -582,43 +582,36 @@
       align-items: center;
     }
 
-    /* ── Logo animado (SVG Disney-style) ── */
+    /* ── Logo animado ── */
     .conceito-logo-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .conceito-logo-svg {
+    .conceito-logo-img {
       width: min(440px, 100%);
-      aspect-ratio: 300 / 290;
-      overflow: visible;
       display: block;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: none;
     }
 
-    /* Arco 110° de cada lado (220° total) → comprimento = (110/360)*2π*120 ≈ 230.4 */
-    .ls-arch-l { stroke-dasharray: 230.4; stroke-dashoffset: 230.4; }
-    .ls-arch-r { stroke-dasharray: 230.4; stroke-dashoffset: 230.4; }
-    .conceito-logo-svg.animated .ls-arch-l,
-    .conceito-logo-svg.animated .ls-arch-r {
-      animation: ls-draw 2s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+    .conceito-logo-img.animated {
+      animation: logo-reveal 1.8s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
     }
-    @keyframes ls-draw { to { stroke-dashoffset: 0; } }
 
-    /* Textos — aparecem em sequência */
-    .ls-text-espaco, .ls-text-cora { opacity: 0; }
-    .conceito-logo-svg.animated .ls-text-espaco { animation: ls-text-in 1.2s ease 1.6s forwards; }
-    .conceito-logo-svg.animated .ls-text-cora   { animation: ls-text-in 1.2s ease 2s   forwards; }
-    @keyframes ls-text-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes logo-reveal {
+      0%   { opacity: 0; transform: scale(0.92); }
+      60%  { opacity: 1; transform: scale(1.02); }
+      100% { opacity: 1; transform: scale(1); }
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .conceito-logo-svg.animated .ls-arch-l,
-      .conceito-logo-svg.animated .ls-arch-r,
-      .conceito-logo-svg.animated .ls-text-espaco,
-      .conceito-logo-svg.animated .ls-text-cora {
+      .conceito-logo-img.animated {
         animation: none !important;
         opacity: 1 !important;
-        stroke-dashoffset: 0 !important;
+        transform: none !important;
       }
     }
 
@@ -2863,7 +2856,7 @@
         gap: 3rem;
       }
       .conceito-logo-wrap { display: flex; }
-      .conceito-logo-svg { width: min(220px, 100%); }
+      .conceito-logo-img { width: min(220px, 100%); }
 
       /* ════════ ESTRUTURA INCLUSA ════════ */
       .estrutura-top { padding: 2.5rem 1.25rem 0; }
@@ -3125,35 +3118,7 @@
     <div class="how-it-works-inner">
 
       <div class="conceito-logo-wrap" id="conceitoLogoWrap">
-        <svg class="conceito-logo-svg" viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
-
-          <!-- Arco esquerdo: 110° do apex até ponto inferior-esquerdo (raio 120) -->
-          <path class="ls-arch-l"
-            d="M 150,30 A 120,120 0 0,0 37,191"
-            stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-          <!-- Arco direito: 110° do apex até ponto inferior-direito (raio 120) -->
-          <path class="ls-arch-r"
-            d="M 150,30 A 120,120 0 0,1 263,191"
-            stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-          <!-- ESPAÇO -->
-          <text class="ls-text-espaco" x="150" y="178"
-            text-anchor="middle"
-            font-family="Cormorant Garamond, serif"
-            font-size="19"
-            font-weight="400"
-            letter-spacing="6"
-            fill="hsl(32,39%,22%)">ESPA&#199;O</text>
-
-          <!-- CORA -->
-          <text class="ls-text-cora" x="150" y="255"
-            text-anchor="middle"
-            font-family="Cormorant Garamond, serif"
-            font-size="78"
-            font-weight="400"
-            fill="hsl(32,39%,22%)">CORA</text>
-        </svg>
+        <img class="conceito-logo-img" src="Assets usados/logo-principal.png" alt="Espaço Cora — Onde o cuidado encontra o afeto" />
       </div>
 
       <div class="conceito-content">
@@ -4079,7 +4044,7 @@
       const logoObs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (e.isIntersecting) {
-            e.target.querySelector('.conceito-logo-svg').classList.add('animated');
+            e.target.querySelector('.conceito-logo-img').classList.add('animated');
             logoObs.unobserve(e.target);
           }
         });
