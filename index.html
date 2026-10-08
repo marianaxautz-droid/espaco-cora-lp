@@ -2901,15 +2901,20 @@
       .comparativo-cta { text-align: center; }
 
       /* ════════ CRESCER JUNTO ════════ */
+      .crescer-junto { overflow: hidden; }
       .crescer-inner {
         display: flex;
         flex-direction: column;
         gap: 2.5rem;
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
       }
       .crescer-card,
-      .crescer-text-col { width: 100%; max-width: 100%; margin: 0; }
+      .crescer-text-col { width: 100%; max-width: 100%; margin: 0; box-sizing: border-box; }
+      .crescer-card { overflow: hidden; }
       .crescer-card-img { aspect-ratio: 3/4; }
+      .crescer-p { max-width: 100%; }
       .crescer-text-col,
       .crescer-text-col.visible { transform: none !important; opacity: 1 !important; transition: none !important; }
       .crescer-card,
