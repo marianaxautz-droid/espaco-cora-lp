@@ -2810,7 +2810,7 @@
 
       /* ════════ HERO ════════ */
       .hero { height: 115vh; }
-      .hero-fade { height: 180px; }
+      .hero-fade { height: 180px; opacity: 1 !important; }
       .hero-bg img { object-position: top center; }
       @keyframes heroBgKen {
         0%   { transform: scale(1)    translateX(0%) translateY(0%); }
@@ -4017,11 +4017,11 @@
       const contentT = clamp(scrollY / (vh * (isMobile ? 0.35 : 0.5)), 0, 1);
       heroContent.style.opacity = 1 - contentT;
 
-      // Fade out to next section (earlier on mobile)
-      const fadeStart = isMobile ? vh * 0.3 : vh * 0.6;
-      const fadeDur   = isMobile ? vh * 0.2 : vh * 0.4;
-      const fadeT = clamp((scrollY - fadeStart) / fadeDur, 0, 1);
-      heroFade.style.opacity = fadeT;
+      // Fade out to next section (always on on mobile, scroll-driven on desktop)
+      if (!isMobile) {
+        const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
+        heroFade.style.opacity = fadeT;
+      }
     });
 
   </script>
