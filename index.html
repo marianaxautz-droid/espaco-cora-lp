@@ -2915,10 +2915,15 @@
         font-size: clamp(1.8rem, 7vw, 2.4rem);
       }
       .comparativo-inner { padding: 2rem 1.25rem 3rem; }
-      .comparativo-table { font-size: 0.8rem; }
+      .comparativo-table { font-size: 0.85rem; }
+      .comparativo-table thead tr,
+      .comparativo-table tbody tr { display: flex; flex-direction: column; }
       .comparativo-table thead th,
-      .comparativo-table td { padding: 0.7rem 0.4rem; }
-      .comparativo-table .col-gap { width: 4%; }
+      .comparativo-table td { display: block; width: 100%; padding: 0.75rem 0; }
+      .comparativo-table .col-gap { display: none; }
+      .comparativo-table thead th:last-child { border-top: 1px solid hsla(45,28%,94%,0.2); margin-top: 0.25rem; }
+      .comparativo-table tbody tr { border-bottom: 1px solid hsla(45,28%,94%,0.12); }
+      .comparativo-table tbody tr td:last-child { border-top: 1px solid hsla(45,28%,94%,0.15); }
 
       /* ════════ CRESCER JUNTO ════════ */
       .crescer-inner {
