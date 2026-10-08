@@ -2902,10 +2902,13 @@
 
       /* ════════ CRESCER JUNTO ════════ */
       .crescer-inner {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 2.5rem;
+        width: 100%;
       }
-      .crescer-card { max-width: 100%; margin: 0; }
+      .crescer-card,
+      .crescer-text-col { width: 100%; max-width: 100%; margin: 0; }
       .crescer-card-img { aspect-ratio: 3/4; }
       .crescer-text-col,
       .crescer-text-col.visible { transform: none !important; opacity: 1 !important; transition: none !important; }
