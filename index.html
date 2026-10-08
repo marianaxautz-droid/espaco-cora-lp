@@ -591,14 +591,14 @@
 
     .conceito-logo-svg {
       width: min(440px, 100%);
-      aspect-ratio: 300 / 280;
+      aspect-ratio: 300 / 290;
       overflow: visible;
       display: block;
     }
 
-    /* Arco — raio 120 → comprimento do arco = π × 120 / 2 ≈ 188.5 */
-    .ls-arch-l { stroke-dasharray: 188.5; stroke-dashoffset: 188.5; }
-    .ls-arch-r { stroke-dasharray: 188.5; stroke-dashoffset: 188.5; }
+    /* Arco 110° de cada lado (220° total) → comprimento = (110/360)*2π*120 ≈ 230.4 */
+    .ls-arch-l { stroke-dasharray: 230.4; stroke-dashoffset: 230.4; }
+    .ls-arch-r { stroke-dasharray: 230.4; stroke-dashoffset: 230.4; }
     .conceito-logo-svg.animated .ls-arch-l,
     .conceito-logo-svg.animated .ls-arch-r {
       animation: ls-draw 2s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
@@ -3125,32 +3125,32 @@
     <div class="how-it-works-inner">
 
       <div class="conceito-logo-wrap" id="conceitoLogoWrap">
-        <svg class="conceito-logo-svg" viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
+        <svg class="conceito-logo-svg" viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg" aria-label="Espaço Cora — Onde o cuidado encontra o afeto" role="img">
 
-          <!-- Arco esquerdo: apex → ponto esquerdo (raio 120) -->
+          <!-- Arco esquerdo: 110° do apex até ponto inferior-esquerdo (raio 120) -->
           <path class="ls-arch-l"
-            d="M 150,32 A 120,120 0 0,0 30,152"
+            d="M 150,30 A 120,120 0 0,0 37,191"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
-          <!-- Arco direito: apex → ponto direito (raio 120) -->
+          <!-- Arco direito: 110° do apex até ponto inferior-direito (raio 120) -->
           <path class="ls-arch-r"
-            d="M 150,32 A 120,120 0 0,1 270,152"
+            d="M 150,30 A 120,120 0 0,1 263,191"
             stroke="hsl(32,39%,22%)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 
           <!-- ESPAÇO -->
-          <text class="ls-text-espaco" x="150" y="185"
+          <text class="ls-text-espaco" x="150" y="178"
             text-anchor="middle"
             font-family="Cormorant Garamond, serif"
-            font-size="20"
+            font-size="19"
             font-weight="400"
-            letter-spacing="8"
+            letter-spacing="6"
             fill="hsl(32,39%,22%)">ESPA&#199;O</text>
 
           <!-- CORA -->
-          <text class="ls-text-cora" x="150" y="258"
+          <text class="ls-text-cora" x="150" y="255"
             text-anchor="middle"
             font-family="Cormorant Garamond, serif"
-            font-size="80"
+            font-size="78"
             font-weight="400"
             fill="hsl(32,39%,22%)">CORA</text>
         </svg>
