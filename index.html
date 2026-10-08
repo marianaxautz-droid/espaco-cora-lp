@@ -592,26 +592,36 @@
     .conceito-logo-img {
       width: min(440px, 100%);
       display: block;
+      /* estado inicial: oculto com clip-path */
+      clip-path: inset(0 0 100% 0);
       opacity: 0;
-      transform: scale(0.92);
-      transition: none;
     }
 
     .conceito-logo-img.animated {
-      animation: logo-reveal 1.8s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+      opacity: 1;
+      animation: logo-clip-reveal 3.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
     }
 
-    @keyframes logo-reveal {
-      0%   { opacity: 0; transform: scale(0.92); }
-      60%  { opacity: 1; transform: scale(1.02); }
-      100% { opacity: 1; transform: scale(1); }
+    /*
+      Logo SVG viewBox 0 0 2563 1972
+      — Arco + ESPAÇO: top ~60% (esconde bottom 40%)
+      — CORA:          top ~88% (esconde bottom 12%)
+      — Tagline:       100% visível
+    */
+    @keyframes logo-clip-reveal {
+      0%   { clip-path: inset(0 0 100% 0); }  /* tudo oculto          */
+      42%  { clip-path: inset(0 0 40% 0); }   /* arco + ESPAÇO revela */
+      58%  { clip-path: inset(0 0 40% 0); }   /* pausa — arco completo*/
+      80%  { clip-path: inset(0 0 12% 0); }   /* CORA revela          */
+      90%  { clip-path: inset(0 0 12% 0); }   /* pausa — CORA completa*/
+      100% { clip-path: inset(0 0 0% 0); }    /* tagline revela       */
     }
 
     @media (prefers-reduced-motion: reduce) {
       .conceito-logo-img.animated {
         animation: none !important;
+        clip-path: none !important;
         opacity: 1 !important;
-        transform: none !important;
       }
     }
 
