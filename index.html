@@ -25,13 +25,13 @@
       --transition:     all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    html { scroll-behavior: auto; background: var(--background); overflow-x: hidden; }
+    html { scroll-behavior: auto; background: var(--background); overflow-x: clip; }
 
     body {
       font-family: 'Inter', sans-serif;
       background: var(--background);
       color: var(--foreground);
-      overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* ─────────────────────────────────────────
@@ -144,13 +144,12 @@
     ───────────────────────────────────────── */
     .hero {
       position: relative;
-      height: 220vh;
+      height: 100vh;
       background: var(--primary);
     }
 
     .hero-sticky {
-      position: sticky;
-      top: 0;
+      position: relative;
       height: 100vh;
       overflow: hidden;
     }
@@ -331,10 +330,8 @@
       height: 240px;
       background: linear-gradient(to bottom, transparent, hsl(32, 39%, 22%));
       z-index: 15;
-      opacity: 0;
+      opacity: 1;
       pointer-events: none;
-      will-change: opacity;
-      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     /* ─────────────────────────────────────────
@@ -1541,7 +1538,7 @@
       position: absolute;
       top: 4rem;
       left: 3rem;
-      width: calc(40% - 6rem);
+      width: calc(100% - 6rem);
       z-index: 2;
       text-align: left;
     }
@@ -1570,7 +1567,7 @@
     }
 
     .comparativo-col--them .comparativo-col-head { color: hsla(45, 28%, 88%, 0.7); }
-    .comparativo-col--us  .comparativo-col-head { color: #555938; }
+    .comparativo-col--us  .comparativo-col-head { color: hsl(45, 45%, 72%); }
 
     .comparativo-col-list {
       list-style: none;
@@ -1594,7 +1591,7 @@
 
     .comparativo-col--us .comparativo-col-list li::before {
       content: '✓ ';
-      color: #555938;
+      color: hsl(45, 45%, 72%);
       font-weight: 500;
     }
 
@@ -2796,9 +2793,9 @@
       }
 
       /* ════════ HERO ════════ */
-      .hero { height: 115vh; }
+      .hero { height: 100vh; }
       .hero-headline br { display: none; }
-      .hero-fade { height: 180px; opacity: 1 !important; }
+      .hero-fade { height: 180px; }
       .hero-bg img { object-position: top center; }
       .hero-bg::after { background: hsla(32, 39%, 22%, 0.75); }
       @keyframes heroBgKen {
@@ -4038,11 +4035,6 @@
       const contentT = clamp(scrollY / (vh * (isMobile ? 0.35 : 0.5)), 0, 1);
       heroContent.style.opacity = 1 - contentT;
 
-      // Fade out to next section (always on on mobile, scroll-driven on desktop)
-      if (!isMobile) {
-        const fadeT = clamp((scrollY - vh * 0.6) / (vh * 0.4), 0, 1);
-        heroFade.style.opacity = fadeT;
-      }
     }
 
     window.addEventListener('scroll', updateHeroState);
