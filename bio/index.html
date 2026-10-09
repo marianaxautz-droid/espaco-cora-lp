@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espaço Cora · Dra. Laíse Cândido</title>
+  <meta name="description" content="Conheça o Espaço Cora e a Dra. Laíse Cândido, agende sua avaliação e veja como chegar." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Tag do Google / Pixel do Meta: colar aqui (os cliques já disparam eventos, ver script no fim) -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:    hsl(32, 39%, 22%);
+      --background: hsl(45, 28%, 88%);
+      --accent:     #555938;
+      --foreground: hsl(32, 39%, 22%);
+      --muted:      hsl(32, 39%, 45%);
+      --border:     hsl(45, 28%, 78%);
+      --cream:      hsl(45, 28%, 94%);
+      --gold:       hsl(45, 45%, 74%);
+      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { background: var(--background); }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bio {
+      width: 100%;
+      max-width: 440px;
+      padding: 1.5rem 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    /* ─────────────────────────────────────────
+       CARD BASE
+       O link principal cobre o card inteiro (::after);
+       o selo do Instagram fica por cima, como link próprio.
+    ───────────────────────────────────────── */
+    .card {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(60, 30, 10, 0.16);
+    }
+
+    .card-link {
+      color: inherit;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+
+    .card-link:focus-visible { outline: none; }
+    .card:has(.card-link:focus-visible) {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    /* Sem position aqui, para o ::after do link se esticar até o card inteiro */
+    .card-body {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-title,
+    .card-sub,
+    .card-arrow {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .card-sub {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+    }
+
+    .card-arrow {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.35s var(--ease);
+    }
+
+    .card-arrow svg,
+    .card-ig svg {
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-arrow svg { width: 16px; height: 16px; }
+
+    .card:hover .card-arrow { transform: translateX(3px); }
+
+    /* ─────────────────────────────────────────
+       CARDS COM FOTO (Espaço Cora e Dra. Laíse)
+    ───────────────────────────────────────── */
+    .card--photo {
+      aspect-ratio: 4 / 3.6;
+      background: var(--primary);
+      color: var(--cream);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.4rem;
+    }
+
+    .card--photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transition: transform 0.8s var(--ease);
+    }
+
+    .card--photo:hover img { transform: scale(1.04); }
+
+    .card--photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top,
+        hsla(32, 39%, 9%, 0.88) 0%,
+        hsla(32, 39%, 12%, 0.35) 45%,
+        transparent 75%);
+    }
+
+    .card--photo .card-body { width: 100%; }
+
+    .card--photo .card-title { font-size: 2.15rem; }
+    .card--photo .card-title em { font-style: italic; color: var(--gold); }
+    .card--photo .card-sub { color: hsla(45, 28%, 92%, 0.78); }
+
+    .card--photo .card-arrow {
+      background: hsla(45, 28%, 94%, 0.16);
+      border: 1px solid hsla(45, 28%, 94%, 0.35);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .card--cora img   { object-position: 45% 40%; }
+    .card--laise img  { object-position: center 22%; }
+
+    /* Selo do Instagram, canto superior */
+    .card-ig {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: hsla(45, 28%, 94%, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--foreground);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 500;
+      transition: background 0.25s ease;
+    }
+
+    .card-ig:hover { background: var(--cream); }
+    .card-ig svg { width: 13px; height: 13px; }
+
+    /* ─────────────────────────────────────────
+       AGENDAMENTOS
+    ───────────────────────────────────────── */
+    .card--agenda {
+      background: var(--primary);
+      color: var(--cream);
+      padding: 1.6rem 1.4rem;
+    }
+
+    .card--agenda:hover { background: var(--accent); }
+
+    .card--agenda .card-body { align-items: center; }
+    .card--agenda .card-title { font-size: 2rem; }
+    .card--agenda .card-sub { color: hsla(45, 28%, 92%, 0.72); }
+
+    .card--agenda .card-arrow {
+      background: var(--gold);
+      color: var(--foreground);
+    }
+
+    /* ─────────────────────────────────────────
+       COMO CHEGAR
+    ───────────────────────────────────────── */
+    .card--mapa {
+      background: hsl(45, 22%, 84%);
+      border: 1px solid var(--border);
+    }
+
+    .card-map {
+      height: 170px;
+      background: hsl(45, 18%, 80%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* O mapa é só ilustrativo: o toque vai para a rota no Google Maps.
+       O iframe é maior que a moldura para esconder os controles do Google, com o pino no centro. */
+    .card-map iframe {
+      position: absolute;
+      top: -60px;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 150px);
+      border: 0;
+      display: block;
+      pointer-events: none;
+      filter: sepia(0.25) saturate(0.85);
+    }
+
+    .card--mapa .card-body {
+      padding: 1.2rem 1.4rem 1.3rem;
+      align-items: center;
+    }
+
+    .card--mapa .card-title { font-size: 1.75rem; }
+    .card--mapa .card-sub { color: var(--muted); }
+
+    .card--mapa .card-arrow {
+      border: 1px solid hsla(32, 39%, 22%, 0.25);
+      color: var(--foreground);
+    }
+
+    /* ─────────────────────────────────────────
+       INSTAGRAM (botões lado a lado)
+    ───────────────────────────────────────── */
+    .social {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid hsla(32, 39%, 22%, 0.22);
+      color: var(--foreground);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .social-btn:hover {
+      border-color: var(--foreground);
+      background: hsla(32, 39%, 22%, 0.05);
+    }
+
+    .social-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .social-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Entrada suave */
+    .bio > * {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: rise 0.6s var(--ease) forwards;
+    }
+    .bio > *:nth-child(2) { animation-delay: 0.08s; }
+    .bio > *:nth-child(3) { animation-delay: 0.16s; }
+    .bio > *:nth-child(4) { animation-delay: 0.24s; }
+    .bio > *:nth-child(5) { animation-delay: 0.32s; }
+
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bio > * { animation: none; opacity: 1; transform: none; }
+      .card, .card img, .card-arrow { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="bio">
+
+    <!-- 1. Agendamentos -->
+    <article class="card card--agenda">
+      <div class="card-body">
+        <a class="card-link" data-link="agendar-avaliacao" data-dest="laise" data-hash="formulario" href="#">
+          <h2 class="card-title">Agendamentos</h2>
+          <span class="card-sub">Agende sua avaliação</span>
+        </a>
+        <span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </div>
+    </article>
+
+    <!-- 2. Dra. Laíse Cândido -->
+    <article class="card card--photo card--laise">
+      <img src="assets/dra-laise.webp" alt="Dra. Laíse Cândido no consultório" />
+      <a class="card-ig" data-link="instagram-laise" href="https://www.instagram.com/laiseccandido/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r="0.4"/></svg>
+        @laiseccandido
+      </a>
+      <div class="card-body">
+        <a class="card-link" data-link="conheca-meu-trabalho" data-dest="laise" href="#">
+          <h2 class="card-title">Dra. Laíse <em>Cândido</em></h2>
+          <span class="card-sub">Conheça melhor o meu trabalho</span>
+        </a>
+        <span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </div>
+    </article>
+
+    <!-- 3. Espaço Cora -->
+    <article class="card card--photo card--cora">
+      <img src="assets/espaco-cora.webp" alt="Porta do Espaço Cora com o logo" />
+      <a class="card-ig" data-link="instagram-cora" href="https://www.instagram.com/cora.espaco/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r="0.4"/></svg>
+        @cora.espaco
+      </a>
+      <div class="card-body">
+        <a class="card-link" data-link="conheca-espaco-cora" data-dest="cora" href="#">
+          <h2 class="card-title">Conheça o<br><em>Espaço Cora</em></h2>
+          <span class="card-sub">Consultórios para profissionais de saúde</span>
+        </a>
+        <span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
+      </div>
+    </article>
+
+    <!-- 4. Como chegar -->
+    <article class="card card--mapa">
+      <div class="card-map">
+        <iframe src="https://maps.google.com/maps?q=R.+Dr.+Carlos+Corr%C3%AAa,+141,+Agron%C3%B4mica,+Florian%C3%B3polis,+SC,+88025-250&z=16&output=embed" title="Mapa: R. Dr. Carlos Corrêa, 141, Agronômica, Florianópolis" loading="lazy" tabindex="-1" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="card-body">
+        <a class="card-link" data-link="como-chegar" href="https://www.google.com/maps/dir/?api=1&destination=R.+Dr.+Carlos+Corr%C3%AAa%2C+141+-+Agron%C3%B4mica%2C+Florian%C3%B3polis+-+SC%2C+88025-250" target="_blank" rel="noopener">
+          <h2 class="card-title">Como chegar</h2>
+          <span class="card-sub">Ed. Somma Tower, salas 601/602<br>R. Dr. Carlos Corrêa, 141 · Agronômica</span>
+        </a>
+        <span class="card-arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16"><path d="M8 14.5s-4.5-4.2-4.5-7.6a4.5 4.5 0 0 1 9 0c0 3.4-4.5 7.6-4.5 7.6z"/><circle cx="8" cy="6.9" r="1.6"/></svg>
+        </span>
+      </div>
+    </article>
+
+    <!-- 5. Instagram -->
+    <nav class="social" aria-label="Instagram">
+      <a class="social-btn" data-link="instagram-laise-botao" href="https://www.instagram.com/laiseccandido/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r="0.4"/></svg>
+        @laiseccandido
+      </a>
+      <a class="social-btn" data-link="instagram-cora-botao" href="https://www.instagram.com/cora.espaco/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r="0.4"/></svg>
+        @cora.espaco
+      </a>
+    </nav>
+
+  </main>
+
+  <script>
+    /* ── Destinos ──
+       PENDENTE: trocar "laise" pela URL final da LP da Dra. Laíse. */
+    var DESTINOS = {
+      cora:  'https://espacocora.com.br/',
+      laise: 'https://espacocora.com.br/dra-laise/'
+    };
+
+    /* ── Rastreamento ──
+       Cada Instagram usa o próprio link na bio:
+         @cora.espaco    → espacocora.com.br/bio?p=cora
+         @laiseccandido  → espacocora.com.br/bio?p=laise
+       O "p" vira utm_campaign nas LPs, e cada card leva o próprio utm_content. */
+    var params = new URLSearchParams(location.search);
+    var perfil = (params.get('p') || 'direto').toLowerCase().replace(/[^a-z0-9_-]/g, '');
+
+    document.querySelectorAll('[data-dest]').forEach(function (a) {
+      var url = new URL(DESTINOS[a.dataset.dest]);
+      url.searchParams.set('utm_source', 'instagram');
+      url.searchParams.set('utm_medium', 'bio');
+      url.searchParams.set('utm_campaign', perfil);
+      url.searchParams.set('utm_content', a.dataset.link);
+      if (a.dataset.hash) url.hash = a.dataset.hash;
+      a.href = url.toString();
+    });
+
+    /* Dispara um evento por clique para a tag do Google (gtag ou GTM) e o Pixel do Meta, se estiverem instalados */
+    document.querySelectorAll('[data-link]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var dados = { link: a.dataset.link, perfil: perfil };
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'bio_click', bio_link: dados.link, bio_perfil: dados.perfil });
+        if (typeof window.gtag === 'function') window.gtag('event', 'bio_click', dados);
+        if (typeof window.fbq === 'function') window.fbq('trackCustom', 'BioClick', dados);
+      });
+    });
+  </script>
+
+</body>
+</html>
