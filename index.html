@@ -1996,7 +1996,7 @@
 
     .team-card[hidden] { display: none !important; }
     .team-card {
-      flex: 0 0 calc((100% - 3.75rem) / 4);
+      flex: 0 0 calc((100% - 2.5rem) / 3);
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -3014,7 +3014,20 @@
       }
     }
 
-  </style>
+  
+    /* ════════ POPUP DA POLÍTICA ════════ */
+    .footer-policy { color: inherit; text-decoration: underline; }
+    .pp-modal { position: fixed; inset: 0; z-index: 2147483000; display: grid; place-items: center; padding: 24px; background: rgba(40, 30, 20, .55); backdrop-filter: blur(4px); opacity: 0; transition: opacity .25s ease; }
+    .pp-modal.is-on { opacity: 1; }
+    .pp-modal[hidden] { display: none; }
+    .pp-box { width: min(760px, 100%); height: min(82vh, 860px); background: var(--background); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 30px 80px -30px rgba(0,0,0,.5); }
+    .pp-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 14px 24px; border-bottom: 1px solid var(--border); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+    .pp-close { width: 40px; height: 40px; border-radius: 50%; border: none; background: transparent; font-size: 28px; line-height: 1; color: var(--primary); cursor: pointer; }
+    .pp-close:hover { background: var(--border); }
+    .pp-frame { flex: 1; width: 100%; border: 0; background: var(--background); }
+    body.pp-lock { overflow: hidden; }
+    @media (max-width: 600px) { .pp-modal { padding: 10px; } .pp-box { height: 92vh; border-radius: 14px; } }
+</style>
 </head>
 <body>
 
@@ -3661,8 +3674,8 @@
             </div>
           </div>
 
-          <div class="team-card" hidden data-sem-foto>
-            <div class="team-card-img"><div class="team-card-placeholder"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Foto</span></div></div>
+          <div class="team-card">
+            <div class="team-card-img"><img loading="lazy" src="Assets usados/Gabriela Schurhaus.webp" alt="Gabriela Schurhaus" /></div>
             <div class="team-card-body">
               <p class="team-card-name">Gabriela Schurhaus</p>
               <p class="team-card-role">Nutricionista Clínica e Comportamental</p>
@@ -3915,13 +3928,13 @@
             </label>
             <label class="form-check">
               <input type="checkbox" name="check-privacy" required />
-              <span>Concordo com a <a href="#" class="form-policy-link">Política de Privacidade</a> e autorizo o contato do Espaço Cora.</span>
+              <span>Concordo com a <a href="privacidade.html" class="form-policy-link" data-policy-popup>Política de Privacidade</a> e autorizo o contato do Espaço Cora.</span>
             </label>
           </div>
 
           <button type="submit" class="form-submit">Quero conversar com o Cora</button>
 
-          <p class="form-note">Ao enviar, você será direcionado para o WhatsApp do Espaço Cora.</p>
+          <p class="form-note">Ao enviar, você será direcionado ao WhatsApp para continuar a conversa.</p>
 
         </form>
       </div>
@@ -3959,7 +3972,7 @@
         <div>
           <p class="footer-col-title">Contato</p>
           <ul class="footer-links">
-            <li><a href="https://wa.me/5548988547557" target="_blank" rel="noopener">WhatsApp: (48) 98854-7557</a></li>
+            <li><a href="https://wa.me/5548988665383" target="_blank" rel="noopener">WhatsApp: (48) 98866-5383</a></li>
             <li><a href="https://www.instagram.com/cora.espaco/" target="_blank" rel="noopener">@cora.espaco</a></li>
             <li><a href="mailto:oespacocora@gmail.com">oespacocora@gmail.com</a></li>
           </ul>
@@ -3968,7 +3981,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 Espaço Cora. Todos os direitos reservados. · ESPACO CORA LTDA · CNPJ 58.913.355/0001-51</span>
+        <span>© 2026 Espaço Cora. Todos os direitos reservados. · ESPACO CORA LTDA · CNPJ 58.913.355/0001-51 · <a href="privacidade.html" class="footer-policy">Política de Privacidade</a></span>
         <span>Resp. técnica: Dra. Laise Cândido · CRO-SC 16246</span>
       </div>
 
@@ -3976,9 +3989,17 @@
   </footer>
 
 
+  <!-- ═══════════ POPUP DA POLÍTICA DE PRIVACIDADE ═══════════ -->
+  <div class="pp-modal" id="ppModal" role="dialog" aria-modal="true" aria-label="Política de Privacidade" hidden>
+    <div class="pp-box">
+      <div class="pp-head"><span>Política de Privacidade</span><button type="button" class="pp-close" id="ppClose" aria-label="Fechar">&times;</button></div>
+      <iframe class="pp-frame" id="ppFrame" title="Política de Privacidade" src="about:blank"></iframe>
+    </div>
+  </div>
+
   <!-- ═══════════ COOKIE BANNER ═══════════ -->
   <div class="cookie-banner" id="cookieBanner">
-    <p class="cookie-text">Usamos cookies para melhorar sua experiência e medir os resultados dos nossos anúncios. Você pode aceitar ou recusar os cookies de marketing. <a href="#">Saiba mais</a></p>
+    <p class="cookie-text">Usamos cookies para melhorar sua experiência e medir os resultados dos nossos anúncios. Você pode aceitar ou recusar os cookies de marketing. <a href="privacidade.html#cookies" data-policy-popup>Saiba mais</a></p>
     <div class="cookie-buttons">
       <button class="btn-cookie-accept" id="cookieAccept">Aceitar</button>
       <button class="btn-cookie-refuse" id="cookieRefuse">Recusar</button>
@@ -4206,9 +4227,9 @@
       const name  = form.querySelector('#form-name').value.trim();
       const area  = form.querySelector('#form-area').value.trim();
       const email = form.querySelector('#form-email').value.trim();
-      const msg = `Olá! Sou ${name}, atuo em ${area} e vim pela página do Espaço Cora. Tenho interesse em atender aí. Meu e-mail é ${email}.`;
-      const waUrl = `https://wa.me/5548988547557?text=${encodeURIComponent(msg)}`;
-      window.open(waUrl, '_blank');
+      const msg = `Olá! Sou ${name}, atuo em ${area} e vim pela página do Espaço Cora. Tenho interesse em atender no Espaço Cora e gostaria de saber mais sobre os consultórios. Meu e-mail é ${email}.`;
+      // leads do Cora vão para o WhatsApp da Dra. Laíse (fundadora); redireciona na mesma aba
+      window.location.href = `https://wa.me/5548988665383?text=${encodeURIComponent(msg)}`;
     }
 
     // ─── Estrutura — entrada do texto e galeria ───
@@ -4247,7 +4268,21 @@
 
     cookieAccept.addEventListener('click', () => dismissCookie(true));
     cookieRefuse.addEventListener('click', () => dismissCookie(false));
-  </script>
+  
+    // ─── Popup da Política de Privacidade (formulário e aviso de cookies) ───
+    (function () {
+      var modal = document.getElementById('ppModal'), frame = document.getElementById('ppFrame'), last = null;
+      if (!modal) return;
+      function open(href) { last = document.activeElement; frame.src = href; modal.hidden = false; document.body.classList.add('pp-lock'); requestAnimationFrame(function () { modal.classList.add('is-on'); }); document.getElementById('ppClose').focus(); }
+      function close() { modal.classList.remove('is-on'); document.body.classList.remove('pp-lock'); setTimeout(function () { modal.hidden = true; }, 250); if (last) last.focus(); }
+      document.querySelectorAll('[data-policy-popup]').forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); open(a.getAttribute('href')); });
+      });
+      document.getElementById('ppClose').addEventListener('click', close);
+      modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) close(); });
+    })();
+</script>
 
 
 </body>
